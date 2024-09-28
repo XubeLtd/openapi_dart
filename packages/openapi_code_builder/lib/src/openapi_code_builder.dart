@@ -1153,11 +1153,6 @@ class OpenApiLibraryGenerator {
         }
       }
     }
-    if (obj.additionalPropertyPolicy ==
-        APISchemaAdditionalPropertyPolicy.restricted) {
-      _logger.warning(
-          'additionalProperties with restrictions are currently not supported. ${obj.referenceURI}');
-    }
 
     final fields = properties.map((key, e) => MapEntry(key, Field((fb) {
           final fieldType = _toDartType('$className${key.pascalCase}', e!);
@@ -1178,6 +1173,26 @@ class OpenApiLibraryGenerator {
             fb.annotations.add(_apiUuidJsonConverter([]));
           }
         })));
+
+    // Add handling for additionalProperties as Map<String, T>
+    if (obj.additionalPropertySchema != null) {
+      final additionalPropsType =
+          _toDartType('$className${'Props'}', obj.additionalPropertySchema!);
+
+      fields['additionalProps'] = Field((fb) {
+        fb
+          ..name = 'additionalProps'
+          ..type =
+              _referType('Map', generics: [_typeString, additionalPropsType])
+          ..annotations.add(jsonKey([], {
+            'name': literalString('additionalProps'),
+            'includeIfNull': literalFalse,
+          }))
+          ..modifier = FieldModifier.final$;
+      });
+
+      required.add('additionalProps');
+    }
     // ignore: avoid_function_literals_in_foreach_calls
     required.forEach((element) {
       if (fields[element] == null) {
