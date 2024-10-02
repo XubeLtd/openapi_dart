@@ -1377,6 +1377,12 @@ class OpenApiLibraryGenerator {
   }
 
   Reference _toDartType(String parent, APISchemaObject schema) {
+    // Check if the schema is an object with additional properties
+    if (APIType.object == schema.type &&
+        schema.additionalPropertySchema != null) {
+      return _schemaReferenceForObjectAdditionalProperty(parent, schema);
+    }
+
     switch (schema.type ?? APIType.object) {
       case APIType.string:
         if (schema.enumerated != null && schema.enumerated!.isNotEmpty) {
@@ -1407,6 +1413,22 @@ class OpenApiLibraryGenerator {
     }
     // throw StateError(
     //     'Invalid type ${schema.type} - $schema - ${schema.referenceURI}');
+  }
+
+  Reference _schemaReferenceForObjectAdditionalProperty(
+      String parent, APISchemaObject schema) {
+    final uri = schema.referenceURI;
+
+    final componentName =
+        _componentNameFromReferenceUri(uri) ?? _classNameForComponent(parent);
+
+    // Classname of the class of the additional properties Ex. XubeDeviceUpdateProgress
+    final className = _classNameForComponent(componentName);
+    final additionalPropsType =
+        _toDartType('$className${'Props'}', schema.additionalPropertySchema!);
+
+    // return Map<String, T>
+    return _referType('Map', generics: [_typeString, additionalPropsType]);
   }
 
   Expression _securitySchemeReference(String name, APISecurityScheme value) {
