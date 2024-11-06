@@ -1422,6 +1422,14 @@ class OpenApiLibraryGenerator {
     final componentName =
         _componentNameFromReferenceUri(uri) ?? _classNameForComponent(parent);
 
+    // if that schema.additionalPropertySchema is an object and dont have any properties. we return Map<String, dynamic>
+    if (schema.additionalPropertySchema?.type == APIType.object &&
+        (schema.additionalPropertySchema?.properties?.entries == null ||
+            schema.additionalPropertySchema?.properties?.entries.isEmpty ==
+                true)) {
+      return _referType('Map', generics: [_typeString, refer('dynamic')]);
+    }
+
     // Classname of the class of the additional properties Ex. XubeDeviceUpdateProgress
     final className = _classNameForComponent(componentName);
     final additionalPropsType =
