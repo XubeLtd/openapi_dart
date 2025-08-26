@@ -16,6 +16,70 @@ import 'package:recase/recase.dart';
 import 'package:yaml/yaml.dart';
 
 final _logger = Logger('openapi_code_builder');
+// Minimal list of Dart reserved words to avoid as enum member names.
+const _dartKeywords = <String>{
+  'abstract',
+  'else',
+  'import',
+  'super',
+  'as',
+  'enum',
+  'in',
+  'switch',
+  'assert',
+  'export',
+  'interface',
+  'sync',
+  'async',
+  'extends',
+  'is',
+  'this',
+  'await',
+  'extension',
+  'late',
+  'throw',
+  'break',
+  'external',
+  'library',
+  'true',
+  'case',
+  'factory',
+  'mixin',
+  'try',
+  'catch',
+  'false',
+  'new',
+  'typedef',
+  'class',
+  'final',
+  'null',
+  'var',
+  'const',
+  'finally',
+  'on',
+  'void',
+  'continue',
+  'for',
+  'operator',
+  'while',
+  'covariant',
+  'Function',
+  'part',
+  'with',
+  'default',
+  'get',
+  'rethrow',
+  'yield',
+  'deferred',
+  'hide',
+  'return',
+  'do',
+  'if',
+  'set',
+  'dynamic',
+  'implements',
+  'show'
+};
 
 class OpenApiLibraryGenerator {
   OpenApiLibraryGenerator(
@@ -233,11 +297,6 @@ class OpenApiLibraryGenerator {
             ..sealed = true
             ..extend = _openApiResponse
             ..constructors.add(Constructor());
-//            ..constructors.add(Constructor((cb) => cb
-//              ..name = '_'
-//              ..requiredParameters.add(Parameter((pb) => pb
-//                ..name = 'status'
-//                ..toThis = true))))
           final mapMethod = MethodBuilder()
             ..name = 'map'
             ..types.add(const Reference('R'))
@@ -319,10 +378,6 @@ class OpenApiLibraryGenerator {
                     ..name = 'body'
                     ..type = bodyType
                     ..toThis = true));
-                  // TODO add server side support for arrays.
-                  // cb.initializers.add(refer('bodyJson')
-                  //     .assign(refer('body').property('toJson')([]))
-                  //     .code);
                   cb.initializers
                       .add(refer('bodyJson').assign(literalMap({})).code);
                   clientResponseParseParams.add(refer('response')
@@ -807,7 +862,7 @@ class OpenApiLibraryGenerator {
                   ..modifier = MethodModifier.async).closure
               ]),
               operation.value!.security ?? api.security,
-            ); //.property(operationName)(parameters));
+            );
           }));
 
           clientCode.add(refer('sendRequest')(
@@ -826,16 +881,11 @@ class OpenApiLibraryGenerator {
           if (generateProvider && operation.key.toLowerCase() == 'get') {
             final params = clientDataConstructor.build().optionalParameters;
             clientDataClass.constructors.add(clientDataConstructor.build());
-            // clientDataClass.build().fields.
             if (params.length > 1) {
               lb.body.add(clientDataClass.build());
               requireFreezed();
             }
 
-// final baseBaseIdGet = _i1.StreamProvider.family<BaseBaseIdGetResponse, BaseBaseIdGet>((ref, arg) {
-//   final client = ref.watch(mywarmApiClientProvider);
-//   return Stream.fromFuture(client.baseBaseIdGet(baseId: arg.baseId));
-// });
             final m = Method((mb) {
               mb.requiredParameters.add(Parameter((pb) => pb..name = 'ref'));
               if (params.isNotEmpty) {
@@ -1250,9 +1300,25 @@ class OpenApiLibraryGenerator {
 //            ..docs.addAll(f.docs)
                     ..name = f.value.name
                     ..asRequired(this, required.contains(f.key))
-                    ..defaultTo = (properties[f.key]?.defaultValue as Object?)
-                        ?.let((dynamic it) => literal(it))
-                        .code
+                    ..defaultTo = (() {
+                      final def = properties[f.key]?.defaultValue as Object?;
+                      if (def == null) {
+                        return null;
+                      }
+                      // If this property is an enum, emit a reference to the
+                      // enum member instead of a plain string literal so the
+                      // generated constructor default and json_serializable
+                      // fromJson fallback use the enum value.
+                      final propSchema = properties[f.key];
+                      if (propSchema?.enumerated != null &&
+                          (propSchema!.enumerated?.isNotEmpty ?? false)) {
+                        final enumTypeRef = _toDartType(
+                            '$className${f.key.pascalCase}', propSchema);
+                        final memberName = _sanitizeEnumMember(def.toString());
+                        return refer('${enumTypeRef.symbol}.$memberName').code;
+                      }
+                      return literal(def).code;
+                    }())
                     ..named = true
                     ..toThis = true)))
               ..initializers.addAll(useNullSafetySyntax
@@ -1262,27 +1328,13 @@ class OpenApiLibraryGenerator {
           ),
         )
         ..constructors.add(Constructor((cb) => cb
-              ..name = 'fromJson'
-              ..factory = true
-              ..requiredParameters.add(Parameter((pb) => pb
-                ..name = 'jsonMap'
-                ..type = refer('Map<String, dynamic>')))
-              ..lambda = true
-              ..body = fromJsonExpression!.code
-//              ..body = Block.of([
-//                InvokeExpression.newOf(
-//                  refer(schemaEntry.key),
-//                  [],
-//                  obj.properties.map((key, value) => MapEntry(
-//                      key,
-//                      refer('map')
-//                          .index(literalString(key))
-//                          .asA(_toDartType(value.type)))),
-//                  [],
-//                ).returned.statement,
-//              ]
-//            )
-            ))
+          ..name = 'fromJson'
+          ..factory = true
+          ..requiredParameters.add(Parameter((pb) => pb
+            ..name = 'jsonMap'
+            ..type = refer('Map<String, dynamic>')))
+          ..lambda = true
+          ..body = fromJsonExpression!.code))
         ..fields.addAll(fields.values)
         ..methods.add(
           Method(
@@ -1293,19 +1345,6 @@ class OpenApiLibraryGenerator {
               ..lambda = true
               ..body = toJsonExpression!.code,
           ),
-//                ..methods.add(
-//                Method(
-//                (mb) => mb
-//        ..name = 'toJson'
-//        ..returns = refer('Map<String, dynamic>')
-//          ..lambda = true
-//          ..body = literalMap(
-//            obj.properties
-//                .map((key, value) => MapEntry(key, refer(key))),
-//            _typeString,
-//            refer('dynamic'),
-//          ).code,
-//      ),
         )
         ..methods.add(Method((mb) => mb
           ..name = 'toString'
@@ -1313,6 +1352,30 @@ class OpenApiLibraryGenerator {
           ..annotations.add(_override)
           ..lambda = true
           ..body = refer('toJson')([]).property('toString')([]).code));
+
+      // Add a copyWith method to allow convenient copying with overrides.
+      cb.methods.add(Method((mb) {
+        mb
+          ..name = 'copyWith'
+          ..returns = refer(className)
+          ..optionalParameters.addAll(fields.entries.map((e) => Parameter((pb) {
+                final t = e.value.type ?? refer('dynamic');
+                pb
+                  ..name = e.value.name
+                  ..named = true
+                  ..type = t.asNullable(true);
+              })))
+          ..body = Block.of([
+            refer(className)
+                .newInstance(
+                    [],
+                    Map.fromEntries(fields.entries.map((e) => MapEntry(
+                        e.value.name,
+                        refer('${e.value.name} ?? this.${e.value.name}')))))
+                .returned
+                .statement
+          ]);
+      }));
 
       if (additionalPropertyPolicy ==
           APISchemaAdditionalPropertyPolicy.freeForm) {
@@ -1357,21 +1420,58 @@ class OpenApiLibraryGenerator {
     return c;
   }
 
+  String _sanitizeEnumMember(String raw) {
+    var cleaned = raw.replaceAll(RegExp(r'[^A-Za-z0-9]+'), ' ').trim();
+    if (cleaned.isEmpty) {
+      cleaned = 'value';
+    }
+
+    String candidate;
+    try {
+      candidate = ReCase(cleaned).camelCase;
+    } catch (_) {
+      candidate = cleaned.replaceAll(RegExp(r'\s+'), '_').toLowerCase();
+    }
+
+    // Remove any stray non-word characters
+    candidate = candidate.replaceAll(RegExp(r'[^A-Za-z0-9_]'), '');
+    // Ensure it starts with a letter; prefix with 'v' otherwise
+    if (!RegExp(r'^[A-Za-z]').hasMatch(candidate)) {
+      candidate = 'v$candidate';
+    }
+    // Ensure first letter is lower-case for lowerCamelCase
+    if (candidate.isNotEmpty) {
+      candidate = candidate[0].toLowerCase() + candidate.substring(1);
+    }
+    // Avoid Dart keywords
+    if (_dartKeywords.contains(candidate)) {
+      candidate = 'v${candidate[0].toUpperCase()}${candidate.substring(1)}';
+    }
+
+    return candidate;
+  }
+
   Reference _createEnum(String name, List<dynamic>? values) {
     return createdEnums.putIfAbsent(name, () {
-      lb.body.add(EnumSpec(
-        name: name,
-        values: values!
-            .map(
-              (dynamic e) => EnumValueSpec(
-                annotations: [
-                  jsonValue([literalString(e.toString())])
-                ],
-                name: e.toString(),
-              ),
-            )
-            .toList(),
-      ));
+      final enumValues = <EnumValueSpec>[];
+      final used = <String>{};
+      for (final v in values ?? <dynamic>[]) {
+        final original = v?.toString() ?? '';
+        var memberName = _sanitizeEnumMember(original);
+        if (used.contains(memberName)) {
+          var i = 2;
+          final base = memberName;
+          while (used.contains(memberName)) {
+            memberName = '$base$i';
+            i++;
+          }
+        }
+        used.add(memberName);
+        final annotation = jsonValue([literalString(original)]);
+        enumValues
+            .add(EnumValueSpec(annotations: [annotation], name: memberName));
+      }
+      lb.body.add(EnumSpec(name: name, values: enumValues));
       return refer(name);
     });
   }
@@ -1409,10 +1509,7 @@ class OpenApiLibraryGenerator {
         return _referType('List', generics: [type]);
       case APIType.object:
         return _schemaReference(parent, schema);
-//        return refer('dynamic');
     }
-    // throw StateError(
-    //     'Invalid type ${schema.type} - $schema - ${schema.referenceURI}');
   }
 
   Reference _schemaReferenceForObjectAdditionalProperty(
