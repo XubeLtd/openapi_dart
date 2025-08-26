@@ -1613,6 +1613,51 @@ class EnumSpec extends Spec {
     ctx.write('static $name fromName(String name) => _names[name] ??'
         ' _throwStateError(\'Invalid enum name: \$name for $name\');');
     ctx.write('String get name => toString().substring(${name!.length + 1});');
+
+    // Human-friendly label getter, e.g. awaitingStatus -> 'Awaiting Status'
+    ctx.write('String get label {');
+    ctx.write('switch (this) {');
+    for (final value in values!) {
+      final member = value.name!;
+      // Build a human readable label from the member name in the generator
+      var raw = member
+          // split camelCase and PascalCase like 'awaitingStatus' -> 'awaiting Status'
+          .replaceAllMapped(
+              RegExp(r'([a-z0-9])([A-Z])'), (m) => '${m[1]} ${m[2]}')
+          // replace underscores and dashes with spaces
+          .replaceAll(RegExp(r'[_\-]+'), ' ')
+          .trim();
+      // Capitalize each word
+      raw = raw.split(RegExp(r'\s+')).map((w) {
+        if (w.isEmpty) return w;
+        return w[0].toUpperCase() + (w.length > 1 ? w.substring(1) : '');
+      }).join(' ');
+      ctx.write('case $name.$member: return ${literalString(raw)};');
+    }
+    // Add a default branch to return a sensible name when no case matches.
+    ctx.write('default: return toString().substring(${name!.length + 1});');
+    ctx.write('}');
+    ctx.write('}');
+
+    // Boolean helpers: isDisabled, isAwaitingConfirmation, etc.
+    for (final value in values!) {
+      final member = value.name!;
+      final pascal = member
+          // split camelCase and PascalCase into words
+          .replaceAllMapped(
+              RegExp(r'([a-z0-9])([A-Z])'), (m) => '${m[1]} ${m[2]}')
+          // replace underscores/dashes with spaces
+          .replaceAll(RegExp(r'[_\-]+'), ' ')
+          .trim()
+          // capitalize words and join without spaces to form PascalCase
+          .split(RegExp(r'\s+'))
+          .map((w) => w.isEmpty
+              ? w
+              : w[0].toUpperCase() + (w.length > 1 ? w.substring(1) : ''))
+          .join();
+      ctx.write('bool get is$pascal => this == $name.$member;');
+    }
+
     ctx.writeln('}');
     return context;
   }
