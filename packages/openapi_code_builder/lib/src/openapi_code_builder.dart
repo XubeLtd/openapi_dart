@@ -190,6 +190,8 @@ class OpenApiLibraryGenerator {
 
   final createdSchema = <APISchemaObject, Reference>{};
   final createdEnums = <String, Reference>{};
+
+  final discriminatedUnions = <String, Map<String, String>>{};
   final securitySchemes = <String, Expression>{};
 
   final lb = LibraryBuilder();
@@ -1167,6 +1169,24 @@ class OpenApiLibraryGenerator {
     final reference = createdSchema.putIfAbsent(schemaObject, () {
       _logger.finer(
           'Creating schema class. for ${schemaObject.referenceURI} / $key');
+      if ((schemaObject.anyOf != null && schemaObject.anyOf!.isNotEmpty) ||
+          (schemaObject.oneOf != null && schemaObject.oneOf!.isNotEmpty)) {
+        final list = (schemaObject.anyOf ?? schemaObject.oneOf)!;
+        const discriminatorGuess = 'facetType';
+        final hasDiscriminator = list.every((s) =>
+            s?.properties != null &&
+            s!.properties!.containsKey(discriminatorGuess));
+        if (hasDiscriminator) {
+          final c = _createDiscriminatedUnionClass(
+              componentName, schemaObject, discriminatorGuess);
+          return refer(c.name);
+        } else {
+          final c = _createAnyOfWrapperClass(componentName);
+          lb.body.add(c);
+          return refer(c.name);
+        }
+      }
+
       if (schemaObject.enumerated?.isNotEmpty == true) {
         final e = _createEnum(componentName, schemaObject.enumerated!);
         return e;
@@ -1196,7 +1216,6 @@ class OpenApiLibraryGenerator {
         };
         override.addAll(baseObj.properties!.entries.map((e) => e.key));
         required.addAll(baseObj.required ?? []);
-        // if the base object as "freeForm" property policy we need to expand it.
         if (baseObj.additionalPropertyPolicy ==
             APISchemaAdditionalPropertyPolicy.freeForm) {
           additionalPropertyPolicy = baseObj.additionalPropertyPolicy;
@@ -1224,7 +1243,6 @@ class OpenApiLibraryGenerator {
           }
         })));
 
-    // Add handling for additionalProperties as Map<String, T>
     if (obj.additionalPropertySchema != null) {
       final additionalPropsType =
           _toDartType('$className${'Props'}', obj.additionalPropertySchema!);
@@ -1297,7 +1315,6 @@ class OpenApiLibraryGenerator {
             (cb) => cb
               ..optionalParameters
                   .addAll(fields.entries.map((f) => Parameter((pb) => pb
-//            ..docs.addAll(f.docs)
                     ..name = f.value.name
                     ..asRequired(this, required.contains(f.key))
                     ..defaultTo = (() {
@@ -1305,10 +1322,6 @@ class OpenApiLibraryGenerator {
                       if (def == null) {
                         return null;
                       }
-                      // If this property is an enum, emit a reference to the
-                      // enum member instead of a plain string literal so the
-                      // generated constructor default and json_serializable
-                      // fromJson fallback use the enum value.
                       final propSchema = properties[f.key];
                       if (propSchema?.enumerated != null &&
                           (propSchema!.enumerated?.isNotEmpty ?? false)) {
@@ -1416,6 +1429,59 @@ class OpenApiLibraryGenerator {
             ..body = refer('_additionalProperties').index(refer('key')).code),
         );
       }
+      for (final f in fields.entries) {
+        final field = f.value;
+        final fieldType = field.type;
+        try {
+          if (fieldType is TypeReference &&
+              fieldType.symbol == 'List' &&
+              fieldType.types.isNotEmpty) {
+            final elem = fieldType.types.first;
+            final baseName = elem.symbol;
+            if (baseName != null && discriminatedUnions.containsKey(baseName)) {
+              final variants = discriminatedUnions[baseName]!;
+              for (final entry in variants.entries) {
+                final discValue = entry.key;
+                final variantClass = entry.value;
+                String discCamel;
+                try {
+                  discCamel = ReCase(discValue).camelCase;
+                } catch (_) {
+                  discCamel = discValue
+                      .replaceAll(RegExp(r'[^A-Za-z0-9]'), '_')
+                      .split(RegExp(r'_+'))
+                      .map((s) => s.isEmpty
+                          ? ''
+                          : s[0].toLowerCase() +
+                              (s.length > 1
+                                  ? s.substring(1).toLowerCase()
+                                  : ''))
+                      .join();
+                  if (discCamel.isEmpty) discCamel = 'variant';
+                }
+                final fieldSuffix = field.name[0].toUpperCase() +
+                    (field.name.length > 1 ? field.name.substring(1) : '');
+                var getterName = '$discCamel$fieldSuffix';
+                var idx = 1;
+                while (cb.methods.build().any((m) => m.name == getterName)) {
+                  getterName = '$discCamel$fieldSuffix${idx++}';
+                }
+
+                cb.methods.add(Method((mb) => mb
+                  ..name = getterName
+                  ..type = MethodType.getter
+                  ..returns =
+                      _referType('List', generics: [refer(variantClass)])
+                  ..lambda = true
+                  ..body = Code(
+                      '${field.name}.whereType<$variantClass>().toList()')));
+              }
+            }
+          }
+        } catch (_) {
+          // Error
+        }
+      }
     });
     return c;
   }
@@ -1433,17 +1499,13 @@ class OpenApiLibraryGenerator {
       candidate = cleaned.replaceAll(RegExp(r'\s+'), '_').toLowerCase();
     }
 
-    // Remove any stray non-word characters
     candidate = candidate.replaceAll(RegExp(r'[^A-Za-z0-9_]'), '');
-    // Ensure it starts with a letter; prefix with 'v' otherwise
     if (!RegExp(r'^[A-Za-z]').hasMatch(candidate)) {
       candidate = 'v$candidate';
     }
-    // Ensure first letter is lower-case for lowerCamelCase
     if (candidate.isNotEmpty) {
       candidate = candidate[0].toLowerCase() + candidate.substring(1);
     }
-    // Avoid Dart keywords
     if (_dartKeywords.contains(candidate)) {
       candidate = 'v${candidate[0].toUpperCase()}${candidate.substring(1)}';
     }
@@ -1476,8 +1538,194 @@ class OpenApiLibraryGenerator {
     });
   }
 
+  Class _createAnyOfWrapperClass(String className) {
+    return Class((cb) {
+      cb
+        ..name = className
+        ..implements.add(_openApiContent)
+        ..fields.add(Field((fb) => fb
+          ..name = '_jsonMap'
+          ..type = _referType('Map', generics: [_typeString, refer('dynamic')])
+          ..modifier = FieldModifier.final$))
+        // Private generative constructor used by the factory
+        ..constructors.add(Constructor((c) => c
+          ..name = '_' // private
+          ..requiredParameters.add(Parameter((pb) => pb
+            ..name = '_jsonMap'
+            ..toThis = true
+            ..type =
+                _referType('Map', generics: [_typeString, refer('dynamic')])))))
+        ..constructors.add(Constructor((c) => c
+          ..name = 'fromJson'
+          ..factory = true
+          ..requiredParameters.add(Parameter((pb) => pb
+            ..name = 'jsonMap'
+            ..type = refer('Map<String, dynamic>')))
+          ..lambda = true
+          ..body =
+              refer(className).newInstanceNamed('_', [refer('jsonMap')]).code))
+        ..methods.add(Method((mb) => mb
+          ..name = 'toJson'
+          ..returns = refer('Map<String, dynamic>')
+          ..lambda = true
+          ..body = refer('_jsonMap').code));
+    });
+  }
+
+  Class _createDiscriminatedUnionClass(
+      String className, APISchemaObject obj, String discriminator) {
+    final variants = (obj.anyOf ?? obj.oneOf)!.map((s) => s!).toList();
+
+    final baseBuf = StringBuffer();
+    baseBuf.writeln('sealed class $className implements OpenApiContent {');
+    baseBuf.writeln('  $className();');
+    baseBuf.writeln(
+        '  factory $className.fromJson(Map<String, dynamic> jsonMap) => ${className}FromJson(jsonMap);');
+    baseBuf.writeln('  Map<String, dynamic> toJson();');
+    baseBuf.writeln('}');
+    lb.body.add(Code(baseBuf.toString()));
+
+    final discriminatorMap = <String, String>{};
+    final usedNames = <String>{};
+    for (var i = 0; i < variants.length; i++) {
+      final v = variants[i];
+
+      String discValue = 'variant${i + 1}';
+      final prop = v.properties?[discriminator];
+      if (prop != null &&
+          prop.enumerated != null &&
+          prop.enumerated!.isNotEmpty) {
+        discValue = prop.enumerated!.first.toString();
+      }
+
+      var suffix = discValue.replaceAll(RegExp(r'[^A-Za-z0-9]'), '_');
+      suffix = suffix.split(RegExp(r'_+')).map((s) {
+        if (s.isEmpty) return '';
+        return s[0].toUpperCase() +
+            (s.length > 1 ? s.substring(1).toLowerCase() : '');
+      }).join();
+      if (suffix.isEmpty) suffix = 'Variant${i + 1}';
+
+      final variantName = '$className$suffix';
+      var uniq = variantName;
+      var k = 1;
+      while (usedNames.contains(uniq)) {
+        uniq = '$variantName${k++}';
+      }
+      usedNames.add(uniq);
+
+      final classRef = _createSchemaClass(uniq, v);
+      final classWithImpl =
+          classRef.rebuild((b) => b..implements.add(refer(className)));
+      lb.body.add(classWithImpl);
+
+      discriminatorMap[discValue] = classRef.name;
+    }
+
+    final wrapper = _createAnyOfWrapperClass('${className}Raw')
+        .rebuild((b) => b..implements.add(refer(className)));
+    lb.body.add(wrapper);
+
+    final buf = StringBuffer();
+    buf.writeln('$className ${className}FromJson(Map<String, dynamic> json) {');
+    buf.writeln("  final d = json['$discriminator'];");
+    buf.writeln('  if (d == null) {');
+    buf.writeln('    return ${className}Raw.fromJson(json);');
+    buf.writeln('  }');
+    buf.writeln('  switch (d) {');
+    for (final entry in discriminatorMap.entries) {
+      final key = entry.key.replaceAll("'", "\\'");
+      buf.writeln("    case '$key':");
+      buf.writeln('      return ${entry.value}.fromJson(json) as $className;');
+    }
+    buf.writeln('    default:');
+    buf.writeln('      return ${className}Raw.fromJson(json) as $className;');
+    buf.writeln('  }');
+    buf.writeln('}');
+
+    lb.body.add(Code(buf.toString()));
+
+    final listExtBuf = StringBuffer();
+    final listExtName = '${className}ListExt';
+    listExtBuf.writeln('extension $listExtName on List<$className> {');
+    final entries = discriminatorMap.entries.toList();
+    entries.sort((a, b) => b.key.length.compareTo(a.key.length));
+    final usedGetters = <String>{};
+    // collect (paramName -> variantClass) pairs so we can emit a when() mapper below
+    final variantParams = <MapEntry<String, String>>[];
+    for (final entry in entries) {
+      final disc = entry.key;
+      final variant = entry.value;
+      String getter;
+      try {
+        getter = ReCase(disc).camelCase;
+      } catch (_) {
+        final parts = disc
+            .replaceAll(RegExp(r'[^A-Za-z0-9]'), '_')
+            .split(RegExp(r'_+'))
+            .where((p) => p.isNotEmpty)
+            .toList();
+        if (parts.isEmpty) {
+          getter = 'variant';
+        } else {
+          getter = parts.first.toLowerCase() +
+              parts
+                  .skip(1)
+                  .map((s) =>
+                      s[0].toUpperCase() +
+                      (s.length > 1 ? s.substring(1).toLowerCase() : ''))
+                  .join();
+        }
+      }
+      // ensure unique getter name within this extension
+      final baseGetter = getter;
+      var k = 1;
+      while (usedGetters.contains(getter)) {
+        getter = '$baseGetter${k++}';
+      }
+      usedGetters.add(getter);
+      variantParams.add(MapEntry(getter, variant));
+      listExtBuf.writeln(
+          '  List<$variant> get $getter => whereType<$variant>().toList();');
+    }
+    // generic helper
+    listExtBuf.writeln(
+        '  List<T> ofType<T extends $className>() => whereType<T>().toList();');
+
+    listExtBuf.writeln('');
+    listExtBuf.writeln('  List<R> when<R>({');
+    for (final vp in variantParams) {
+      listExtBuf.writeln('    R Function(${vp.value} v)? ${vp.key},');
+    }
+    listExtBuf.writeln('    R Function($className v)? orElse,');
+    listExtBuf.writeln('  }) {');
+    listExtBuf.writeln('    final res = <R>[];');
+    listExtBuf.writeln('    for (final f in this) {');
+    listExtBuf.writeln('      R? out;');
+    listExtBuf.writeln('      switch (f) {');
+    for (final vp in variantParams) {
+      listExtBuf.writeln('        case ${vp.value} v:');
+      listExtBuf
+          .writeln('          if (${vp.key} != null) out = ${vp.key}(v);');
+      listExtBuf.writeln('          break;');
+    }
+    listExtBuf.writeln('        default:');
+    listExtBuf.writeln('          if (orElse != null) out = orElse(f);');
+    listExtBuf.writeln('      }');
+    listExtBuf.writeln('      if (out != null) res.add(out);');
+    listExtBuf.writeln('    }');
+    listExtBuf.writeln('    return res;');
+    listExtBuf.writeln('  }');
+
+    listExtBuf.writeln('}');
+    lb.body.add(Code(listExtBuf.toString()));
+
+    discriminatedUnions[className] = Map.from(discriminatorMap);
+
+    return Class((cb) => cb..name = className);
+  }
+
   Reference _toDartType(String parent, APISchemaObject schema) {
-    // Check if the schema is an object with additional properties
     if (APIType.object == schema.type &&
         schema.additionalPropertySchema != null) {
       return _schemaReferenceForObjectAdditionalProperty(parent, schema);
@@ -1519,7 +1767,6 @@ class OpenApiLibraryGenerator {
     final componentName =
         _componentNameFromReferenceUri(uri) ?? _classNameForComponent(parent);
 
-    // if that schema.additionalPropertySchema is an object and dont have any properties. we return Map<String, dynamic>
     if (schema.additionalPropertySchema?.type == APIType.object &&
         (schema.additionalPropertySchema?.properties?.entries == null ||
             schema.additionalPropertySchema?.properties?.entries.isEmpty ==
@@ -1527,12 +1774,10 @@ class OpenApiLibraryGenerator {
       return _referType('Map', generics: [_typeString, refer('dynamic')]);
     }
 
-    // Classname of the class of the additional properties Ex. XubeDeviceUpdateProgress
     final className = _classNameForComponent(componentName);
     final additionalPropsType =
         _toDartType('$className${'Props'}', schema.additionalPropertySchema!);
 
-    // return Map<String, T>
     return _referType('Map', generics: [_typeString, additionalPropsType]);
   }
 
