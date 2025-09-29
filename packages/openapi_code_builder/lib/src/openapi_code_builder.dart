@@ -5,7 +5,7 @@ import 'package:build/build.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:code_builder/src/visitors.dart'; // ignore: implementation_imports
-import 'package:collection/collection.dart' show IterableExtension;
+import 'package:collection/collection.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:logging/logging.dart';
 import 'package:open_api_forked/v3.dart';
@@ -1169,22 +1169,11 @@ class OpenApiLibraryGenerator {
     final reference = createdSchema.putIfAbsent(schemaObject, () {
       _logger.finer(
           'Creating schema class. for ${schemaObject.referenceURI} / $key');
-      if ((schemaObject.anyOf != null && schemaObject.anyOf!.isNotEmpty) ||
-          (schemaObject.oneOf != null && schemaObject.oneOf!.isNotEmpty)) {
-        final list = (schemaObject.anyOf ?? schemaObject.oneOf)!;
+      if ((schemaObject.anyOf != null)) {
         const discriminatorGuess = 'facetType';
-        final hasDiscriminator = list.every((s) =>
-            s?.properties != null &&
-            s!.properties!.containsKey(discriminatorGuess));
-        if (hasDiscriminator) {
-          final c = _createDiscriminatedUnionClass(
-              componentName, schemaObject, discriminatorGuess);
-          return refer(c.name);
-        } else {
-          final c = _createAnyOfWrapperClass(componentName);
-          lb.body.add(c);
-          return refer(c.name);
-        }
+        final c = _createDiscriminatedUnionClass(
+            componentName, schemaObject, discriminatorGuess);
+        return refer(c.name);
       }
 
       if (schemaObject.enumerated?.isNotEmpty == true) {
@@ -1225,14 +1214,18 @@ class OpenApiLibraryGenerator {
 
     final fields = properties.map((key, e) => MapEntry(key, Field((fb) {
           final fieldType = _toDartType('$className${key.pascalCase}', e!);
+          final jsonKeyArgs = <String, Expression>{
+            'name': literalString(key),
+            if (!(e.isNullable ?? false)) 'includeIfNull': literalFalse,
+          };
+          final defObj = e.defaultValue;
+          if (defObj != null && defObj is Map) {
+            jsonKeyArgs['defaultValue'] = literalMap(defObj);
+          }
+
           fb
             ..addDartDoc(e.description)
-            ..annotations.add(jsonKey([], {
-              'name': literalString(key),
-              if (!(e.isNullable ?? false)) ...{
-                'includeIfNull': literalFalse,
-              }
-            }))
+            ..annotations.add(jsonKey([], jsonKeyArgs))
             ..annotations.addAll(override.contains(key) ? [_override] : [])
             ..name = key.camelCase
             ..modifier = FieldModifier.final$
@@ -1322,7 +1315,13 @@ class OpenApiLibraryGenerator {
                       if (def == null) {
                         return null;
                       }
+                      // If default is an object (Map), we've already added it to
+                      // the JsonKey as `defaultValue`. Don't emit a constructor
+                      // defaultTo for object defaults to avoid raw map defaults
+                      // on typed fields.
+                      if (def is Map) return null;
                       final propSchema = properties[f.key];
+                      // Enum defaults: emit Enum.member
                       if (propSchema?.enumerated != null &&
                           (propSchema!.enumerated?.isNotEmpty ?? false)) {
                         final enumTypeRef = _toDartType(
@@ -1330,6 +1329,8 @@ class OpenApiLibraryGenerator {
                         final memberName = _sanitizeEnumMember(def.toString());
                         return refer('${enumTypeRef.symbol}.$memberName').code;
                       }
+
+                      // Fallback - emit literal for primitives/arrays
                       return literal(def).code;
                     }())
                     ..named = true
@@ -2035,8 +2036,6 @@ class OpenApiCodeBuilder extends Builder {
       orderDirectives: true,
       useNullSafetySyntax: useNullSafetySyntax,
     );
-//    print(DartFormatter().format('${l.accept(emitter)}'));
-//    print('inputId: $inputId / outputId: $outputId');
     await buildStep.writeAsString(outputId, libraryOutput);
   }
 
