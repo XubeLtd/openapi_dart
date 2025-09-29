@@ -1214,23 +1214,36 @@ class OpenApiLibraryGenerator {
 
     final fields = properties.map((key, e) => MapEntry(key, Field((fb) {
           final fieldType = _toDartType('$className${key.pascalCase}', e!);
-          final jsonKeyArgs = <String, Expression>{
-            'name': literalString(key),
-            if (!(e.isNullable ?? false)) 'includeIfNull': literalFalse,
-          };
-          final defObj = e.defaultValue;
-          if (defObj != null && defObj is Map) {
-            jsonKeyArgs['defaultValue'] = literalMap(defObj);
-          }
-
           fb
             ..addDartDoc(e.description)
-            ..annotations.add(jsonKey([], jsonKeyArgs))
+            ..annotations.add(jsonKey([], () {
+              final map = <String, Expression>{
+                'name': literalString(key),
+              };
+              // includeIfNull when explicitly non-nullable in the schema
+              if (!(e.isNullable ?? false)) {
+                map['includeIfNull'] = literalFalse;
+              }
+              // If property has a default and it's not required, emit defaultValue
+              final def = e.defaultValue as Object?;
+              if (def != null && !(required.contains(key))) {
+                // prefer const map/list literals when possible
+                if (def is Map) {
+                  map['defaultValue'] = literalConstMap(def, _typeString,
+                      refer('dynamic'));
+                } else if (def is List) {
+                  map['defaultValue'] = literalConstList(def, refer('dynamic'));
+                } else {
+                  map['defaultValue'] = literal(def);
+                }
+              }
+              return map;
+            }()))
             ..annotations.addAll(override.contains(key) ? [_override] : [])
             ..name = key.camelCase
             ..modifier = FieldModifier.final$
-            ..type = fieldType
-                .asNullable(!required.contains(key) && e.defaultValue == null);
+            // make fields nullable when the property is not required
+            ..type = fieldType.asNullable(!required.contains(key));
           if (fieldType == _apiUuid) {
             fb.annotations.add(_apiUuidJsonConverter([]));
           }
@@ -1307,34 +1320,13 @@ class OpenApiLibraryGenerator {
           Constructor(
             (cb) => cb
               ..optionalParameters
-                  .addAll(fields.entries.map((f) => Parameter((pb) => pb
-                    ..name = f.value.name
-                    ..asRequired(this, required.contains(f.key))
-                    ..defaultTo = (() {
-                      final def = properties[f.key]?.defaultValue as Object?;
-                      if (def == null) {
-                        return null;
-                      }
-                      // If default is an object (Map), we've already added it to
-                      // the JsonKey as `defaultValue`. Don't emit a constructor
-                      // defaultTo for object defaults to avoid raw map defaults
-                      // on typed fields.
-                      if (def is Map) return null;
-                      final propSchema = properties[f.key];
-                      // Enum defaults: emit Enum.member
-                      if (propSchema?.enumerated != null &&
-                          (propSchema!.enumerated?.isNotEmpty ?? false)) {
-                        final enumTypeRef = _toDartType(
-                            '$className${f.key.pascalCase}', propSchema);
-                        final memberName = _sanitizeEnumMember(def.toString());
-                        return refer('${enumTypeRef.symbol}.$memberName').code;
-                      }
-
-                      // Fallback - emit literal for primitives/arrays
-                      return literal(def).code;
-                    }())
-                    ..named = true
-                    ..toThis = true)))
+                      .addAll(fields.entries.map((f) => Parameter((pb) => pb
+                        ..name = f.value.name
+                        ..asRequired(this, required.contains(f.key))
+                        // Do not emit constructor parameter defaults here; defaults
+                        // for non-required properties are handled via JsonKey
+                        ..named = true
+                        ..toThis = true)))
               ..initializers.addAll(useNullSafetySyntax
                   ? []
                   : required.map((e) => refer('assert')(
