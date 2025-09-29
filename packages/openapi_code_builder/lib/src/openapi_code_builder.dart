@@ -1224,19 +1224,19 @@ class OpenApiLibraryGenerator {
               if (!(e.isNullable ?? false)) {
                 map['includeIfNull'] = literalFalse;
               }
-              // If property has a default and it's not required, emit defaultValue
-              final def = e.defaultValue as Object?;
-              if (def != null && !(required.contains(key))) {
-                // prefer const map/list literals when possible
-                if (def is Map) {
-                  map['defaultValue'] = literalConstMap(def, _typeString,
-                      refer('dynamic'));
-                } else if (def is List) {
-                  map['defaultValue'] = literalConstList(def, refer('dynamic'));
-                } else {
-                  map['defaultValue'] = literal(def);
-                }
-              }
+              // // If property has a default and it's not required, emit defaultValue
+              // final def = e.defaultValue as Object?;
+              // if (def != null && !(required.contains(key))) {
+              //   // prefer const map/list literals when possible
+              //   if (def is Map) {
+              //     map['defaultValue'] =
+              //         literalConstMap(def, _typeString, refer('dynamic'));
+              //   } else if (def is List) {
+              //     map['defaultValue'] = literalConstList(def, refer('dynamic'));
+              //   } else {
+              //     map['defaultValue'] = literal(def);
+              //   }
+              // }
               return map;
             }()))
             ..annotations.addAll(override.contains(key) ? [_override] : [])
@@ -1320,13 +1320,13 @@ class OpenApiLibraryGenerator {
           Constructor(
             (cb) => cb
               ..optionalParameters
-                      .addAll(fields.entries.map((f) => Parameter((pb) => pb
-                        ..name = f.value.name
-                        ..asRequired(this, required.contains(f.key))
-                        // Do not emit constructor parameter defaults here; defaults
-                        // for non-required properties are handled via JsonKey
-                        ..named = true
-                        ..toThis = true)))
+                  .addAll(fields.entries.map((f) => Parameter((pb) => pb
+                    ..name = f.value.name
+                    ..asRequired(this, required.contains(f.key))
+                    // Do not emit constructor parameter defaults here; defaults
+                    // for non-required properties are handled via JsonKey
+                    ..named = true
+                    ..toThis = true)))
               ..initializers.addAll(useNullSafetySyntax
                   ? []
                   : required.map((e) => refer('assert')(
