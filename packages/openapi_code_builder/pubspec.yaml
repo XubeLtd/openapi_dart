@@ -4,7 +4,7 @@ version: 1.3.3
 homepage: https://github.com/hpoul/openapi_dart/tree/master/packages/openapi_code_builder
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
   logging: ">=1.0.1 <2.0.0"
@@ -16,13 +16,7 @@ dependencies:
   code_builder: ">=4.0.0 <5.0.0"
   build: ">=2.0.2 <3.0.0"
   source_gen: ">=1.0.2 <2.0.0"
-  # open_api_forked: ^3.0.0+6
-  # open_api_forked:
-  #   git:
-  #     url: https://github.com/XubeLtd/open_api_forked.git
-  #     ref: master
-  open_api_forked:
-    path: ../../../open_api_forked
+  open_api_forked: ^3.0.0+6
   yaml: ">=3.1.0 <4.0.0"
   json_annotation: ">=4.0.1 <6.0.0"
   recase: ^4.1.0
@@ -32,11 +26,11 @@ dependencies:
 
 dev_dependencies:
   lints: ^3.0.0
-dependency_overrides:
-  # Ensure we use the local packages instead of pulling a hosted version
-  openapi_base:
-    path: ../openapi_base
-  open_api_forked:
-    path: ../../../open_api_forked
-  # codable_forked:
-  #   path: ../../deps/dart-codable
+
+#dependency_overrides:
+#  openapi_base:
+#    path: ../openapi_base
+#  open_api_forked:
+#    path: ../../deps/open-api-dart
+#  codable_forked:
+#    path: ../../deps/dart-codable

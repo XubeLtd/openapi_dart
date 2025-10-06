@@ -372,7 +372,6 @@ class OpenApiLibraryGenerator {
                         [literalString(responseContentType.toString())]).code;
                 final responseSchema = content.schema!;
                 if (responseSchema.type == APIType.array) {
-                  print('Array response detected ${responseClass.name}');
                   final bodyItemType = _schemaReference(
                       '${responseClass.name}Body$codeName',
                       responseSchema.items!);
@@ -703,7 +702,6 @@ class OpenApiLibraryGenerator {
                   case APIType.boolean:
                     return refer('paramToBool')([expression]);
                   case APIType.array:
-                    print('Array response detected ${responseClass.name}');
                     checkState(param.schema!.items!.type == APIType.string);
                     if (param.schema!.items!.enumerated != null &&
                         param.schema!.items!.enumerated!.isNotEmpty) {
@@ -726,6 +724,8 @@ class OpenApiLibraryGenerator {
                     return expression;
                   case APIType.object:
                     return expression;
+                  default:
+                    throw StateError('Invalid schema type $schemaType');
                 }
               }
 
@@ -785,7 +785,6 @@ class OpenApiLibraryGenerator {
                   case APIType.boolean:
                     return refer('encodeBool')([expression]);
                   case APIType.array:
-                    print('Array response detected ${responseClass.name}');
                     checkState(param.schema!.items!.type == APIType.string);
                     if (param.schema!.items!.enumerated != null &&
                         param.schema!.items!.enumerated!.isNotEmpty) {
@@ -1170,65 +1169,11 @@ class OpenApiLibraryGenerator {
     final reference = createdSchema.putIfAbsent(schemaObject, () {
       _logger.finer(
           'Creating schema class. for ${schemaObject.referenceURI} / $key');
-      // Discriminated unions: prefer explicit OpenAPI discriminator; otherwise infer.
-      if ((schemaObject.anyOf != null ||
-          schemaObject.oneOf != null ||
-          schemaObject.allOf != null)) {
-        String? discPropName;
-        dynamic discObj;
-        try {
-          final dyn = schemaObject as dynamic; // ignore: avoid_dynamic_calls
-          discObj = dyn.discriminator; // ignore: avoid_dynamic_calls
-          if (discObj != null) {
-            // ignore: avoid_dynamic_calls
-            discPropName = discObj.propertyName as String?;
-          }
-        } catch (_) {
-          discObj = null;
-        }
-        // Inference if not explicit
-        if (discPropName == null) {
-          final variants = (schemaObject.oneOf ??
-                  schemaObject.anyOf ??
-                  schemaObject.allOf) ??
-              const [];
-          if (variants.isNotEmpty) {
-            final nameCounts = <String, int>{};
-            for (final v in variants) {
-              final props = v?.properties?.keys ?? const Iterable.empty();
-              for (final p in props) {
-                nameCounts[p] = (nameCounts[p] ?? 0) + 1;
-              }
-            }
-            final total = variants.length;
-            for (final entry in nameCounts.entries) {
-              if (entry.value == total) {
-                final values = <String>{};
-                var valid = true;
-                for (final v in variants) {
-                  final prop = v?.properties?[entry.key];
-                  if (prop == null ||
-                      prop.enumerated == null ||
-                      prop.enumerated!.length != 1) {
-                    valid = false;
-                    break;
-                  }
-                  values.add(prop.enumerated!.first.toString());
-                }
-                if (valid && values.length == total) {
-                  discPropName = entry.key;
-                  break;
-                }
-              }
-            }
-          }
-        }
-        if (discPropName != null) {
-          _logger.fine(
-              'Creating discriminated union for component $componentName using discriminator $discPropName (inferred=${discObj == null})');
-          final c = _createDiscriminatedUnionClass(componentName, schemaObject);
-          return refer(c.name);
-        }
+      if ((schemaObject.anyOf != null)) {
+        const discriminatorGuess = 'facetType';
+        final c = _createDiscriminatedUnionClass(
+            componentName, schemaObject, discriminatorGuess);
+        return refer(c.name);
       }
 
       if (schemaObject.enumerated?.isNotEmpty == true) {
@@ -1279,7 +1224,19 @@ class OpenApiLibraryGenerator {
               if (!(e.isNullable ?? false)) {
                 map['includeIfNull'] = literalFalse;
               }
-
+              // // If property has a default and it's not required, emit defaultValue
+              // final def = e.defaultValue as Object?;
+              // if (def != null && !(required.contains(key))) {
+              //   // prefer const map/list literals when possible
+              //   if (def is Map) {
+              //     map['defaultValue'] =
+              //         literalConstMap(def, _typeString, refer('dynamic'));
+              //   } else if (def is List) {
+              //     map['defaultValue'] = literalConstList(def, refer('dynamic'));
+              //   } else {
+              //     map['defaultValue'] = literal(def);
+              //   }
+              // }
               return map;
             }()))
             ..annotations.addAll(override.contains(key) ? [_override] : [])
@@ -1608,98 +1565,10 @@ class OpenApiLibraryGenerator {
     });
   }
 
-  Class _createDiscriminatedUnionClass(String className, APISchemaObject obj) {
-    dynamic discriminatorObj;
-    String? discriminator;
-    try {
-      final dyn = obj as dynamic; // ignore: avoid_dynamic_calls
-      discriminatorObj = dyn.discriminator; // ignore: avoid_dynamic_calls
-      if (discriminatorObj != null) {
-        // ignore: avoid_dynamic_calls
-        discriminator = discriminatorObj.propertyName as String?;
-      }
-    } catch (_) {
-      discriminatorObj = null;
-    }
-    // Infer if not found
-    if (discriminator == null) {
-      final variants = (obj.oneOf ?? obj.anyOf ?? obj.allOf) ?? const [];
-      if (variants.isNotEmpty) {
-        final nameCounts = <String, int>{};
-        for (final v in variants) {
-          final props = v?.properties?.keys ?? const Iterable.empty();
-          for (final p in props) {
-            nameCounts[p] = (nameCounts[p] ?? 0) + 1;
-          }
-        }
-        final total = variants.length;
-        for (final entry in nameCounts.entries) {
-          if (entry.value == total) {
-            final values = <String>{};
-            var valid = true;
-            for (final v in variants) {
-              final prop = v?.properties?[entry.key];
-              if (prop == null ||
-                  prop.enumerated == null ||
-                  prop.enumerated!.length != 1) {
-                valid = false;
-                break;
-              }
-              values.add(prop.enumerated!.first.toString());
-            }
-            if (valid && values.length == total) {
-              discriminator = entry.key;
-              break;
-            }
-          }
-        }
-      }
-    }
-    if (discriminator == null) {
-      return _createAnyOfWrapperClass(className);
-    }
+  Class _createDiscriminatedUnionClass(
+      String className, APISchemaObject obj, String discriminator) {
+    final variants = (obj.anyOf ?? obj.oneOf)!.map((s) => s!).toList();
 
-    // Collect variant schemas.
-    List<APISchemaObject?> variantSchemas =
-        (obj.oneOf ?? obj.anyOf ?? obj.allOf ?? const <APISchemaObject?>[])
-            .toList();
-
-    // If explicit mapping provided, override variantSchemas order using mapping.
-    Map<String, String> mappingRefs = {};
-    if (discriminatorObj != null) {
-      try {
-        final rawMapping =
-            discriminatorObj.mapping as Map?; // ignore: avoid_dynamic_calls
-        if (rawMapping != null) {
-          mappingRefs =
-              rawMapping.map((k, v) => MapEntry(k.toString(), v.toString()));
-        }
-      } catch (_) {/* ignore */}
-    }
-    final usingMapping = mappingRefs.isNotEmpty;
-    if (usingMapping) {
-      variantSchemas = [];
-      // Build artificial list based on mapping order.
-      for (final entry in mappingRefs.entries) {
-        final ref = entry.value;
-        // Expect format '#/components/schemas/TypeName'
-        String? typeName;
-        final idx = ref.lastIndexOf('/');
-        if (idx != -1 && idx < ref.length - 1) {
-          typeName = ref.substring(idx + 1);
-        } else {
-          typeName = ref; // fallback
-        }
-        final schema = api.components?.schemas?[typeName];
-        if (schema == null) {
-          _logger.warning(
-              'Discriminator mapping for $className references unknown schema $ref');
-        }
-        variantSchemas.add(schema);
-      }
-    }
-
-    // Base sealed class
     final baseBuf = StringBuffer();
     baseBuf.writeln('sealed class $className implements OpenApiContent {');
     baseBuf.writeln('  $className();');
@@ -1709,29 +1578,19 @@ class OpenApiLibraryGenerator {
     baseBuf.writeln('}');
     lb.body.add(Code(baseBuf.toString()));
 
-    final discriminatorMap = <String, String>{}; // discValue -> variant class
+    final discriminatorMap = <String, String>{};
     final usedNames = <String>{};
+    for (var i = 0; i < variants.length; i++) {
+      final v = variants[i];
 
-    for (var i = 0; i < variantSchemas.length; i++) {
-      final v = variantSchemas[i];
-      if (v == null) continue; // skip missing
-
-      // Determine discriminator value.
-      String discValue;
-      if (usingMapping) {
-        // mapping order corresponds; fetch key
-        discValue = mappingRefs.keys.elementAt(i);
-      } else {
-        discValue = 'variant${i + 1}';
-        final prop = v.properties?[discriminator];
-        if (prop != null &&
-            prop.enumerated != null &&
-            prop.enumerated!.isNotEmpty) {
-          discValue = prop.enumerated!.first.toString();
-        }
+      String discValue = 'variant${i + 1}';
+      final prop = v.properties?[discriminator];
+      if (prop != null &&
+          prop.enumerated != null &&
+          prop.enumerated!.isNotEmpty) {
+        discValue = prop.enumerated!.first.toString();
       }
 
-      // Build suffix from discValue.
       var suffix = discValue.replaceAll(RegExp(r'[^A-Za-z0-9]'), '_');
       suffix = suffix.split(RegExp(r'_+')).map((s) {
         if (s.isEmpty) return '';
@@ -1752,15 +1611,14 @@ class OpenApiLibraryGenerator {
       final classWithImpl =
           classRef.rebuild((b) => b..implements.add(refer(className)));
       lb.body.add(classWithImpl);
+
       discriminatorMap[discValue] = classRef.name;
     }
 
-    // Raw fallback (for unknown discriminator values)
     final wrapper = _createAnyOfWrapperClass('${className}Raw')
         .rebuild((b) => b..implements.add(refer(className)));
     lb.body.add(wrapper);
 
-    // fromJson factory
     final buf = StringBuffer();
     buf.writeln('$className ${className}FromJson(Map<String, dynamic> json) {');
     buf.writeln("  final d = json['$discriminator'];");
@@ -1777,15 +1635,16 @@ class OpenApiLibraryGenerator {
     buf.writeln('      return ${className}Raw.fromJson(json) as $className;');
     buf.writeln('  }');
     buf.writeln('}');
+
     lb.body.add(Code(buf.toString()));
 
-    // List extension helpers (filtering & pattern matching style)
     final listExtBuf = StringBuffer();
     final listExtName = '${className}ListExt';
     listExtBuf.writeln('extension $listExtName on List<$className> {');
-    final entries = discriminatorMap.entries.toList()
-      ..sort((a, b) => b.key.length.compareTo(a.key.length));
+    final entries = discriminatorMap.entries.toList();
+    entries.sort((a, b) => b.key.length.compareTo(a.key.length));
     final usedGetters = <String>{};
+    // collect (paramName -> variantClass) pairs so we can emit a when() mapper below
     final variantParams = <MapEntry<String, String>>[];
     for (final entry in entries) {
       final disc = entry.key;
@@ -1799,16 +1658,19 @@ class OpenApiLibraryGenerator {
             .split(RegExp(r'_+'))
             .where((p) => p.isNotEmpty)
             .toList();
-        getter = parts.isEmpty
-            ? 'variant'
-            : parts.first.toLowerCase() +
-                parts
-                    .skip(1)
-                    .map((s) =>
-                        s[0].toUpperCase() +
-                        (s.length > 1 ? s.substring(1).toLowerCase() : ''))
-                    .join();
+        if (parts.isEmpty) {
+          getter = 'variant';
+        } else {
+          getter = parts.first.toLowerCase() +
+              parts
+                  .skip(1)
+                  .map((s) =>
+                      s[0].toUpperCase() +
+                      (s.length > 1 ? s.substring(1).toLowerCase() : ''))
+                  .join();
+        }
       }
+      // ensure unique getter name within this extension
       final baseGetter = getter;
       var k = 1;
       while (usedGetters.contains(getter)) {
@@ -1819,8 +1681,10 @@ class OpenApiLibraryGenerator {
       listExtBuf.writeln(
           '  List<$variant> get $getter => whereType<$variant>().toList();');
     }
+    // generic helper
     listExtBuf.writeln(
         '  List<T> ofType<T extends $className>() => whereType<T>().toList();');
+
     listExtBuf.writeln('');
     listExtBuf.writeln('  List<R> when<R>({');
     for (final vp in variantParams) {
@@ -1845,15 +1709,16 @@ class OpenApiLibraryGenerator {
     listExtBuf.writeln('    }');
     listExtBuf.writeln('    return res;');
     listExtBuf.writeln('  }');
+
     listExtBuf.writeln('}');
     lb.body.add(Code(listExtBuf.toString()));
 
     discriminatedUnions[className] = Map.from(discriminatorMap);
+
     return Class((cb) => cb..name = className);
   }
 
   Reference _toDartType(String parent, APISchemaObject schema) {
-    print('toDartType: $parent - ${schema.anyOf} ');
     if (APIType.object == schema.type &&
         schema.additionalPropertySchema != null) {
       return _schemaReferenceForObjectAdditionalProperty(parent, schema);
