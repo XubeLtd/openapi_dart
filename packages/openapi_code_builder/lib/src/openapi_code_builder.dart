@@ -15,6 +15,8 @@ import 'package:quiver/check.dart';
 import 'package:recase/recase.dart';
 import 'package:yaml/yaml.dart';
 
+const _componentPrefix = 'Xube';
+
 final _logger = Logger('openapi_code_builder');
 // Minimal list of Dart reserved words to avoid as enum member names.
 const _dartKeywords = <String>{
@@ -193,6 +195,13 @@ class OpenApiLibraryGenerator {
 
   final discriminatedUnions = <String, Map<String, String>>{};
   final securitySchemes = <String, Expression>{};
+
+  // When creating discriminated unions where variants are component refs that
+  // may not yet have been materialized, we register the interface they should
+  // implement here so that when the concrete schema class is later created it
+  // can add the interface. Key: concrete class name, Value: list of interfaces
+  // to implement.
+  final Map<String, List<Reference>> _pendingInterfaces = {};
 
   final lb = LibraryBuilder();
   final securitySchemesClass = ClassBuilder()..name = 'SecuritySchemes';
@@ -724,8 +733,6 @@ class OpenApiLibraryGenerator {
                     return expression;
                   case APIType.object:
                     return expression;
-                  default:
-                    throw StateError('Invalid schema type $schemaType');
                 }
               }
 
@@ -1138,7 +1145,13 @@ class OpenApiLibraryGenerator {
   }
 
   String _classNameForComponent(String componentName) {
-    return componentName.pascalCase;
+    final hasComponentPrefix = componentName.startsWith(_componentPrefix);
+
+    if (hasComponentPrefix) {
+      return componentName.pascalCase;
+    }
+
+    return '$_componentPrefix${componentName.pascalCase}';
   }
 
   String? _componentNameFromReferenceUri(Uri? referenceUri) {
@@ -1148,6 +1161,7 @@ class OpenApiLibraryGenerator {
     final segments = referenceUri.pathSegments;
     if (segments[0] == 'components' && segments[1] == 'schemas') {
       final name = _classNameForComponent(segments[2]);
+      print('Component name from referenceUri: $name');
       return name;
     }
     return null;
@@ -1166,13 +1180,28 @@ class OpenApiLibraryGenerator {
       return found;
     }
 
+    final discriminator = schemaObject.discriminator;
+    final propertyName = discriminator?.propertyName;
+    final mapping = discriminator?.mapping;
+
     final reference = createdSchema.putIfAbsent(schemaObject, () {
       _logger.finer(
           'Creating schema class. for ${schemaObject.referenceURI} / $key');
-      if ((schemaObject.anyOf != null)) {
-        const discriminatorGuess = 'facetType';
-        final c = _createDiscriminatedUnionClass(
-            componentName, schemaObject, discriminatorGuess);
+
+      // Handle polymorphic constructs with discriminator support (anyOf/oneOf/allOf)
+      if (schemaObject.anyOf != null ||
+          schemaObject.oneOf != null ||
+          schemaObject.allOf != null) {
+        if (discriminator != null && propertyName != null) {
+          final c = _createDiscriminatedUnionClass(
+              componentName, schemaObject, propertyName,
+              explicitMapping: mapping);
+          return refer(c.name);
+        }
+
+        // Fallback: no discriminator specified, create enhanced union class
+        final c =
+            _createFallBackDiscriminatedUnionClass(componentName, schemaObject);
         return refer(c.name);
       }
 
@@ -1193,6 +1222,13 @@ class OpenApiLibraryGenerator {
     final override = <String>{};
     final required = obj.required ?? [];
     final implements = <Reference>[];
+
+    // If this class was referenced as a variant in a discriminated union before
+    // it was materialized, attach those interfaces now.
+    final pending = _pendingInterfaces.remove(className);
+    if (pending != null) {
+      implements.addAll(pending);
+    }
 
     // check for inheritance
     var additionalPropertyPolicy = obj.additionalPropertyPolicy;
@@ -1224,19 +1260,6 @@ class OpenApiLibraryGenerator {
               if (!(e.isNullable ?? false)) {
                 map['includeIfNull'] = literalFalse;
               }
-              // // If property has a default and it's not required, emit defaultValue
-              // final def = e.defaultValue as Object?;
-              // if (def != null && !(required.contains(key))) {
-              //   // prefer const map/list literals when possible
-              //   if (def is Map) {
-              //     map['defaultValue'] =
-              //         literalConstMap(def, _typeString, refer('dynamic'));
-              //   } else if (def is List) {
-              //     map['defaultValue'] = literalConstList(def, refer('dynamic'));
-              //   } else {
-              //     map['defaultValue'] = literal(def);
-              //   }
-              // }
               return map;
             }()))
             ..annotations.addAll(override.contains(key) ? [_override] : [])
@@ -1450,7 +1473,9 @@ class OpenApiLibraryGenerator {
                                   ? s.substring(1).toLowerCase()
                                   : ''))
                       .join();
-                  if (discCamel.isEmpty) discCamel = 'variant';
+                  if (discCamel.isEmpty) {
+                    discCamel = 'variant';
+                  }
                 }
                 final fieldSuffix = field.name[0].toUpperCase() +
                     (field.name.length > 1 ? field.name.substring(1) : '');
@@ -1531,18 +1556,226 @@ class OpenApiLibraryGenerator {
     });
   }
 
-  Class _createAnyOfWrapperClass(String className) {
+  Class _createFallBackDiscriminatedUnionClass(
+      String className, APISchemaObject obj) {
+    final List<APISchemaObject> variants = [
+      ...?obj.oneOf?.whereType<APISchemaObject>(),
+      ...?obj.anyOf?.whereType<APISchemaObject>(),
+      ...?obj.allOf?.whereType<APISchemaObject>(),
+    ];
+
+    if (variants.isEmpty) {
+      return _createJsonMapWrapperClass(className);
+    }
+
+    final baseBuf = StringBuffer();
+    baseBuf.writeln('sealed class $className implements OpenApiContent {');
+    baseBuf.writeln('  $className();');
+    baseBuf.writeln(
+        '  factory $className.fromJson(Map<String, dynamic> jsonMap) => ${className}FromJson(jsonMap);');
+    baseBuf.writeln('  Map<String, dynamic> toJson();');
+    baseBuf.writeln('}');
+    lb.body.add(Code(baseBuf.toString()));
+
+    final variantClasses = <String>[];
+    final usedNames = <String>{};
+
+    // Generate variant classes
+    for (var i = 0; i < variants.length; i++) {
+      final v = variants[i];
+      String variantClassName;
+
+      if (v.referenceURI != null) {
+        variantClassName = _componentNameFromReferenceUri(v.referenceURI) ??
+            '${className}Variant${i + 1}';
+      } else {
+        variantClassName = '${className}Variant${i + 1}';
+      }
+
+      var uniqueName = variantClassName;
+      var k = 1;
+      while (usedNames.contains(uniqueName)) {
+        uniqueName = '$variantClassName${k++}';
+      }
+      usedNames.add(uniqueName);
+
+      // Handle referenced vs inline variants
+      if (v.referenceURI != null) {
+        final targetName =
+            _componentNameFromReferenceUri(v.referenceURI) ?? uniqueName;
+        _pendingInterfaces.putIfAbsent(targetName, () => []);
+        _pendingInterfaces[targetName]!.add(refer(className));
+        variantClasses.add(targetName);
+      } else {
+        final classRef = _createSchemaClass(uniqueName, v);
+        final classWithImpl =
+            classRef.rebuild((b) => b..implements.add(refer(className)));
+        lb.body.add(classWithImpl);
+        variantClasses.add(classRef.name);
+      }
+    }
+
+    // Create raw fallback wrapper
+    final wrapper =
+        _createJsonMapWrapperClass('${className}Raw').rebuild((cb) => cb
+          ..implements.clear()
+          ..implements.add(refer(className)));
+    lb.body.add(wrapper);
+
+    // Generate factory fromJson function with variant attempts
+    final factoryBuf = StringBuffer();
+    factoryBuf.writeln(
+        '$className ${className}FromJson(Map<String, dynamic> json) {');
+    factoryBuf.writeln('  final variants = [');
+
+    // Add each variant's fromJson method to the list
+    for (final variantClass in variantClasses) {
+      factoryBuf.writeln('    $variantClass.fromJson,');
+    }
+    factoryBuf.writeln('  ];');
+    factoryBuf.writeln('');
+
+    // Try each variant in the list
+    factoryBuf.writeln('  for (final fromJson in variants) {');
+    factoryBuf.writeln('    try {');
+    factoryBuf.writeln('      return fromJson(json) as $className;');
+    factoryBuf.writeln('    } catch (_) {');
+    factoryBuf.writeln('      // ignore and continue');
+    factoryBuf.writeln('    }');
+    factoryBuf.writeln('  }');
+    factoryBuf.writeln('');
+
+    // Fallback to raw wrapper
+    factoryBuf.writeln('  // fallback');
+    factoryBuf.writeln('  return ${className}Raw.fromJson(json);');
+    factoryBuf.writeln('}');
+    lb.body.add(Code(factoryBuf.toString()));
+
+    // Generate list extension utilities
+    final listExtBuf = StringBuffer();
+    final listExtName = '${className}ListExt';
+    listExtBuf.writeln('extension $listExtName on List<$className> {');
+
+    // Add typed getters for each variant
+    for (var i = 0; i < variantClasses.length; i++) {
+      final variantClass = variantClasses[i];
+      final getterName = 'variant${i + 1}';
+      listExtBuf.writeln(
+          '  List<$variantClass> get $getterName => whereType<$variantClass>().toList();');
+    }
+
+    // Generic helper
+    listExtBuf.writeln(
+        '  List<T> ofType<T extends $className>() => whereType<T>().toList();');
+
+    // When method for pattern matching
+    listExtBuf.writeln('');
+    listExtBuf.writeln('  List<R> when<R>({');
+    for (var i = 0; i < variantClasses.length; i++) {
+      final variantClass = variantClasses[i];
+      final paramName = 'variant${i + 1}';
+      listExtBuf.writeln('    R Function($variantClass v)? $paramName,');
+    }
+    listExtBuf.writeln('    R Function($className v)? orElse,');
+    listExtBuf.writeln('  }) {');
+    listExtBuf.writeln('    final res = <R>[];');
+    listExtBuf.writeln('    for (final f in this) {');
+    listExtBuf.writeln('      R? out;');
+    listExtBuf.writeln('      switch (f) {');
+    for (var i = 0; i < variantClasses.length; i++) {
+      final variantClass = variantClasses[i];
+      final paramName = 'variant${i + 1}';
+      listExtBuf.writeln('        case $variantClass v:');
+      listExtBuf
+          .writeln('          if ($paramName != null) out = $paramName(v);');
+      listExtBuf.writeln('          break;');
+    }
+    listExtBuf.writeln('        default:');
+    listExtBuf.writeln('          if (orElse != null) out = orElse(f);');
+    listExtBuf.writeln('      }');
+    listExtBuf.writeln('      if (out != null) res.add(out);');
+    listExtBuf.writeln('    }');
+    listExtBuf.writeln('    return res;');
+    listExtBuf.writeln('  }');
+    listExtBuf.writeln('}');
+    lb.body.add(Code(listExtBuf.toString()));
+
+    return Class((cb) => cb..name = className);
+  }
+
+  Class _createDiscriminatedUnionClass(
+      String className, APISchemaObject obj, String discriminator,
+      {Map<String, String>? explicitMapping}) {
+    // === VARIANT COLLECTION ===
+    // Collect all possible variants from the schema definition
+    final variants = _collectDiscriminatedVariants(obj);
+
+    if (variants.isEmpty) {
+      _logger.warning('No variants found for discriminated union $className');
+      return _createEmptyUnionClass(className);
+    }
+
+    _logger.fine(
+        'Creating discriminated union $className with ${variants.length} variants');
+
+    // === SEALED BASE CLASS GENERATION ===
+    _generateSealedBaseClass(className);
+
+    // ===  PROCESSING ===
+    final discriminatorMap = _processDiscriminatedVariants(
+        className, variants, discriminator, explicitMapping ?? const {});
+
+    // === FACTORY METHOD GENERATION ===
+    _generateDiscriminatorFactory(className, discriminatorMap, discriminator);
+
+    // === LIST EXTENSIONS GENERATION ===
+    _generateDiscriminatorListExtensions(className, discriminatorMap);
+
+    // === INSTANCE WHEN/MAP EXTENSION GENERATION ===
+    _generateDiscriminatorWhenExtension(className, discriminatorMap);
+
+    // Store mapping for potential use by other generators
+    discriminatedUnions[className] = Map.from(discriminatorMap);
+
+    return Class((cb) => cb..name = className);
+  }
+
+  /// Collects variants from oneOf, anyOf, or allOf schema definitions
+  List<APISchemaObject> _collectDiscriminatedVariants(APISchemaObject obj) {
+    final variants = <APISchemaObject>[
+      // Primary patterns: oneOf and anyOf are the standard for discriminated unions
+      ...?obj.oneOf?.whereType<APISchemaObject>(),
+      ...?obj.anyOf?.whereType<APISchemaObject>(),
+    ];
+
+    // allOf with discriminator indicates composition inheritance pattern
+    if (variants.isEmpty && obj.allOf != null) {
+      variants.addAll(obj.allOf!.whereType<APISchemaObject>());
+    }
+
+    return variants;
+  }
+
+  /// Creates an empty union class when no variants are found
+  Class _createEmptyUnionClass(String className) {
+    return Class((cb) => cb
+      ..name = className
+      ..implements.add(_openApiContent)
+      ..docs.add('/// Empty discriminated union class - no variants found'));
+  }
+
+  Class _createJsonMapWrapperClass(String className) {
     return Class((cb) {
       cb
         ..name = className
         ..implements.add(_openApiContent)
+        ..docs.add('/// JSON map wrapper class for $className')
         ..fields.add(Field((fb) => fb
           ..name = '_jsonMap'
           ..type = _referType('Map', generics: [_typeString, refer('dynamic')])
           ..modifier = FieldModifier.final$))
-        // Private generative constructor used by the factory
         ..constructors.add(Constructor((c) => c
-          ..name = '_' // private
+          ..name = '_'
           ..requiredParameters.add(Parameter((pb) => pb
             ..name = '_jsonMap'
             ..toThis = true
@@ -1565,103 +1798,211 @@ class OpenApiLibraryGenerator {
     });
   }
 
-  Class _createDiscriminatedUnionClass(
-      String className, APISchemaObject obj, String discriminator) {
-    final variants = (obj.anyOf ?? obj.oneOf)!.map((s) => s!).toList();
-
+  /// Generates the sealed base class for the discriminated union
+  void _generateSealedBaseClass(String className) {
     final baseBuf = StringBuffer();
+    baseBuf.writeln('/// Sealed base class for discriminated union $className');
+    baseBuf.writeln('/// Generated from OpenAPI discriminator specification');
     baseBuf.writeln('sealed class $className implements OpenApiContent {');
-    baseBuf.writeln('  $className();');
+    baseBuf.writeln('  const $className();');
+    baseBuf.writeln('  ');
     baseBuf.writeln(
-        '  factory $className.fromJson(Map<String, dynamic> jsonMap) => ${className}FromJson(jsonMap);');
+        '  /// Factory constructor that deserializes JSON to the appropriate variant');
+    baseBuf.writeln('  /// based on the discriminator property value');
+    baseBuf.writeln(
+        '  factory $className.fromJson(Map<String, dynamic> jsonMap) => ');
+    baseBuf.writeln('      ${className}FromJson(jsonMap);');
+    baseBuf.writeln('  ');
+    baseBuf.writeln('  /// Serializes this instance to JSON');
+    baseBuf.writeln('  @override');
     baseBuf.writeln('  Map<String, dynamic> toJson();');
     baseBuf.writeln('}');
     lb.body.add(Code(baseBuf.toString()));
+  }
 
+  /// Processes variants and generates concrete classes for each discriminator value
+  Map<String, String> _processDiscriminatedVariants(
+      String className,
+      List<APISchemaObject> variants,
+      String discriminator,
+      Map<String, String> explicitMapping) {
     final discriminatorMap = <String, String>{};
     final usedNames = <String>{};
+
+    _logger.fine(
+        'Processing ${variants.length} variants for discriminated union $className');
+
     for (var i = 0; i < variants.length; i++) {
       final v = variants[i];
-
-      String discValue = 'variant${i + 1}';
-      final prop = v.properties?[discriminator];
-      if (prop != null &&
-          prop.enumerated != null &&
-          prop.enumerated!.isNotEmpty) {
-        discValue = prop.enumerated!.first.toString();
+      // Determine discriminator value for this variant.
+      String? discValue;
+      // If mapping is provided in discriminator, attempt to invert it by matching $ref.
+      if (explicitMapping.isNotEmpty && v.referenceURI != null) {
+        final refStr = v.referenceURI.toString();
+        discValue = explicitMapping.entries
+            .firstWhereOrNull((e) => refStr.endsWith(e.value))
+            ?.key;
       }
+      // Try enum on discriminator property inside variant schema
+      discValue ??= () {
+        final prop = v.properties?[discriminator];
+        if (prop != null && prop.enumerated?.isNotEmpty == true) {
+          return prop.enumerated!.first.toString();
+        }
+        return null;
+      }();
+      discValue ??= 'variant${i + 1}';
 
-      var suffix = discValue.replaceAll(RegExp(r'[^A-Za-z0-9]'), '_');
-      suffix = suffix.split(RegExp(r'_+')).map((s) {
-        if (s.isEmpty) return '';
-        return s[0].toUpperCase() +
-            (s.length > 1 ? s.substring(1).toLowerCase() : '');
-      }).join();
-      if (suffix.isEmpty) suffix = 'Variant${i + 1}';
-
-      final variantName = '$className$suffix';
-      var uniq = variantName;
+      // Determine class name for variant
+      String variantClassName;
+      if (v.referenceURI != null) {
+        variantClassName = _componentNameFromReferenceUri(v.referenceURI) ??
+            '${className}Variant${i + 1}';
+      } else {
+        var suffix = discValue.replaceAll(RegExp(r'[^A-Za-z0-9]'), '_');
+        suffix = suffix.split(RegExp(r'_+')).map((s) {
+          if (s.isEmpty) {
+            return '';
+          }
+          return s[0].toUpperCase() +
+              (s.length > 1 ? s.substring(1).toLowerCase() : '');
+        }).join();
+        if (suffix.isEmpty) {
+          suffix = 'Variant${i + 1}';
+        }
+        variantClassName = '$className$suffix';
+      }
+      var uniqueName = variantClassName;
       var k = 1;
-      while (usedNames.contains(uniq)) {
-        uniq = '$variantName${k++}';
+      while (usedNames.contains(uniqueName)) {
+        uniqueName = '$variantClassName${k++}';
       }
-      usedNames.add(uniq);
+      usedNames.add(uniqueName);
 
-      final classRef = _createSchemaClass(uniq, v);
-      final classWithImpl =
-          classRef.rebuild((b) => b..implements.add(refer(className)));
-      lb.body.add(classWithImpl);
+      // If variant references an existing component schema we just need to ensure
+      // that schema implements the interface once created.
+      if (v.referenceURI != null) {
+        final targetName =
+            _componentNameFromReferenceUri(v.referenceURI) ?? uniqueName;
 
-      discriminatorMap[discValue] = classRef.name;
+        Class? existingClass;
+        var existingIndex = -1;
+        for (var i = 0; i < lb.body.length; i++) {
+          final spec = lb.body[i];
+          if (spec is Class && spec.name == targetName) {
+            existingClass = spec;
+            existingIndex = i;
+            break;
+          }
+        }
+        if (existingClass != null && existingIndex >= 0) {
+          final updated = existingClass.rebuild((b) {
+            var already = false;
+            for (final impl in b.implements.build()) {
+              if (impl.symbol == className) {
+                already = true;
+                break;
+              }
+            }
+            if (!already) {
+              b.implements.add(refer(className));
+            }
+          });
+          lb.body[existingIndex] = updated;
+        } else {
+          _pendingInterfaces.putIfAbsent(targetName, () => []);
+          _pendingInterfaces[targetName]!.add(refer(className));
+        }
+        discriminatorMap[discValue] = targetName;
+      } else {
+        final classRef = _createSchemaClass(uniqueName, v);
+        final classWithImpl =
+            classRef.rebuild((b) => b..implements.add(refer(className)));
+        lb.body.add(classWithImpl);
+        discriminatorMap[discValue] = classRef.name;
+      }
     }
 
-    final wrapper = _createAnyOfWrapperClass('${className}Raw')
-        .rebuild((b) => b..implements.add(refer(className)));
-    lb.body.add(wrapper);
+    discriminatedUnions[className] = Map.from(discriminatorMap);
+
+    return discriminatorMap;
+  }
+
+  /// Generates the discriminator factory function for deserializing JSON
+  void _generateDiscriminatorFactory(String className,
+      Map<String, String> discriminatorMap, String discriminator) {
+    _logger.fine(
+        'Generating discriminator factory for $className with ${discriminatorMap.length} variants');
 
     final buf = StringBuffer();
+    buf.writeln(
+        '/// Factory function to deserialize JSON to the correct $className variant');
+    buf.writeln('/// based on the discriminator property "$discriminator"');
     buf.writeln('$className ${className}FromJson(Map<String, dynamic> json) {');
-    buf.writeln("  final d = json['$discriminator'];");
-    buf.writeln('  if (d == null) {');
-    buf.writeln('    return ${className}Raw.fromJson(json);');
+    buf.writeln("  final discriminatorValue = json['$discriminator'];");
+    buf.writeln('  ');
+    buf.writeln('  if (discriminatorValue == null) {');
+    buf.writeln("    throw ArgumentError.notNull('json[\"$discriminator\"]');");
     buf.writeln('  }');
-    buf.writeln('  switch (d) {');
+    buf.writeln('  ');
+    buf.writeln('  switch (discriminatorValue) {');
+
     for (final entry in discriminatorMap.entries) {
       final key = entry.key.replaceAll("'", "\\'");
+      final variantClass = entry.value;
       buf.writeln("    case '$key':");
-      buf.writeln('      return ${entry.value}.fromJson(json) as $className;');
+      buf.writeln('      return $variantClass.fromJson(json);');
     }
+
     buf.writeln('    default:');
-    buf.writeln('      return ${className}Raw.fromJson(json) as $className;');
+    buf.writeln('      throw ArgumentError(');
+    buf.writeln(
+        "        'Unknown discriminator value: \$discriminatorValue for property \"$discriminator\"'");
+    buf.writeln('      );');
     buf.writeln('  }');
     buf.writeln('}');
 
     lb.body.add(Code(buf.toString()));
+  }
+
+  /// Generates list extension methods for working with discriminated union collections
+  void _generateDiscriminatorListExtensions(
+      String className, Map<String, String> discriminatorMap) {
+    _logger.fine(
+        'Generating list extensions for $className with ${discriminatorMap.length} variants');
 
     final listExtBuf = StringBuffer();
-    final listExtName = '${className}ListExt';
+    final listExtName = '${className}ListExtensions';
+
+    listExtBuf.writeln(
+        '/// Extension methods for working with lists of $className variants');
     listExtBuf.writeln('extension $listExtName on List<$className> {');
+
     final entries = discriminatorMap.entries.toList();
     entries.sort((a, b) => b.key.length.compareTo(a.key.length));
     final usedGetters = <String>{};
-    // collect (paramName -> variantClass) pairs so we can emit a when() mapper below
     final variantParams = <MapEntry<String, String>>[];
+
+    // Generate getter methods for each variant type
     for (final entry in entries) {
-      final disc = entry.key;
-      final variant = entry.value;
-      String getter;
+      final discriminatorValue = entry.key;
+      final variantClass = entry.value;
+
+      String getterName;
       try {
-        getter = ReCase(disc).camelCase;
+        getterName = ReCase(discriminatorValue).camelCase;
       } catch (_) {
-        final parts = disc
+        // Fallback for invalid discriminator values
+        final parts = discriminatorValue
             .replaceAll(RegExp(r'[^A-Za-z0-9]'), '_')
             .split(RegExp(r'_+'))
             .where((p) => p.isNotEmpty)
             .toList();
+
         if (parts.isEmpty) {
-          getter = 'variant';
+          getterName = 'variant';
         } else {
-          getter = parts.first.toLowerCase() +
+          getterName = parts.first.toLowerCase() +
               parts
                   .skip(1)
                   .map((s) =>
@@ -1670,52 +2011,193 @@ class OpenApiLibraryGenerator {
                   .join();
         }
       }
-      // ensure unique getter name within this extension
-      final baseGetter = getter;
-      var k = 1;
-      while (usedGetters.contains(getter)) {
-        getter = '$baseGetter${k++}';
+
+      // Ensure unique getter name within this extension
+      final baseGetter = getterName;
+      var counter = 1;
+      while (usedGetters.contains(getterName)) {
+        getterName = '$baseGetter${counter++}';
       }
-      usedGetters.add(getter);
-      variantParams.add(MapEntry(getter, variant));
+      usedGetters.add(getterName);
+      variantParams.add(MapEntry(getterName, variantClass));
+
+      listExtBuf
+          .writeln('  /// Returns all $variantClass instances from this list');
       listExtBuf.writeln(
-          '  List<$variant> get $getter => whereType<$variant>().toList();');
+          '  List<$variantClass> get $getterName => whereType<$variantClass>().toList();');
+      listExtBuf.writeln('');
     }
-    // generic helper
+
+    // Generic helper method
+    listExtBuf.writeln('  /// Returns all instances of type T from this list');
     listExtBuf.writeln(
         '  List<T> ofType<T extends $className>() => whereType<T>().toList();');
-
     listExtBuf.writeln('');
+
+    // Pattern matching helper method
+    listExtBuf
+        .writeln('  /// Pattern matching helper for processing list elements');
     listExtBuf.writeln('  List<R> when<R>({');
-    for (final vp in variantParams) {
-      listExtBuf.writeln('    R Function(${vp.value} v)? ${vp.key},');
+    for (final variantParam in variantParams) {
+      listExtBuf.writeln(
+          '    R Function(${variantParam.value} variant)? ${variantParam.key},');
     }
-    listExtBuf.writeln('    R Function($className v)? orElse,');
+    listExtBuf.writeln('    R Function($className variant)? orElse,');
     listExtBuf.writeln('  }) {');
-    listExtBuf.writeln('    final res = <R>[];');
-    listExtBuf.writeln('    for (final f in this) {');
-    listExtBuf.writeln('      R? out;');
-    listExtBuf.writeln('      switch (f) {');
-    for (final vp in variantParams) {
-      listExtBuf.writeln('        case ${vp.value} v:');
+    listExtBuf.writeln('    final results = <R>[];');
+    listExtBuf.writeln('    ');
+    listExtBuf.writeln('    for (final item in this) {');
+    listExtBuf.writeln('      R? result;');
+    listExtBuf.writeln('      ');
+    listExtBuf.writeln('      switch (item) {');
+    for (final variantParam in variantParams) {
+      listExtBuf.writeln('        case ${variantParam.value} variant:');
       listExtBuf
-          .writeln('          if (${vp.key} != null) out = ${vp.key}(v);');
+          .writeln('          result = ${variantParam.key}?.call(variant);');
       listExtBuf.writeln('          break;');
     }
     listExtBuf.writeln('        default:');
-    listExtBuf.writeln('          if (orElse != null) out = orElse(f);');
+    listExtBuf.writeln('          result = orElse?.call(item);');
     listExtBuf.writeln('      }');
-    listExtBuf.writeln('      if (out != null) res.add(out);');
+    listExtBuf.writeln('      ');
+    listExtBuf.writeln('      if (result != null) {');
+    listExtBuf.writeln('        results.add(result);');
+    listExtBuf.writeln('      }');
     listExtBuf.writeln('    }');
-    listExtBuf.writeln('    return res;');
+    listExtBuf.writeln('    ');
+    listExtBuf.writeln('    return results;');
     listExtBuf.writeln('  }');
-
     listExtBuf.writeln('}');
+
     lb.body.add(Code(listExtBuf.toString()));
+  }
 
-    discriminatedUnions[className] = Map.from(discriminatorMap);
+  // Generates when/map helpers on the discriminated union itself.
+  void _generateDiscriminatorWhenExtension(
+      String className, Map<String, String> discriminatorMap) {
+    if (discriminatorMap.isEmpty) {
+      return;
+    }
 
-    return Class((cb) => cb..name = className);
+    final buf = StringBuffer();
+    final extName = '${className}WhenExtension';
+    buf.writeln('/// Pattern matching helpers for $className instances');
+    buf.writeln('extension $extName on $className {');
+
+    // Stable ordering (longer keys first reduces similar short name collisions)
+    final entries = discriminatorMap.entries.toList()
+      ..sort((a, b) => b.key.length.compareTo(a.key.length));
+
+    final used = <String>{};
+    final params = <MapEntry<String, String>>[]; // paramName -> variantClass
+
+    String toParamName(String raw) {
+      String base;
+      try {
+        base = ReCase(raw).camelCase;
+      } catch (_) {
+        base = raw
+            .replaceAll(RegExp(r'[^A-Za-z0-9]'), '_')
+            .replaceAll(RegExp(r'_+'), '_')
+            .toLowerCase();
+      }
+      if (base.isEmpty) {
+        base = 'variant';
+      }
+      if (RegExp(r'^[0-9]').hasMatch(base)) {
+        base = 'v$base';
+      }
+      var candidate = base;
+      var i = 2;
+      while (used.contains(candidate)) {
+        candidate = '$base$i';
+        i++;
+      }
+      used.add(candidate);
+      return candidate;
+    }
+
+    for (final e in entries) {
+      params.add(MapEntry(toParamName(e.key), e.value));
+    }
+
+    // when: optional handlers + required orElse
+    buf.writeln(
+        '  /// Pattern match with optional handlers and required orElse fallback.');
+    buf.writeln('  R when<R>({');
+    for (final p in params) {
+      buf.writeln('    R Function(${p.value} value)? ${p.key},');
+    }
+    buf.writeln('    required R Function($className value) orElse,');
+    buf.writeln('  }) {');
+    buf.writeln('    switch (this) {');
+    for (final p in params) {
+      buf.writeln('      case ${p.value} v:');
+      buf.writeln('        if (${p.key} != null) return ${p.key}!(v);');
+      buf.writeln('        break;');
+    }
+    buf.writeln('    }');
+    buf.writeln('    return orElse(this);');
+    buf.writeln('  }');
+
+    // maybeWhen: all optional including orElse
+    buf.writeln('');
+    buf.writeln(
+        '  /// Pattern match; returns null if no handler matches and orElse not provided.');
+    buf.writeln('  R? maybeWhen<R>({');
+    for (final p in params) {
+      buf.writeln('    R Function(${p.value} value)? ${p.key},');
+    }
+    buf.writeln('    R Function($className value)? orElse,');
+    buf.writeln('  }) {');
+    buf.writeln('    switch (this) {');
+    for (final p in params) {
+      buf.writeln('      case ${p.value} v:');
+      buf.writeln('        return ${p.key}?.call(v) ?? orElse?.call(this);');
+    }
+    buf.writeln('    }');
+    buf.writeln('    return orElse?.call(this);');
+    buf.writeln('  }');
+
+    // map: exhaustive (all required)
+    buf.writeln('');
+    buf.writeln('  /// Exhaustive map: all variant handlers required.');
+    buf.writeln('  R map<R>({');
+    for (final p in params) {
+      buf.writeln('    required R Function(${p.value} value) ${p.key},');
+    }
+    buf.writeln('  }) {');
+    buf.writeln('    switch (this) {');
+    for (final p in params) {
+      buf.writeln('      case ${p.value} v: return ${p.key}(v);');
+    }
+    buf.writeln('    }');
+    buf.writeln(
+        "    throw StateError('Unhandled $className variant: \$this');");
+    buf.writeln('  }');
+
+    // maybeMap: optional handlers + required orElse
+    buf.writeln('');
+    buf.writeln(
+        '  /// Non-exhaustive map: handlers optional, orElse required for fallback.');
+    buf.writeln('  R maybeMap<R>({');
+    for (final p in params) {
+      buf.writeln('    R Function(${p.value} value)? ${p.key},');
+    }
+    buf.writeln('    required R Function($className value) orElse,');
+    buf.writeln('  }) {');
+    buf.writeln('    switch (this) {');
+    for (final p in params) {
+      buf.writeln('      case ${p.value} v:');
+      buf.writeln('        if (${p.key} != null) return ${p.key}!(v);');
+      buf.writeln('        break;');
+    }
+    buf.writeln('    }');
+    buf.writeln('    return orElse(this);');
+    buf.writeln('  }');
+
+    buf.writeln('}');
+    lb.body.add(Code(buf.toString()));
   }
 
   Reference _toDartType(String parent, APISchemaObject schema) {
@@ -1867,7 +2349,9 @@ class EnumSpec extends Spec {
           .trim();
       // Capitalize each word
       raw = raw.split(RegExp(r'\s+')).map((w) {
-        if (w.isEmpty) return w;
+        if (w.isEmpty) {
+          return w;
+        }
         return w[0].toUpperCase() + (w.length > 1 ? w.substring(1) : '');
       }).join(' ');
       ctx.write('case $name.$member: return ${literalString(raw)};');

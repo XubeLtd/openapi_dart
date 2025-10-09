@@ -239,7 +239,7 @@ XubeSubscribeToUserAccountsRequest _$XubeSubscribeToUserAccountsRequestFromJson(
       limit: json['limit'] as num?,
       destination: json['destination'] as String,
       user: json['user'] as String,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
     );
 
 Map<String, dynamic> _$XubeSubscribeToUserAccountsRequestToJson(
@@ -258,7 +258,7 @@ Map<String, dynamic> _$XubeSubscribeToUserAccountsRequestToJson(
   writeNotNull('limit', instance.limit);
   val['destination'] = instance.destination;
   val['user'] = instance.user;
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   return val;
 }
 
@@ -922,7 +922,7 @@ XubeGetUserAccountsRequest _$XubeGetUserAccountsRequestFromJson(
       nextToken: json['nextToken'] as String?,
       limit: json['limit'] as num?,
       user: json['user'] as String,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
     );
 
 Map<String, dynamic> _$XubeGetUserAccountsRequestToJson(
@@ -938,7 +938,7 @@ Map<String, dynamic> _$XubeGetUserAccountsRequestToJson(
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('limit', instance.limit);
   val['user'] = instance.user;
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   return val;
 }
 
@@ -980,7 +980,7 @@ XubeSubscribeToAccountComponentsRequest
           nextToken: json['nextToken'] as String?,
           limit: json['limit'] as num?,
           destination: json['destination'] as String,
-          descending: json['descending'] as bool? ?? false,
+          descending: json['descending'] as bool?,
           account: json['account'] as String,
         );
 
@@ -1000,7 +1000,7 @@ Map<String, dynamic> _$XubeSubscribeToAccountComponentsRequestToJson(
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('limit', instance.limit);
   val['destination'] = instance.destination;
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   val['account'] = instance.account;
   return val;
 }
@@ -1017,7 +1017,7 @@ XubeSubscribeToChildrenRequest _$XubeSubscribeToChildrenRequestFromJson(
       nextToken: json['nextToken'] as String?,
       limit: json['limit'] as num?,
       destination: json['destination'] as String,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
     );
 
 Map<String, dynamic> _$XubeSubscribeToChildrenRequestToJson(
@@ -1037,7 +1037,7 @@ Map<String, dynamic> _$XubeSubscribeToChildrenRequestToJson(
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('limit', instance.limit);
   val['destination'] = instance.destination;
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   return val;
 }
 
@@ -1111,7 +1111,7 @@ XubeGetAccountComponentsRequest _$XubeGetAccountComponentsRequestFromJson(
       componentType: json['componentType'] as String?,
       nextToken: json['nextToken'] as String?,
       limit: json['limit'] as num?,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
       account: json['account'] as String,
     );
 
@@ -1128,7 +1128,7 @@ Map<String, dynamic> _$XubeGetAccountComponentsRequestToJson(
   writeNotNull('componentType', instance.componentType);
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('limit', instance.limit);
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   val['account'] = instance.account;
   return val;
 }
@@ -1321,7 +1321,7 @@ XubeGetChildrenRequest _$XubeGetChildrenRequestFromJson(
       component: json['component'] as String,
       nextToken: json['nextToken'] as String?,
       limit: json['limit'] as num?,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
     );
 
 Map<String, dynamic> _$XubeGetChildrenRequestToJson(
@@ -1338,7 +1338,7 @@ Map<String, dynamic> _$XubeGetChildrenRequestToJson(
   val['component'] = instance.component;
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('limit', instance.limit);
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   return val;
 }
 
@@ -1997,234 +1997,18 @@ Map<String, dynamic> _$XubeDeleteSubscriptionByIdRequestToJson(
 
 XubeGetDestinationsResponse _$XubeGetDestinationsResponseFromJson(
         Map<String, dynamic> json) =>
-    XubeGetDestinationsResponse();
+    XubeGetDestinationsResponse(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => XubeGetDestinationsResponseData.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$XubeGetDestinationsResponseToJson(
         XubeGetDestinationsResponse instance) =>
-    <String, dynamic>{};
-
-XubeGetDestinationResponseVariant1HeadersVariant1
-    _$XubeGetDestinationResponseVariant1HeadersVariant1FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDestinationResponseVariant1HeadersVariant1(
-          authorization: json['Authorization'] as String?,
-          xApiKey: json['x-api-key'] as String?,
-        );
-
-Map<String, dynamic> _$XubeGetDestinationResponseVariant1HeadersVariant1ToJson(
-    XubeGetDestinationResponseVariant1HeadersVariant1 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('Authorization', instance.authorization);
-  writeNotNull('x-api-key', instance.xApiKey);
-  return val;
-}
-
-XubeGetDestinationResponseVariant1HeadersVariant2
-    _$XubeGetDestinationResponseVariant1HeadersVariant2FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDestinationResponseVariant1HeadersVariant2(
-          additionalProps:
-              Map<String, String>.from(json['additionalProps'] as Map),
-        );
-
-Map<String, dynamic> _$XubeGetDestinationResponseVariant1HeadersVariant2ToJson(
-        XubeGetDestinationResponseVariant1HeadersVariant2 instance) =>
     <String, dynamic>{
-      'additionalProps': instance.additionalProps,
+      'data': instance.data,
     };
-
-XubeGetDestinationResponseVariant1IotDestination
-    _$XubeGetDestinationResponseVariant1IotDestinationFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDestinationResponseVariant1IotDestination(
-          state: $enumDecode(
-              _$XubeGetDestinationResponseVariant1IotDestinationStateEnumMap,
-              json['state']),
-          arn: json['arn'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetDestinationResponseVariant1IotDestinationToJson(
-        XubeGetDestinationResponseVariant1IotDestination instance) =>
-    <String, dynamic>{
-      'state': _$XubeGetDestinationResponseVariant1IotDestinationStateEnumMap[
-          instance.state]!,
-      'arn': instance.arn,
-    };
-
-const _$XubeGetDestinationResponseVariant1IotDestinationStateEnumMap = {
-  XubeGetDestinationResponseVariant1IotDestinationState.notSent: 'NOT_SENT',
-  XubeGetDestinationResponseVariant1IotDestinationState.pending: 'PENDING',
-  XubeGetDestinationResponseVariant1IotDestinationState.confirmed: 'CONFIRMED',
-};
-
-XubeGetDestinationResponseVariant1Confirmation
-    _$XubeGetDestinationResponseVariant1ConfirmationFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDestinationResponseVariant1Confirmation(
-          state: $enumDecode(
-              _$XubeGetDestinationResponseVariant1ConfirmationStateEnumMap,
-              json['state']),
-          sent: json['sent'] as String?,
-          token: json['token'] as String?,
-        );
-
-Map<String, dynamic> _$XubeGetDestinationResponseVariant1ConfirmationToJson(
-    XubeGetDestinationResponseVariant1Confirmation instance) {
-  final val = <String, dynamic>{
-    'state': _$XubeGetDestinationResponseVariant1ConfirmationStateEnumMap[
-        instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('sent', instance.sent);
-  writeNotNull('token', instance.token);
-  return val;
-}
-
-const _$XubeGetDestinationResponseVariant1ConfirmationStateEnumMap = {
-  XubeGetDestinationResponseVariant1ConfirmationState.notSent: 'NOT_SENT',
-  XubeGetDestinationResponseVariant1ConfirmationState.pending: 'PENDING',
-  XubeGetDestinationResponseVariant1ConfirmationState.confirmed: 'CONFIRMED',
-};
-
-XubeGetDestinationResponseVariant1 _$XubeGetDestinationResponseVariant1FromJson(
-        Map<String, dynamic> json) =>
-    XubeGetDestinationResponseVariant1(
-      accountId: json['accountId'] as String,
-      headers: json['headers'] == null
-          ? null
-          : XubeGetDestinationResponseVariant1Headers.fromJson(
-              json['headers'] as Map<String, dynamic>),
-      creator: json['creator'] as String?,
-      created: json['created'] == null
-          ? null
-          : DateTime.parse(json['created'] as String),
-      iotDestination: json['iotDestination'] == null
-          ? null
-          : XubeGetDestinationResponseVariant1IotDestination.fromJson(
-              json['iotDestination'] as Map<String, dynamic>),
-      name: json['name'] as String,
-      destinationType: $enumDecode(
-          _$XubeGetDestinationResponseVariant1DestinationTypeEnumMap,
-          json['destinationType']),
-      id: json['id'] as String,
-      confirmation: XubeGetDestinationResponseVariant1Confirmation.fromJson(
-          json['confirmation'] as Map<String, dynamic>),
-      state: $enumDecode(
-          _$XubeGetDestinationResponseVariant1StateEnumMap, json['state']),
-      type: json['type'] as String?,
-      url: json['url'] as String,
-    );
-
-Map<String, dynamic> _$XubeGetDestinationResponseVariant1ToJson(
-    XubeGetDestinationResponseVariant1 instance) {
-  final val = <String, dynamic>{
-    'accountId': instance.accountId,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('headers', instance.headers);
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('iotDestination', instance.iotDestination);
-  val['name'] = instance.name;
-  val['destinationType'] =
-      _$XubeGetDestinationResponseVariant1DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  val['confirmation'] = instance.confirmation;
-  val['state'] =
-      _$XubeGetDestinationResponseVariant1StateEnumMap[instance.state]!;
-  writeNotNull('type', instance.type);
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$XubeGetDestinationResponseVariant1DestinationTypeEnumMap = {
-  XubeGetDestinationResponseVariant1DestinationType.webhook: 'WEBHOOK',
-};
-
-const _$XubeGetDestinationResponseVariant1StateEnumMap = {
-  XubeGetDestinationResponseVariant1State.active: 'ACTIVE',
-  XubeGetDestinationResponseVariant1State.pending: 'PENDING',
-  XubeGetDestinationResponseVariant1State.unsecure: 'UNSECURE',
-};
-
-XubeGetDestinationResponseVariant2 _$XubeGetDestinationResponseVariant2FromJson(
-        Map<String, dynamic> json) =>
-    XubeGetDestinationResponseVariant2(
-      accountId: json['accountId'] as String,
-      creator: json['creator'] as String?,
-      lastHeartbeat: DateTime.parse(json['lastHeartbeat'] as String),
-      created: json['created'] == null
-          ? null
-          : DateTime.parse(json['created'] as String),
-      name: json['name'] as String,
-      missedHeartbeats: json['missedHeartbeats'] as num? ?? 0,
-      destinationType: $enumDecode(
-          _$XubeGetDestinationResponseVariant2DestinationTypeEnumMap,
-          json['destinationType']),
-      connectionId: json['connectionId'] as String,
-      id: json['id'] as String,
-      type: json['type'] as String?,
-      status: $enumDecode(
-          _$XubeGetDestinationResponseVariant2StatusEnumMap, json['status']),
-    );
-
-Map<String, dynamic> _$XubeGetDestinationResponseVariant2ToJson(
-    XubeGetDestinationResponseVariant2 instance) {
-  final val = <String, dynamic>{
-    'accountId': instance.accountId,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['lastHeartbeat'] = instance.lastHeartbeat.toIso8601String();
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['name'] = instance.name;
-  val['missedHeartbeats'] = instance.missedHeartbeats;
-  val['destinationType'] =
-      _$XubeGetDestinationResponseVariant2DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['status'] =
-      _$XubeGetDestinationResponseVariant2StatusEnumMap[instance.status]!;
-  return val;
-}
-
-const _$XubeGetDestinationResponseVariant2DestinationTypeEnumMap = {
-  XubeGetDestinationResponseVariant2DestinationType.websocket: 'WEBSOCKET',
-};
-
-const _$XubeGetDestinationResponseVariant2StatusEnumMap = {
-  XubeGetDestinationResponseVariant2Status.active: 'ACTIVE',
-  XubeGetDestinationResponseVariant2Status.stale: 'STALE',
-  XubeGetDestinationResponseVariant2Status.disconnected: 'DISCONNECTED',
-};
 
 XubeSendConfirmationToDestinationRequest
     _$XubeSendConfirmationToDestinationRequestFromJson(
@@ -2238,688 +2022,6 @@ Map<String, dynamic> _$XubeSendConfirmationToDestinationRequestToJson(
     <String, dynamic>{
       'destination': instance.destination,
     };
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant1Delivery
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant1DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant1Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant1DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant1DeliveryToJson(
-        XubeGetSubscriptionsByTargetsResponsePropsVariant1Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant1DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant1DeliveryStatusEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant1DeliveryStatus.active:
-      'ACTIVE',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant1DeliveryStatus.paused:
-      'PAUSED',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant1DeliveryStatus.failed:
-      'FAILED',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant1
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant1FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant1(
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionsByTargetsResponsePropsVariant1Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-          accountId: json['accountId'] as String?,
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant1SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant1DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionsByTargetsResponsePropsVariant1ToJson(
-    XubeGetSubscriptionsByTargetsResponsePropsVariant1 instance) {
-  final val = <String, dynamic>{
-    'delivery': instance.delivery,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  writeNotNull('accountId', instance.accountId);
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant1SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant1DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant1SubscriptionTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant1SubscriptionType.facet:
-      'FACET',
-};
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant1DestinationTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant1DestinationType.webhook:
-      'WEBHOOK',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant2Delivery
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant2DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant2Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant2DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant2DeliveryToJson(
-        XubeGetSubscriptionsByTargetsResponsePropsVariant2Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant2DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant2DeliveryStatusEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant2DeliveryStatus.active:
-      'ACTIVE',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant2DeliveryStatus.paused:
-      'PAUSED',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant2DeliveryStatus.failed:
-      'FAILED',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant2
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant2FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant2(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionsByTargetsResponsePropsVariant2Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant2SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant2DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionsByTargetsResponsePropsVariant2ToJson(
-    XubeGetSubscriptionsByTargetsResponsePropsVariant2 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant2SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant2DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant2SubscriptionTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant2SubscriptionType.data:
-      'DATA',
-};
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant2DestinationTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant2DestinationType.webhook:
-      'WEBHOOK',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant3Delivery
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant3DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant3Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant3DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant3DeliveryToJson(
-        XubeGetSubscriptionsByTargetsResponsePropsVariant3Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant3DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant3DeliveryStatusEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant3DeliveryStatus.active:
-      'ACTIVE',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant3DeliveryStatus.paused:
-      'PAUSED',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant3DeliveryStatus.failed:
-      'FAILED',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant3
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant3FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant3(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionsByTargetsResponsePropsVariant3Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant3SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant3DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionsByTargetsResponsePropsVariant3ToJson(
-    XubeGetSubscriptionsByTargetsResponsePropsVariant3 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant3SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant3DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant3SubscriptionTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant3SubscriptionType.member:
-      'MEMBER',
-};
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant3DestinationTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant3DestinationType.webhook:
-      'WEBHOOK',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant4Delivery
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant4DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant4Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant4DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant4DeliveryToJson(
-        XubeGetSubscriptionsByTargetsResponsePropsVariant4Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant4DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant4DeliveryStatusEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant4DeliveryStatus.active:
-      'ACTIVE',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant4DeliveryStatus.paused:
-      'PAUSED',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant4DeliveryStatus.failed:
-      'FAILED',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant4
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant4FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant4(
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionsByTargetsResponsePropsVariant4Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          accountId: json['accountId'] as String?,
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant4SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant4DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionsByTargetsResponsePropsVariant4ToJson(
-    XubeGetSubscriptionsByTargetsResponsePropsVariant4 instance) {
-  final val = <String, dynamic>{
-    'delivery': instance.delivery,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  writeNotNull('accountId', instance.accountId);
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant4SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant4DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant4SubscriptionTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant4SubscriptionType.facet:
-      'FACET',
-};
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant4DestinationTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant4DestinationType.websocket:
-      'WEBSOCKET',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant5Delivery
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant5DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant5Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant5DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant5DeliveryToJson(
-        XubeGetSubscriptionsByTargetsResponsePropsVariant5Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant5DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant5DeliveryStatusEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant5DeliveryStatus.active:
-      'ACTIVE',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant5DeliveryStatus.paused:
-      'PAUSED',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant5DeliveryStatus.failed:
-      'FAILED',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant5
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant5FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant5(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionsByTargetsResponsePropsVariant5Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant5SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant5DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionsByTargetsResponsePropsVariant5ToJson(
-    XubeGetSubscriptionsByTargetsResponsePropsVariant5 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant5SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant5DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant5SubscriptionTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant5SubscriptionType.data:
-      'DATA',
-};
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant5DestinationTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant5DestinationType.websocket:
-      'WEBSOCKET',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant6Delivery
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant6DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant6Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant6DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant6DeliveryToJson(
-        XubeGetSubscriptionsByTargetsResponsePropsVariant6Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant6DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant6DeliveryStatusEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant6DeliveryStatus.active:
-      'ACTIVE',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant6DeliveryStatus.paused:
-      'PAUSED',
-  XubeGetSubscriptionsByTargetsResponsePropsVariant6DeliveryStatus.failed:
-      'FAILED',
-};
-
-XubeGetSubscriptionsByTargetsResponsePropsVariant6
-    _$XubeGetSubscriptionsByTargetsResponsePropsVariant6FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByTargetsResponsePropsVariant6(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionsByTargetsResponsePropsVariant6Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant6SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionsByTargetsResponsePropsVariant6DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionsByTargetsResponsePropsVariant6ToJson(
-    XubeGetSubscriptionsByTargetsResponsePropsVariant6 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant6SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionsByTargetsResponsePropsVariant6DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  return val;
-}
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant6SubscriptionTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant6SubscriptionType.member:
-      'MEMBER',
-};
-
-const _$XubeGetSubscriptionsByTargetsResponsePropsVariant6DestinationTypeEnumMap =
-    {
-  XubeGetSubscriptionsByTargetsResponsePropsVariant6DestinationType.websocket:
-      'WEBSOCKET',
-};
 
 XubeGetSubscriptionsByTargetsResponse
     _$XubeGetSubscriptionsByTargetsResponseFromJson(
@@ -2986,19 +2088,31 @@ Map<String, dynamic> _$XubeDeleteSubscriptionRequest1ToJson(
 XubeGetSubscriptionsByDestinationResponse
     _$XubeGetSubscriptionsByDestinationResponseFromJson(
             Map<String, dynamic> json) =>
-        XubeGetSubscriptionsByDestinationResponse();
+        XubeGetSubscriptionsByDestinationResponse(
+          data: (json['data'] as List<dynamic>)
+              .map((e) =>
+                  XubeGetSubscriptionsByDestinationResponseData.fromJson(
+                      e as Map<String, dynamic>))
+              .toList(),
+        );
 
 Map<String, dynamic> _$XubeGetSubscriptionsByDestinationResponseToJson(
         XubeGetSubscriptionsByDestinationResponse instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'data': instance.data,
+    };
 
 XubeConfirmDestinationResponse1 _$XubeConfirmDestinationResponse1FromJson(
         Map<String, dynamic> json) =>
-    XubeConfirmDestinationResponse1();
+    XubeConfirmDestinationResponse1(
+      success: json['success'] as bool,
+    );
 
 Map<String, dynamic> _$XubeConfirmDestinationResponse1ToJson(
         XubeConfirmDestinationResponse1 instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'success': instance.success,
+    };
 
 XubeGetSubscriptionsByDestinationRequest
     _$XubeGetSubscriptionsByDestinationRequestFromJson(
@@ -3029,11 +2143,15 @@ Map<String, dynamic> _$XubeGetSubscriptionsByDestinationRequestToJson(
 
 XubeConfirmDataDestinationResponse _$XubeConfirmDataDestinationResponseFromJson(
         Map<String, dynamic> json) =>
-    XubeConfirmDataDestinationResponse();
+    XubeConfirmDataDestinationResponse(
+      success: json['success'] as bool,
+    );
 
 Map<String, dynamic> _$XubeConfirmDataDestinationResponseToJson(
         XubeConfirmDataDestinationResponse instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'success': instance.success,
+    };
 
 XubeDeleteDestinationResponse _$XubeDeleteDestinationResponseFromJson(
         Map<String, dynamic> json) =>
@@ -3223,634 +2341,6 @@ Map<String, dynamic> _$XubeDeleteDestinationRequestToJson(
       'destination': instance.destination,
     };
 
-XubeGetSubscriptionByIdResponseVariant1Delivery
-    _$XubeGetSubscriptionByIdResponseVariant1DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant1Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant1DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant1DeliveryToJson(
-    XubeGetSubscriptionByIdResponseVariant1Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionByIdResponseVariant1DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant1DeliveryStatusEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant1DeliveryStatus.active: 'ACTIVE',
-  XubeGetSubscriptionByIdResponseVariant1DeliveryStatus.paused: 'PAUSED',
-  XubeGetSubscriptionByIdResponseVariant1DeliveryStatus.failed: 'FAILED',
-};
-
-XubeGetSubscriptionByIdResponseVariant1
-    _$XubeGetSubscriptionByIdResponseVariant1FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant1(
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionByIdResponseVariant1Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-          accountId: json['accountId'] as String?,
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant1SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant1DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant1ToJson(
-    XubeGetSubscriptionByIdResponseVariant1 instance) {
-  final val = <String, dynamic>{
-    'delivery': instance.delivery,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  writeNotNull('accountId', instance.accountId);
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionByIdResponseVariant1SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionByIdResponseVariant1DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant1SubscriptionTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant1SubscriptionType.facet: 'FACET',
-};
-
-const _$XubeGetSubscriptionByIdResponseVariant1DestinationTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant1DestinationType.webhook: 'WEBHOOK',
-};
-
-XubeGetSubscriptionByIdResponseVariant2Delivery
-    _$XubeGetSubscriptionByIdResponseVariant2DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant2Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant2DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant2DeliveryToJson(
-    XubeGetSubscriptionByIdResponseVariant2Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionByIdResponseVariant2DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant2DeliveryStatusEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant2DeliveryStatus.active: 'ACTIVE',
-  XubeGetSubscriptionByIdResponseVariant2DeliveryStatus.paused: 'PAUSED',
-  XubeGetSubscriptionByIdResponseVariant2DeliveryStatus.failed: 'FAILED',
-};
-
-XubeGetSubscriptionByIdResponseVariant2
-    _$XubeGetSubscriptionByIdResponseVariant2FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant2(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionByIdResponseVariant2Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant2SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant2DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant2ToJson(
-    XubeGetSubscriptionByIdResponseVariant2 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionByIdResponseVariant2SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionByIdResponseVariant2DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant2SubscriptionTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant2SubscriptionType.data: 'DATA',
-};
-
-const _$XubeGetSubscriptionByIdResponseVariant2DestinationTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant2DestinationType.webhook: 'WEBHOOK',
-};
-
-XubeGetSubscriptionByIdResponseVariant3Delivery
-    _$XubeGetSubscriptionByIdResponseVariant3DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant3Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant3DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant3DeliveryToJson(
-    XubeGetSubscriptionByIdResponseVariant3Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionByIdResponseVariant3DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant3DeliveryStatusEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant3DeliveryStatus.active: 'ACTIVE',
-  XubeGetSubscriptionByIdResponseVariant3DeliveryStatus.paused: 'PAUSED',
-  XubeGetSubscriptionByIdResponseVariant3DeliveryStatus.failed: 'FAILED',
-};
-
-XubeGetSubscriptionByIdResponseVariant3
-    _$XubeGetSubscriptionByIdResponseVariant3FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant3(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionByIdResponseVariant3Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant3SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant3DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant3ToJson(
-    XubeGetSubscriptionByIdResponseVariant3 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionByIdResponseVariant3SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionByIdResponseVariant3DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant3SubscriptionTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant3SubscriptionType.member: 'MEMBER',
-};
-
-const _$XubeGetSubscriptionByIdResponseVariant3DestinationTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant3DestinationType.webhook: 'WEBHOOK',
-};
-
-XubeGetSubscriptionByIdResponseVariant4Delivery
-    _$XubeGetSubscriptionByIdResponseVariant4DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant4Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant4DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant4DeliveryToJson(
-    XubeGetSubscriptionByIdResponseVariant4Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionByIdResponseVariant4DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant4DeliveryStatusEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant4DeliveryStatus.active: 'ACTIVE',
-  XubeGetSubscriptionByIdResponseVariant4DeliveryStatus.paused: 'PAUSED',
-  XubeGetSubscriptionByIdResponseVariant4DeliveryStatus.failed: 'FAILED',
-};
-
-XubeGetSubscriptionByIdResponseVariant4
-    _$XubeGetSubscriptionByIdResponseVariant4FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant4(
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionByIdResponseVariant4Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          accountId: json['accountId'] as String?,
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant4SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant4DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant4ToJson(
-    XubeGetSubscriptionByIdResponseVariant4 instance) {
-  final val = <String, dynamic>{
-    'delivery': instance.delivery,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  writeNotNull('accountId', instance.accountId);
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionByIdResponseVariant4SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionByIdResponseVariant4DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant4SubscriptionTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant4SubscriptionType.facet: 'FACET',
-};
-
-const _$XubeGetSubscriptionByIdResponseVariant4DestinationTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant4DestinationType.websocket: 'WEBSOCKET',
-};
-
-XubeGetSubscriptionByIdResponseVariant5Delivery
-    _$XubeGetSubscriptionByIdResponseVariant5DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant5Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant5DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant5DeliveryToJson(
-    XubeGetSubscriptionByIdResponseVariant5Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionByIdResponseVariant5DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant5DeliveryStatusEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant5DeliveryStatus.active: 'ACTIVE',
-  XubeGetSubscriptionByIdResponseVariant5DeliveryStatus.paused: 'PAUSED',
-  XubeGetSubscriptionByIdResponseVariant5DeliveryStatus.failed: 'FAILED',
-};
-
-XubeGetSubscriptionByIdResponseVariant5
-    _$XubeGetSubscriptionByIdResponseVariant5FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant5(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionByIdResponseVariant5Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant5SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant5DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant5ToJson(
-    XubeGetSubscriptionByIdResponseVariant5 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionByIdResponseVariant5SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionByIdResponseVariant5DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant5SubscriptionTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant5SubscriptionType.data: 'DATA',
-};
-
-const _$XubeGetSubscriptionByIdResponseVariant5DestinationTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant5DestinationType.websocket: 'WEBSOCKET',
-};
-
-XubeGetSubscriptionByIdResponseVariant6Delivery
-    _$XubeGetSubscriptionByIdResponseVariant6DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant6Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant6DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant6DeliveryToJson(
-    XubeGetSubscriptionByIdResponseVariant6Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$XubeGetSubscriptionByIdResponseVariant6DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant6DeliveryStatusEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant6DeliveryStatus.active: 'ACTIVE',
-  XubeGetSubscriptionByIdResponseVariant6DeliveryStatus.paused: 'PAUSED',
-  XubeGetSubscriptionByIdResponseVariant6DeliveryStatus.failed: 'FAILED',
-};
-
-XubeGetSubscriptionByIdResponseVariant6
-    _$XubeGetSubscriptionByIdResponseVariant6FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetSubscriptionByIdResponseVariant6(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : XubeGetSubscriptionByIdResponseVariant6Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant6SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$XubeGetSubscriptionByIdResponseVariant6DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetSubscriptionByIdResponseVariant6ToJson(
-    XubeGetSubscriptionByIdResponseVariant6 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$XubeGetSubscriptionByIdResponseVariant6SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$XubeGetSubscriptionByIdResponseVariant6DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  return val;
-}
-
-const _$XubeGetSubscriptionByIdResponseVariant6SubscriptionTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant6SubscriptionType.member: 'MEMBER',
-};
-
-const _$XubeGetSubscriptionByIdResponseVariant6DestinationTypeEnumMap = {
-  XubeGetSubscriptionByIdResponseVariant6DestinationType.websocket: 'WEBSOCKET',
-};
-
 XubeGetDestinationRequest _$XubeGetDestinationRequestFromJson(
         Map<String, dynamic> json) =>
     XubeGetDestinationRequest(
@@ -3877,11 +2367,18 @@ Map<String, dynamic> _$XubeDeleteSubscriptionResponse1ToJson(
 
 XubeGetSubscriptionsResponse _$XubeGetSubscriptionsResponseFromJson(
         Map<String, dynamic> json) =>
-    XubeGetSubscriptionsResponse();
+    XubeGetSubscriptionsResponse(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => XubeGetSubscriptionsResponseData.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$XubeGetSubscriptionsResponseToJson(
         XubeGetSubscriptionsResponse instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'data': instance.data,
+    };
 
 XubeConfirmDataDestinationRequest _$XubeConfirmDataDestinationRequestFromJson(
         Map<String, dynamic> json) =>
@@ -3918,102 +2415,6 @@ XubeCreateSubscriptionsResponse _$XubeCreateSubscriptionsResponseFromJson(
 Map<String, dynamic> _$XubeCreateSubscriptionsResponseToJson(
         XubeCreateSubscriptionsResponse instance) =>
     <String, dynamic>{};
-
-XubeCreateSubscriptionsRequestSubscriptionsVariant1
-    _$XubeCreateSubscriptionsRequestSubscriptionsVariant1FromJson(
-            Map<String, dynamic> json) =>
-        XubeCreateSubscriptionsRequestSubscriptionsVariant1(
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$XubeCreateSubscriptionsRequestSubscriptionsVariant1SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          destination: json['destination'] as String,
-          target: json['target'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeCreateSubscriptionsRequestSubscriptionsVariant1ToJson(
-        XubeCreateSubscriptionsRequestSubscriptionsVariant1 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$XubeCreateSubscriptionsRequestSubscriptionsVariant1SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  val['destination'] = instance.destination;
-  val['target'] = instance.target;
-  return val;
-}
-
-const _$XubeCreateSubscriptionsRequestSubscriptionsVariant1SubscriptionTypeEnumMap =
-    {
-  XubeCreateSubscriptionsRequestSubscriptionsVariant1SubscriptionType.facet:
-      'FACET',
-};
-
-XubeCreateSubscriptionsRequestSubscriptionsVariant2
-    _$XubeCreateSubscriptionsRequestSubscriptionsVariant2FromJson(
-            Map<String, dynamic> json) =>
-        XubeCreateSubscriptionsRequestSubscriptionsVariant2(
-          subscriptionType: $enumDecode(
-              _$XubeCreateSubscriptionsRequestSubscriptionsVariant2SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          destination: json['destination'] as String,
-          target: json['target'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeCreateSubscriptionsRequestSubscriptionsVariant2ToJson(
-            XubeCreateSubscriptionsRequestSubscriptionsVariant2 instance) =>
-        <String, dynamic>{
-          'subscriptionType':
-              _$XubeCreateSubscriptionsRequestSubscriptionsVariant2SubscriptionTypeEnumMap[
-                  instance.subscriptionType]!,
-          'destination': instance.destination,
-          'target': instance.target,
-        };
-
-const _$XubeCreateSubscriptionsRequestSubscriptionsVariant2SubscriptionTypeEnumMap =
-    {
-  XubeCreateSubscriptionsRequestSubscriptionsVariant2SubscriptionType.data:
-      'DATA',
-};
-
-XubeCreateSubscriptionsRequestSubscriptionsVariant3
-    _$XubeCreateSubscriptionsRequestSubscriptionsVariant3FromJson(
-            Map<String, dynamic> json) =>
-        XubeCreateSubscriptionsRequestSubscriptionsVariant3(
-          subscriptionType: $enumDecode(
-              _$XubeCreateSubscriptionsRequestSubscriptionsVariant3SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          destination: json['destination'] as String,
-          target: json['target'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeCreateSubscriptionsRequestSubscriptionsVariant3ToJson(
-            XubeCreateSubscriptionsRequestSubscriptionsVariant3 instance) =>
-        <String, dynamic>{
-          'subscriptionType':
-              _$XubeCreateSubscriptionsRequestSubscriptionsVariant3SubscriptionTypeEnumMap[
-                  instance.subscriptionType]!,
-          'destination': instance.destination,
-          'target': instance.target,
-        };
-
-const _$XubeCreateSubscriptionsRequestSubscriptionsVariant3SubscriptionTypeEnumMap =
-    {
-  XubeCreateSubscriptionsRequestSubscriptionsVariant3SubscriptionType.member:
-      'MEMBER',
-};
 
 XubeCreateSubscriptionsRequest _$XubeCreateSubscriptionsRequestFromJson(
         Map<String, dynamic> json) =>
@@ -4105,6 +2506,889 @@ Map<String, dynamic> _$XubeSendConfirmationToDestinationResponseToJson(
       'success': instance.success,
     };
 
+XubeWebhookHeadersVariant1 _$XubeWebhookHeadersVariant1FromJson(
+        Map<String, dynamic> json) =>
+    XubeWebhookHeadersVariant1(
+      authorization: json['Authorization'] as String?,
+      xApiKey: json['x-api-key'] as String?,
+    );
+
+Map<String, dynamic> _$XubeWebhookHeadersVariant1ToJson(
+    XubeWebhookHeadersVariant1 instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('Authorization', instance.authorization);
+  writeNotNull('x-api-key', instance.xApiKey);
+  return val;
+}
+
+XubeWebhookHeadersVariant2 _$XubeWebhookHeadersVariant2FromJson(
+        Map<String, dynamic> json) =>
+    XubeWebhookHeadersVariant2(
+      additionalProps: Map<String, String>.from(json['additionalProps'] as Map),
+    );
+
+Map<String, dynamic> _$XubeWebhookHeadersVariant2ToJson(
+        XubeWebhookHeadersVariant2 instance) =>
+    <String, dynamic>{
+      'additionalProps': instance.additionalProps,
+    };
+
+XubeWebhookIotDestination _$XubeWebhookIotDestinationFromJson(
+        Map<String, dynamic> json) =>
+    XubeWebhookIotDestination(
+      state:
+          $enumDecode(_$XubeWebhookIotDestinationStateEnumMap, json['state']),
+      arn: json['arn'] as String,
+    );
+
+Map<String, dynamic> _$XubeWebhookIotDestinationToJson(
+        XubeWebhookIotDestination instance) =>
+    <String, dynamic>{
+      'state': _$XubeWebhookIotDestinationStateEnumMap[instance.state]!,
+      'arn': instance.arn,
+    };
+
+const _$XubeWebhookIotDestinationStateEnumMap = {
+  XubeWebhookIotDestinationState.notSent: 'NOT_SENT',
+  XubeWebhookIotDestinationState.pending: 'PENDING',
+  XubeWebhookIotDestinationState.confirmed: 'CONFIRMED',
+};
+
+XubeWebhookConfirmation _$XubeWebhookConfirmationFromJson(
+        Map<String, dynamic> json) =>
+    XubeWebhookConfirmation(
+      state: $enumDecode(_$XubeWebhookConfirmationStateEnumMap, json['state']),
+      sent: json['sent'] as String?,
+      token: json['token'] as String?,
+    );
+
+Map<String, dynamic> _$XubeWebhookConfirmationToJson(
+    XubeWebhookConfirmation instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeWebhookConfirmationStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sent', instance.sent);
+  writeNotNull('token', instance.token);
+  return val;
+}
+
+const _$XubeWebhookConfirmationStateEnumMap = {
+  XubeWebhookConfirmationState.notSent: 'NOT_SENT',
+  XubeWebhookConfirmationState.pending: 'PENDING',
+  XubeWebhookConfirmationState.confirmed: 'CONFIRMED',
+};
+
+XubeWebhook _$XubeWebhookFromJson(Map<String, dynamic> json) => XubeWebhook(
+      accountId: json['accountId'] as String,
+      headers: json['headers'] == null
+          ? null
+          : XubeWebhookHeaders.fromJson(
+              json['headers'] as Map<String, dynamic>),
+      creator: json['creator'] as String?,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      iotDestination: json['iotDestination'] == null
+          ? null
+          : XubeWebhookIotDestination.fromJson(
+              json['iotDestination'] as Map<String, dynamic>),
+      name: json['name'] as String,
+      destinationType: $enumDecode(
+          _$XubeWebhookDestinationTypeEnumMap, json['destinationType']),
+      id: json['id'] as String,
+      confirmation: XubeWebhookConfirmation.fromJson(
+          json['confirmation'] as Map<String, dynamic>),
+      state: $enumDecode(_$XubeWebhookStateEnumMap, json['state']),
+      type: json['type'] as String?,
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$XubeWebhookToJson(XubeWebhook instance) {
+  final val = <String, dynamic>{
+    'accountId': instance.accountId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('headers', instance.headers);
+  writeNotNull('creator', instance.creator);
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('iotDestination', instance.iotDestination);
+  val['name'] = instance.name;
+  val['destinationType'] =
+      _$XubeWebhookDestinationTypeEnumMap[instance.destinationType]!;
+  val['id'] = instance.id;
+  val['confirmation'] = instance.confirmation;
+  val['state'] = _$XubeWebhookStateEnumMap[instance.state]!;
+  writeNotNull('type', instance.type);
+  val['url'] = instance.url;
+  return val;
+}
+
+const _$XubeWebhookDestinationTypeEnumMap = {
+  XubeWebhookDestinationType.webhook: 'WEBHOOK',
+};
+
+const _$XubeWebhookStateEnumMap = {
+  XubeWebhookState.active: 'ACTIVE',
+  XubeWebhookState.pending: 'PENDING',
+  XubeWebhookState.unsecure: 'UNSECURE',
+};
+
+XubeWebsocket _$XubeWebsocketFromJson(Map<String, dynamic> json) =>
+    XubeWebsocket(
+      accountId: json['accountId'] as String,
+      creator: json['creator'] as String?,
+      lastHeartbeat: DateTime.parse(json['lastHeartbeat'] as String),
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      name: json['name'] as String,
+      missedHeartbeats: json['missedHeartbeats'] as num?,
+      destinationType: $enumDecode(
+          _$XubeWebsocketDestinationTypeEnumMap, json['destinationType']),
+      connectionId: json['connectionId'] as String,
+      id: json['id'] as String,
+      type: json['type'] as String?,
+      status: $enumDecode(_$XubeWebsocketStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeWebsocketToJson(XubeWebsocket instance) {
+  final val = <String, dynamic>{
+    'accountId': instance.accountId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('creator', instance.creator);
+  val['lastHeartbeat'] = instance.lastHeartbeat.toIso8601String();
+  writeNotNull('created', instance.created?.toIso8601String());
+  val['name'] = instance.name;
+  writeNotNull('missedHeartbeats', instance.missedHeartbeats);
+  val['destinationType'] =
+      _$XubeWebsocketDestinationTypeEnumMap[instance.destinationType]!;
+  val['connectionId'] = instance.connectionId;
+  val['id'] = instance.id;
+  writeNotNull('type', instance.type);
+  val['status'] = _$XubeWebsocketStatusEnumMap[instance.status]!;
+  return val;
+}
+
+const _$XubeWebsocketDestinationTypeEnumMap = {
+  XubeWebsocketDestinationType.websocket: 'WEBSOCKET',
+};
+
+const _$XubeWebsocketStatusEnumMap = {
+  XubeWebsocketStatus.active: 'ACTIVE',
+  XubeWebsocketStatus.stale: 'STALE',
+  XubeWebsocketStatus.disconnected: 'DISCONNECTED',
+};
+
+XubeFacetWebhookDelivery _$XubeFacetWebhookDeliveryFromJson(
+        Map<String, dynamic> json) =>
+    XubeFacetWebhookDelivery(
+      lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
+      nextRetryAt: json['nextRetryAt'] as String?,
+      lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
+      failedAttempts: json['failedAttempts'] as num?,
+      status:
+          $enumDecode(_$XubeFacetWebhookDeliveryStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeFacetWebhookDeliveryToJson(
+    XubeFacetWebhookDelivery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
+  writeNotNull('nextRetryAt', instance.nextRetryAt);
+  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
+  writeNotNull('failedAttempts', instance.failedAttempts);
+  val['status'] = _$XubeFacetWebhookDeliveryStatusEnumMap[instance.status]!;
+  return val;
+}
+
+const _$XubeFacetWebhookDeliveryStatusEnumMap = {
+  XubeFacetWebhookDeliveryStatus.active: 'ACTIVE',
+  XubeFacetWebhookDeliveryStatus.paused: 'PAUSED',
+  XubeFacetWebhookDeliveryStatus.failed: 'FAILED',
+};
+
+XubeFacetWebhook _$XubeFacetWebhookFromJson(Map<String, dynamic> json) =>
+    XubeFacetWebhook(
+      delivery: json['delivery'] == null
+          ? null
+          : XubeFacetWebhookDelivery.fromJson(
+              json['delivery'] as Map<String, dynamic>),
+      creator: json['creator'] as String?,
+      targetId: json['targetId'] as String,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      type: json['type'] as String?,
+      destinationId: json['destinationId'] as String,
+      url: json['url'] as String,
+      accountId: json['accountId'] as String?,
+      facetType: json['facetType'] as String?,
+      subscriptionVariant: $enumDecode(
+          _$XubeFacetWebhookSubscriptionVariantEnumMap,
+          json['subscriptionVariant']),
+      subscriptionType: $enumDecode(
+          _$XubeFacetWebhookSubscriptionTypeEnumMap, json['subscriptionType']),
+      facetId: json['facetId'] as String?,
+      name: json['name'] as String?,
+      destinationType: $enumDecode(
+          _$XubeFacetWebhookDestinationTypeEnumMap, json['destinationType']),
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$XubeFacetWebhookToJson(XubeFacetWebhook instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('delivery', instance.delivery);
+  writeNotNull('creator', instance.creator);
+  val['targetId'] = instance.targetId;
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('type', instance.type);
+  val['destinationId'] = instance.destinationId;
+  val['url'] = instance.url;
+  writeNotNull('accountId', instance.accountId);
+  writeNotNull('facetType', instance.facetType);
+  val['subscriptionVariant'] = _$XubeFacetWebhookSubscriptionVariantEnumMap[
+      instance.subscriptionVariant]!;
+  val['subscriptionType'] =
+      _$XubeFacetWebhookSubscriptionTypeEnumMap[instance.subscriptionType]!;
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('name', instance.name);
+  val['destinationType'] =
+      _$XubeFacetWebhookDestinationTypeEnumMap[instance.destinationType]!;
+  val['id'] = instance.id;
+  return val;
+}
+
+const _$XubeFacetWebhookSubscriptionVariantEnumMap = {
+  XubeFacetWebhookSubscriptionVariant.facetWebhook: 'FACET-WEBHOOK',
+};
+
+const _$XubeFacetWebhookSubscriptionTypeEnumMap = {
+  XubeFacetWebhookSubscriptionType.facet: 'FACET',
+};
+
+const _$XubeFacetWebhookDestinationTypeEnumMap = {
+  XubeFacetWebhookDestinationType.webhook: 'WEBHOOK',
+};
+
+XubeDataWebhookDelivery _$XubeDataWebhookDeliveryFromJson(
+        Map<String, dynamic> json) =>
+    XubeDataWebhookDelivery(
+      lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
+      nextRetryAt: json['nextRetryAt'] as String?,
+      lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
+      failedAttempts: json['failedAttempts'] as num?,
+      status:
+          $enumDecode(_$XubeDataWebhookDeliveryStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeDataWebhookDeliveryToJson(
+    XubeDataWebhookDelivery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
+  writeNotNull('nextRetryAt', instance.nextRetryAt);
+  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
+  writeNotNull('failedAttempts', instance.failedAttempts);
+  val['status'] = _$XubeDataWebhookDeliveryStatusEnumMap[instance.status]!;
+  return val;
+}
+
+const _$XubeDataWebhookDeliveryStatusEnumMap = {
+  XubeDataWebhookDeliveryStatus.active: 'ACTIVE',
+  XubeDataWebhookDeliveryStatus.paused: 'PAUSED',
+  XubeDataWebhookDeliveryStatus.failed: 'FAILED',
+};
+
+XubeDataWebhook _$XubeDataWebhookFromJson(Map<String, dynamic> json) =>
+    XubeDataWebhook(
+      delivery: json['delivery'] == null
+          ? null
+          : XubeDataWebhookDelivery.fromJson(
+              json['delivery'] as Map<String, dynamic>),
+      creator: json['creator'] as String?,
+      targetId: json['targetId'] as String,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      type: json['type'] as String?,
+      destinationId: json['destinationId'] as String,
+      url: json['url'] as String,
+      accountId: json['accountId'] as String?,
+      subscriptionVariant: $enumDecode(
+          _$XubeDataWebhookSubscriptionVariantEnumMap,
+          json['subscriptionVariant']),
+      subscriptionType: $enumDecode(
+          _$XubeDataWebhookSubscriptionTypeEnumMap, json['subscriptionType']),
+      name: json['name'] as String?,
+      destinationType: $enumDecode(
+          _$XubeDataWebhookDestinationTypeEnumMap, json['destinationType']),
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$XubeDataWebhookToJson(XubeDataWebhook instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('delivery', instance.delivery);
+  writeNotNull('creator', instance.creator);
+  val['targetId'] = instance.targetId;
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('type', instance.type);
+  val['destinationId'] = instance.destinationId;
+  val['url'] = instance.url;
+  writeNotNull('accountId', instance.accountId);
+  val['subscriptionVariant'] = _$XubeDataWebhookSubscriptionVariantEnumMap[
+      instance.subscriptionVariant]!;
+  val['subscriptionType'] =
+      _$XubeDataWebhookSubscriptionTypeEnumMap[instance.subscriptionType]!;
+  writeNotNull('name', instance.name);
+  val['destinationType'] =
+      _$XubeDataWebhookDestinationTypeEnumMap[instance.destinationType]!;
+  val['id'] = instance.id;
+  return val;
+}
+
+const _$XubeDataWebhookSubscriptionVariantEnumMap = {
+  XubeDataWebhookSubscriptionVariant.dataWebhook: 'DATA-WEBHOOK',
+};
+
+const _$XubeDataWebhookSubscriptionTypeEnumMap = {
+  XubeDataWebhookSubscriptionType.data: 'DATA',
+};
+
+const _$XubeDataWebhookDestinationTypeEnumMap = {
+  XubeDataWebhookDestinationType.webhook: 'WEBHOOK',
+};
+
+XubeMemberWebhookDelivery _$XubeMemberWebhookDeliveryFromJson(
+        Map<String, dynamic> json) =>
+    XubeMemberWebhookDelivery(
+      lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
+      nextRetryAt: json['nextRetryAt'] as String?,
+      lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
+      failedAttempts: json['failedAttempts'] as num?,
+      status:
+          $enumDecode(_$XubeMemberWebhookDeliveryStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeMemberWebhookDeliveryToJson(
+    XubeMemberWebhookDelivery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
+  writeNotNull('nextRetryAt', instance.nextRetryAt);
+  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
+  writeNotNull('failedAttempts', instance.failedAttempts);
+  val['status'] = _$XubeMemberWebhookDeliveryStatusEnumMap[instance.status]!;
+  return val;
+}
+
+const _$XubeMemberWebhookDeliveryStatusEnumMap = {
+  XubeMemberWebhookDeliveryStatus.active: 'ACTIVE',
+  XubeMemberWebhookDeliveryStatus.paused: 'PAUSED',
+  XubeMemberWebhookDeliveryStatus.failed: 'FAILED',
+};
+
+XubeMemberWebhook _$XubeMemberWebhookFromJson(Map<String, dynamic> json) =>
+    XubeMemberWebhook(
+      delivery: json['delivery'] == null
+          ? null
+          : XubeMemberWebhookDelivery.fromJson(
+              json['delivery'] as Map<String, dynamic>),
+      creator: json['creator'] as String?,
+      targetId: json['targetId'] as String,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      type: json['type'] as String?,
+      destinationId: json['destinationId'] as String,
+      url: json['url'] as String,
+      accountId: json['accountId'] as String?,
+      subscriptionVariant: $enumDecode(
+          _$XubeMemberWebhookSubscriptionVariantEnumMap,
+          json['subscriptionVariant']),
+      subscriptionType: $enumDecode(
+          _$XubeMemberWebhookSubscriptionTypeEnumMap, json['subscriptionType']),
+      name: json['name'] as String?,
+      destinationType: $enumDecode(
+          _$XubeMemberWebhookDestinationTypeEnumMap, json['destinationType']),
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$XubeMemberWebhookToJson(XubeMemberWebhook instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('delivery', instance.delivery);
+  writeNotNull('creator', instance.creator);
+  val['targetId'] = instance.targetId;
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('type', instance.type);
+  val['destinationId'] = instance.destinationId;
+  val['url'] = instance.url;
+  writeNotNull('accountId', instance.accountId);
+  val['subscriptionVariant'] = _$XubeMemberWebhookSubscriptionVariantEnumMap[
+      instance.subscriptionVariant]!;
+  val['subscriptionType'] =
+      _$XubeMemberWebhookSubscriptionTypeEnumMap[instance.subscriptionType]!;
+  writeNotNull('name', instance.name);
+  val['destinationType'] =
+      _$XubeMemberWebhookDestinationTypeEnumMap[instance.destinationType]!;
+  val['id'] = instance.id;
+  return val;
+}
+
+const _$XubeMemberWebhookSubscriptionVariantEnumMap = {
+  XubeMemberWebhookSubscriptionVariant.memberWebhook: 'MEMBER-WEBHOOK',
+};
+
+const _$XubeMemberWebhookSubscriptionTypeEnumMap = {
+  XubeMemberWebhookSubscriptionType.member: 'MEMBER',
+};
+
+const _$XubeMemberWebhookDestinationTypeEnumMap = {
+  XubeMemberWebhookDestinationType.webhook: 'WEBHOOK',
+};
+
+XubeFacetWebsocketDelivery _$XubeFacetWebsocketDeliveryFromJson(
+        Map<String, dynamic> json) =>
+    XubeFacetWebsocketDelivery(
+      lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
+      nextRetryAt: json['nextRetryAt'] as String?,
+      lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
+      failedAttempts: json['failedAttempts'] as num?,
+      status: $enumDecode(
+          _$XubeFacetWebsocketDeliveryStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeFacetWebsocketDeliveryToJson(
+    XubeFacetWebsocketDelivery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
+  writeNotNull('nextRetryAt', instance.nextRetryAt);
+  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
+  writeNotNull('failedAttempts', instance.failedAttempts);
+  val['status'] = _$XubeFacetWebsocketDeliveryStatusEnumMap[instance.status]!;
+  return val;
+}
+
+const _$XubeFacetWebsocketDeliveryStatusEnumMap = {
+  XubeFacetWebsocketDeliveryStatus.active: 'ACTIVE',
+  XubeFacetWebsocketDeliveryStatus.paused: 'PAUSED',
+  XubeFacetWebsocketDeliveryStatus.failed: 'FAILED',
+};
+
+XubeFacetWebsocket _$XubeFacetWebsocketFromJson(Map<String, dynamic> json) =>
+    XubeFacetWebsocket(
+      delivery: json['delivery'] == null
+          ? null
+          : XubeFacetWebsocketDelivery.fromJson(
+              json['delivery'] as Map<String, dynamic>),
+      creator: json['creator'] as String?,
+      targetId: json['targetId'] as String,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      type: json['type'] as String?,
+      destinationId: json['destinationId'] as String,
+      accountId: json['accountId'] as String?,
+      facetType: json['facetType'] as String?,
+      subscriptionVariant: $enumDecode(
+          _$XubeFacetWebsocketSubscriptionVariantEnumMap,
+          json['subscriptionVariant']),
+      subscriptionType: $enumDecode(_$XubeFacetWebsocketSubscriptionTypeEnumMap,
+          json['subscriptionType']),
+      facetId: json['facetId'] as String?,
+      name: json['name'] as String?,
+      destinationType: $enumDecode(
+          _$XubeFacetWebsocketDestinationTypeEnumMap, json['destinationType']),
+      connectionId: json['connectionId'] as String,
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$XubeFacetWebsocketToJson(XubeFacetWebsocket instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('delivery', instance.delivery);
+  writeNotNull('creator', instance.creator);
+  val['targetId'] = instance.targetId;
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('type', instance.type);
+  val['destinationId'] = instance.destinationId;
+  writeNotNull('accountId', instance.accountId);
+  writeNotNull('facetType', instance.facetType);
+  val['subscriptionVariant'] = _$XubeFacetWebsocketSubscriptionVariantEnumMap[
+      instance.subscriptionVariant]!;
+  val['subscriptionType'] =
+      _$XubeFacetWebsocketSubscriptionTypeEnumMap[instance.subscriptionType]!;
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('name', instance.name);
+  val['destinationType'] =
+      _$XubeFacetWebsocketDestinationTypeEnumMap[instance.destinationType]!;
+  val['connectionId'] = instance.connectionId;
+  val['id'] = instance.id;
+  return val;
+}
+
+const _$XubeFacetWebsocketSubscriptionVariantEnumMap = {
+  XubeFacetWebsocketSubscriptionVariant.facetWebsocket: 'FACET-WEBSOCKET',
+};
+
+const _$XubeFacetWebsocketSubscriptionTypeEnumMap = {
+  XubeFacetWebsocketSubscriptionType.facet: 'FACET',
+};
+
+const _$XubeFacetWebsocketDestinationTypeEnumMap = {
+  XubeFacetWebsocketDestinationType.websocket: 'WEBSOCKET',
+};
+
+XubeDataWebsocketDelivery _$XubeDataWebsocketDeliveryFromJson(
+        Map<String, dynamic> json) =>
+    XubeDataWebsocketDelivery(
+      lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
+      nextRetryAt: json['nextRetryAt'] as String?,
+      lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
+      failedAttempts: json['failedAttempts'] as num?,
+      status:
+          $enumDecode(_$XubeDataWebsocketDeliveryStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeDataWebsocketDeliveryToJson(
+    XubeDataWebsocketDelivery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
+  writeNotNull('nextRetryAt', instance.nextRetryAt);
+  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
+  writeNotNull('failedAttempts', instance.failedAttempts);
+  val['status'] = _$XubeDataWebsocketDeliveryStatusEnumMap[instance.status]!;
+  return val;
+}
+
+const _$XubeDataWebsocketDeliveryStatusEnumMap = {
+  XubeDataWebsocketDeliveryStatus.active: 'ACTIVE',
+  XubeDataWebsocketDeliveryStatus.paused: 'PAUSED',
+  XubeDataWebsocketDeliveryStatus.failed: 'FAILED',
+};
+
+XubeDataWebsocket _$XubeDataWebsocketFromJson(Map<String, dynamic> json) =>
+    XubeDataWebsocket(
+      delivery: json['delivery'] == null
+          ? null
+          : XubeDataWebsocketDelivery.fromJson(
+              json['delivery'] as Map<String, dynamic>),
+      creator: json['creator'] as String?,
+      targetId: json['targetId'] as String,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      type: json['type'] as String?,
+      destinationId: json['destinationId'] as String,
+      accountId: json['accountId'] as String?,
+      subscriptionVariant: $enumDecode(
+          _$XubeDataWebsocketSubscriptionVariantEnumMap,
+          json['subscriptionVariant']),
+      subscriptionType: $enumDecode(
+          _$XubeDataWebsocketSubscriptionTypeEnumMap, json['subscriptionType']),
+      name: json['name'] as String?,
+      destinationType: $enumDecode(
+          _$XubeDataWebsocketDestinationTypeEnumMap, json['destinationType']),
+      connectionId: json['connectionId'] as String,
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$XubeDataWebsocketToJson(XubeDataWebsocket instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('delivery', instance.delivery);
+  writeNotNull('creator', instance.creator);
+  val['targetId'] = instance.targetId;
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('type', instance.type);
+  val['destinationId'] = instance.destinationId;
+  writeNotNull('accountId', instance.accountId);
+  val['subscriptionVariant'] = _$XubeDataWebsocketSubscriptionVariantEnumMap[
+      instance.subscriptionVariant]!;
+  val['subscriptionType'] =
+      _$XubeDataWebsocketSubscriptionTypeEnumMap[instance.subscriptionType]!;
+  writeNotNull('name', instance.name);
+  val['destinationType'] =
+      _$XubeDataWebsocketDestinationTypeEnumMap[instance.destinationType]!;
+  val['connectionId'] = instance.connectionId;
+  val['id'] = instance.id;
+  return val;
+}
+
+const _$XubeDataWebsocketSubscriptionVariantEnumMap = {
+  XubeDataWebsocketSubscriptionVariant.dataWebsocket: 'DATA-WEBSOCKET',
+};
+
+const _$XubeDataWebsocketSubscriptionTypeEnumMap = {
+  XubeDataWebsocketSubscriptionType.data: 'DATA',
+};
+
+const _$XubeDataWebsocketDestinationTypeEnumMap = {
+  XubeDataWebsocketDestinationType.websocket: 'WEBSOCKET',
+};
+
+XubeMemberWebsocketDelivery _$XubeMemberWebsocketDeliveryFromJson(
+        Map<String, dynamic> json) =>
+    XubeMemberWebsocketDelivery(
+      lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
+      nextRetryAt: json['nextRetryAt'] as String?,
+      lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
+      failedAttempts: json['failedAttempts'] as num?,
+      status: $enumDecode(
+          _$XubeMemberWebsocketDeliveryStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeMemberWebsocketDeliveryToJson(
+    XubeMemberWebsocketDelivery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
+  writeNotNull('nextRetryAt', instance.nextRetryAt);
+  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
+  writeNotNull('failedAttempts', instance.failedAttempts);
+  val['status'] = _$XubeMemberWebsocketDeliveryStatusEnumMap[instance.status]!;
+  return val;
+}
+
+const _$XubeMemberWebsocketDeliveryStatusEnumMap = {
+  XubeMemberWebsocketDeliveryStatus.active: 'ACTIVE',
+  XubeMemberWebsocketDeliveryStatus.paused: 'PAUSED',
+  XubeMemberWebsocketDeliveryStatus.failed: 'FAILED',
+};
+
+XubeMemberWebsocket _$XubeMemberWebsocketFromJson(Map<String, dynamic> json) =>
+    XubeMemberWebsocket(
+      delivery: json['delivery'] == null
+          ? null
+          : XubeMemberWebsocketDelivery.fromJson(
+              json['delivery'] as Map<String, dynamic>),
+      creator: json['creator'] as String?,
+      targetId: json['targetId'] as String,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      type: json['type'] as String?,
+      destinationId: json['destinationId'] as String,
+      accountId: json['accountId'] as String?,
+      subscriptionVariant: $enumDecode(
+          _$XubeMemberWebsocketSubscriptionVariantEnumMap,
+          json['subscriptionVariant']),
+      subscriptionType: $enumDecode(
+          _$XubeMemberWebsocketSubscriptionTypeEnumMap,
+          json['subscriptionType']),
+      name: json['name'] as String?,
+      destinationType: $enumDecode(
+          _$XubeMemberWebsocketDestinationTypeEnumMap, json['destinationType']),
+      connectionId: json['connectionId'] as String,
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$XubeMemberWebsocketToJson(XubeMemberWebsocket instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('delivery', instance.delivery);
+  writeNotNull('creator', instance.creator);
+  val['targetId'] = instance.targetId;
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('type', instance.type);
+  val['destinationId'] = instance.destinationId;
+  writeNotNull('accountId', instance.accountId);
+  val['subscriptionVariant'] = _$XubeMemberWebsocketSubscriptionVariantEnumMap[
+      instance.subscriptionVariant]!;
+  val['subscriptionType'] =
+      _$XubeMemberWebsocketSubscriptionTypeEnumMap[instance.subscriptionType]!;
+  writeNotNull('name', instance.name);
+  val['destinationType'] =
+      _$XubeMemberWebsocketDestinationTypeEnumMap[instance.destinationType]!;
+  val['connectionId'] = instance.connectionId;
+  val['id'] = instance.id;
+  return val;
+}
+
+const _$XubeMemberWebsocketSubscriptionVariantEnumMap = {
+  XubeMemberWebsocketSubscriptionVariant.memberWebsocket: 'MEMBER-WEBSOCKET',
+};
+
+const _$XubeMemberWebsocketSubscriptionTypeEnumMap = {
+  XubeMemberWebsocketSubscriptionType.member: 'MEMBER',
+};
+
+const _$XubeMemberWebsocketDestinationTypeEnumMap = {
+  XubeMemberWebsocketDestinationType.websocket: 'WEBSOCKET',
+};
+
+XubeFacet _$XubeFacetFromJson(Map<String, dynamic> json) => XubeFacet(
+      facetType: json['facetType'] as String?,
+      subscriptionType: $enumDecode(
+          _$XubeFacetSubscriptionTypeEnumMap, json['subscriptionType']),
+      facetId: json['facetId'] as String?,
+      destination: json['destination'] as String,
+      target: json['target'] as String,
+    );
+
+Map<String, dynamic> _$XubeFacetToJson(XubeFacet instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('facetType', instance.facetType);
+  val['subscriptionType'] =
+      _$XubeFacetSubscriptionTypeEnumMap[instance.subscriptionType]!;
+  writeNotNull('facetId', instance.facetId);
+  val['destination'] = instance.destination;
+  val['target'] = instance.target;
+  return val;
+}
+
+const _$XubeFacetSubscriptionTypeEnumMap = {
+  XubeFacetSubscriptionType.facet: 'FACET',
+};
+
+XubeData _$XubeDataFromJson(Map<String, dynamic> json) => XubeData(
+      subscriptionType: $enumDecode(
+          _$XubeDataSubscriptionTypeEnumMap, json['subscriptionType']),
+      destination: json['destination'] as String,
+      target: json['target'] as String,
+    );
+
+Map<String, dynamic> _$XubeDataToJson(XubeData instance) => <String, dynamic>{
+      'subscriptionType':
+          _$XubeDataSubscriptionTypeEnumMap[instance.subscriptionType]!,
+      'destination': instance.destination,
+      'target': instance.target,
+    };
+
+const _$XubeDataSubscriptionTypeEnumMap = {
+  XubeDataSubscriptionType.data: 'DATA',
+};
+
+XubeMember _$XubeMemberFromJson(Map<String, dynamic> json) => XubeMember(
+      subscriptionType: $enumDecode(
+          _$XubeMemberSubscriptionTypeEnumMap, json['subscriptionType']),
+      destination: json['destination'] as String,
+      target: json['target'] as String,
+    );
+
+Map<String, dynamic> _$XubeMemberToJson(XubeMember instance) =>
+    <String, dynamic>{
+      'subscriptionType':
+          _$XubeMemberSubscriptionTypeEnumMap[instance.subscriptionType]!,
+      'destination': instance.destination,
+      'target': instance.target,
+    };
+
+const _$XubeMemberSubscriptionTypeEnumMap = {
+  XubeMemberSubscriptionType.member: 'MEMBER',
+};
+
 XubeGetAccountFacetsRequest _$XubeGetAccountFacetsRequestFromJson(
         Map<String, dynamic> json) =>
     XubeGetAccountFacetsRequest(
@@ -4112,8 +3396,8 @@ XubeGetAccountFacetsRequest _$XubeGetAccountFacetsRequestFromJson(
       facetTypes: (json['facetTypes'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      limit: json['limit'] as num? ?? 100,
-      descending: json['descending'] as bool? ?? false,
+      limit: json['limit'] as num?,
+      descending: json['descending'] as bool?,
       account: json['account'] as String,
     );
 
@@ -4129,8 +3413,8 @@ Map<String, dynamic> _$XubeGetAccountFacetsRequestToJson(
 
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('facetTypes', instance.facetTypes);
-  val['limit'] = instance.limit;
-  val['descending'] = instance.descending;
+  writeNotNull('limit', instance.limit);
+  writeNotNull('descending', instance.descending);
   val['account'] = instance.account;
   return val;
 }
@@ -4141,7 +3425,7 @@ XubeAccountDevicesRequest _$XubeAccountDevicesRequestFromJson(
       nextToken: json['nextToken'] as String?,
       limit: json['limit'] as num?,
       account: json['account'] as String,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
     );
 
 Map<String, dynamic> _$XubeAccountDevicesRequestToJson(
@@ -4157,7 +3441,7 @@ Map<String, dynamic> _$XubeAccountDevicesRequestToJson(
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('limit', instance.limit);
   val['account'] = instance.account;
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   return val;
 }
 
@@ -6414,3072 +5698,6 @@ Map<String, dynamic> _$XubeGetAccountFacetsResponseDataComponentToJson(
 
 const _$XubeGetAccountFacetsResponseDataComponentComponentTypeEnumMap = {
   XubeGetAccountFacetsResponseDataComponentComponentType.device: 'DEVICE',
-};
-
-XubeGetAccountFacetsResponseDataFacetsAccount
-    _$XubeGetAccountFacetsResponseDataFacetsAccountFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsAccount(
-          accountId: json['accountId'] as String,
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsAccountFacetTypeEnumMap,
-              json['facetType']),
-          creator: json['creator'] as String?,
-          facetId: json['facetId'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsAccountToJson(
-    XubeGetAccountFacetsResponseDataFacetsAccount instance) {
-  final val = <String, dynamic>{
-    'accountId': instance.accountId,
-    'componentType': instance.componentType,
-    'facetType':
-        _$XubeGetAccountFacetsResponseDataFacetsAccountFacetTypeEnumMap[
-            instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsAccountFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsAccountFacetType.account: 'ACCOUNT',
-};
-
-XubeGetAccountFacetsResponseDataFacetsActivationStatus
-    _$XubeGetAccountFacetsResponseDataFacetsActivationStatusFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsActivationStatus(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          activationStatus: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsActivationStatusActivationStatusEnumMap,
-              json['activationStatus']),
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          updater: json['updater'] as String?,
-          accountId: json['accountId'] as String,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsActivationStatusFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          timestamp: json['timestamp'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsActivationStatusToJson(
-        XubeGetAccountFacetsResponseDataFacetsActivationStatus instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['activationStatus'] =
-      _$XubeGetAccountFacetsResponseDataFacetsActivationStatusActivationStatusEnumMap[
-          instance.activationStatus]!;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  writeNotNull('updater', instance.updater);
-  val['accountId'] = instance.accountId;
-  val['facetType'] =
-      _$XubeGetAccountFacetsResponseDataFacetsActivationStatusFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['timestamp'] = instance.timestamp;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsActivationStatusActivationStatusEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsActivationStatusActivationStatus.active:
-      'active',
-  XubeGetAccountFacetsResponseDataFacetsActivationStatusActivationStatus
-      .inactive: 'inactive',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsActivationStatusFacetTypeEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsActivationStatusFacetType
-      .activationStatus: 'ACTIVATION-STATUS',
-};
-
-XubeGetAccountFacetsResponseDataFacetsHeartbeat
-    _$XubeGetAccountFacetsResponseDataFacetsHeartbeatFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsHeartbeat(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsHeartbeatFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          id: json['id'] as String,
-          deviceId: json['deviceId'] as String,
-          timestamp: DateTime.parse(json['timestamp'] as String),
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsHeartbeatToJson(
-    XubeGetAccountFacetsResponseDataFacetsHeartbeat instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType':
-        _$XubeGetAccountFacetsResponseDataFacetsHeartbeatFacetTypeEnumMap[
-            instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('facetId', instance.facetId);
-  val['id'] = instance.id;
-  val['deviceId'] = instance.deviceId;
-  val['timestamp'] = instance.timestamp.toIso8601String();
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsHeartbeatFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsHeartbeatFacetType.heartbeat:
-      'HEARTBEAT',
-};
-
-XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsExisting
-    _$XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsExistingToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsAcceptance
-    _$XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsAcceptanceToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsActive
-    _$XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsActiveToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesOrphanedProps
-    _$XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesOrphanedProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active: XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsActive
-              .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesOrphanedPropsToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesOrphanedProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsExisting
-    _$XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsExistingToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsAcceptance
-    _$XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsAcceptanceToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsActive
-    _$XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsActiveToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesStorageProps
-    _$XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesStorageProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active: XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsActive
-              .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesStoragePropsToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesStorageProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsExisting
-    _$XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsExistingToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsAcceptance
-    _$XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsAcceptanceToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsActive
-    _$XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsActiveToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesScriptingProps
-    _$XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesScriptingProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsActive
-                  .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesScriptingPropsToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesScriptingProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesEnvironment
-    _$XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesEnvironment(
-          release: json['release'] as String,
-          mqttEndpoint: json['mqttEndpoint'] as String,
-          region: json['region'] as String,
-          status: $enumDecodeNullable(
-              _$XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesEnvironment instance) {
-  final val = <String, dynamic>{
-    'release': instance.release,
-    'mqttEndpoint': instance.mqttEndpoint,
-    'region': instance.region,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'status',
-      _$XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatusEnumMap[
-          instance.status]);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatusEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatus.disabled:
-      'disabled',
-  XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatus.pending:
-      'pending',
-  XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatus.unknown:
-      'unknown',
-  XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatus.error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatus.warning:
-      'warning',
-  XubeGetAccountFacetsResponseDataFacetsFilesEnvironmentStatus.healthy:
-      'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareExisting
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareExistingToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareAcceptance
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareAcceptanceToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareActive
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareActiveToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmware
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmware(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareActive
-                  .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmwareToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmware instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesSystem
-    _$XubeGetAccountFacetsResponseDataFacetsFilesSystemFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesSystem(
-          firmware: XubeGetAccountFacetsResponseDataFacetsFilesSystemFirmware
-              .fromJson(json['firmware'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsFilesSystemToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesSystem instance) =>
-    <String, dynamic>{
-      'firmware': instance.firmware,
-    };
-
-XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsExisting
-    _$XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsExistingToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsAcceptance
-    _$XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsAcceptanceToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsActive
-    _$XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsActiveToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesCommunicationProps
-    _$XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesCommunicationProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsActive
-                  .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesCommunicationPropsToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesCommunicationProps
-            instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsExisting
-    _$XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsExistingToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsAcceptance
-    _$XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsAcceptanceToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsActive
-    _$XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsActiveToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsActive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFilesConfigProps
-    _$XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFilesConfigProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active: XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsActive
-              .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsFilesConfigPropsToJson(
-        XubeGetAccountFacetsResponseDataFacetsFilesConfigProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsFiles
-    _$XubeGetAccountFacetsResponseDataFacetsFilesFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFiles(
-          componentType: json['componentType'] as String,
-          orphaned: (json['orphaned'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetAccountFacetsResponseDataFacetsFilesOrphanedProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          storage: (json['storage'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetAccountFacetsResponseDataFacetsFilesStorageProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          scripting: (json['scripting'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetAccountFacetsResponseDataFacetsFilesScriptingProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsFilesFacetTypeEnumMap,
-              json['facetType']),
-          environment:
-              XubeGetAccountFacetsResponseDataFacetsFilesEnvironment.fromJson(
-                  json['environment'] as Map<String, dynamic>),
-          system: XubeGetAccountFacetsResponseDataFacetsFilesSystem.fromJson(
-              json['system'] as Map<String, dynamic>),
-          stage: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsFilesStageEnumMap,
-              json['stage']),
-          facetId: json['facetId'] as String?,
-          communication: (json['communication'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetAccountFacetsResponseDataFacetsFilesCommunicationProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          device: json['device'] as String,
-          config: (json['config'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetAccountFacetsResponseDataFacetsFilesConfigProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          status: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsFilesStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsFilesToJson(
-    XubeGetAccountFacetsResponseDataFacetsFiles instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('orphaned', instance.orphaned);
-  writeNotNull('storage', instance.storage);
-  writeNotNull('scripting', instance.scripting);
-  val['facetType'] =
-      _$XubeGetAccountFacetsResponseDataFacetsFilesFacetTypeEnumMap[
-          instance.facetType]!;
-  val['environment'] = instance.environment;
-  val['system'] = instance.system;
-  val['stage'] = _$XubeGetAccountFacetsResponseDataFacetsFilesStageEnumMap[
-      instance.stage]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('communication', instance.communication);
-  val['device'] = instance.device;
-  writeNotNull('config', instance.config);
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['status'] = _$XubeGetAccountFacetsResponseDataFacetsFilesStatusEnumMap[
-      instance.status]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsFilesFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsFilesFacetType.files: 'FILES',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsFilesStageEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsFilesStage.current: 'current',
-  XubeGetAccountFacetsResponseDataFacetsFilesStage.expected: 'expected',
-  XubeGetAccountFacetsResponseDataFacetsFilesStage.historical: 'historical',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsFilesStatusEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsFilesStatus.disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsFilesStatus.pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsFilesStatus.unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsFilesStatus.error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsFilesStatus.warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsFilesStatus.healthy: 'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsLocation
-    _$XubeGetAccountFacetsResponseDataFacetsLocationFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsLocation(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          latitude: json['latitude'] as num,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          updater: json['updater'] as String?,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsLocationFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          longitude: json['longitude'] as num,
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsLocationToJson(
-    XubeGetAccountFacetsResponseDataFacetsLocation instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['latitude'] = instance.latitude;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  writeNotNull('updater', instance.updater);
-  val['facetType'] =
-      _$XubeGetAccountFacetsResponseDataFacetsLocationFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['longitude'] = instance.longitude;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsLocationFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsLocationFacetType.location: 'LOCATION',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrength
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrength(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrength
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .healthy: 'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnection
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnection(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionValueEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionValue
-      .connected: 'connected',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifi
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifi(
-          signalStrength: json['signalStrength'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiSignalStrength
-                  .fromJson(json['signalStrength'] as Map<String, dynamic>),
-          connection:
-              XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          ssid: json['ssid'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifiToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifi instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('signalStrength', instance.signalStrength);
-  val['connection'] = instance.connection;
-  writeNotNull('ssid', instance.ssid);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrength
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrength(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrength
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .healthy: 'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnection
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnection(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionValueEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionValue
-      .connected: 'connected',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellular
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellular(
-          signalStrength: json['signalStrength'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularSignalStrength
-                  .fromJson(json['signalStrength'] as Map<String, dynamic>),
-          connection:
-              XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellularToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellular
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('signalStrength', instance.signalStrength);
-  val['connection'] = instance.connection;
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnection
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnection(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionValueEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionValue
-      .connected: 'connected',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEth
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEth(
-          connection:
-              XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          mac: json['mac'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEthToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEth instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('mac', instance.mac);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnection
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnection(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValueEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValue
-      .connected: 'connected',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatform
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatform(
-          connection:
-              XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatformToJson(
-            XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatform
-                instance) =>
-        <String, dynamic>{
-          'connection': instance.connection,
-        };
-
-XubeGetAccountFacetsResponseDataFacetsStatusConnectivity
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivity(
-          wifi: json['wifi'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusConnectivityWifi
-                  .fromJson(json['wifi'] as Map<String, dynamic>),
-          cellular: json['cellular'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusConnectivityCellular
-                  .fromJson(json['cellular'] as Map<String, dynamic>),
-          eth: json['eth'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusConnectivityEth
-                  .fromJson(json['eth'] as Map<String, dynamic>),
-          platform: json['platform'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusConnectivityPlatform
-                  .fromJson(json['platform'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusConnectivityToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusConnectivity instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('wifi', instance.wifi);
-  writeNotNull('cellular', instance.cellular);
-  writeNotNull('eth', instance.eth);
-  writeNotNull('platform', instance.platform);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsStatusEngine
-    _$XubeGetAccountFacetsResponseDataFacetsStatusEngineFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusEngine(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusEngineStateEnumMap,
-              json['state']),
-          updated: json['updated'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsStatusEngineToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusEngine instance) =>
-    <String, dynamic>{
-      'state': _$XubeGetAccountFacetsResponseDataFacetsStatusEngineStateEnumMap[
-          instance.state]!,
-      'updated': instance.updated,
-    };
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusEngineStateEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsStatusEngineState.running: 'running',
-  XubeGetAccountFacetsResponseDataFacetsStatusEngineState.stopped: 'stopped',
-  XubeGetAccountFacetsResponseDataFacetsStatusEngineState.error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusEngineState.unknown: 'unknown',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusTemperature
-    _$XubeGetAccountFacetsResponseDataFacetsStatusTemperatureFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusTemperature(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusTemperatureStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusTemperatureToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusTemperature instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusTemperatureStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusTemperatureStateEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsStatusTemperatureState.disabled:
-      'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusTemperatureState.pending:
-      'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusTemperatureState.unknown:
-      'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusTemperatureState.error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusTemperatureState.warning:
-      'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusTemperatureState.healthy:
-      'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusAvailability
-    _$XubeGetAccountFacetsResponseDataFacetsStatusAvailabilityFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusAvailability(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusAvailabilityStateEnumMap,
-              json['state']),
-          updated: json['updated'] as String,
-        );
-
-Map<String,
-    dynamic> _$XubeGetAccountFacetsResponseDataFacetsStatusAvailabilityToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusAvailability instance) =>
-    <String, dynamic>{
-      'state':
-          _$XubeGetAccountFacetsResponseDataFacetsStatusAvailabilityStateEnumMap[
-              instance.state]!,
-      'updated': instance.updated,
-    };
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusAvailabilityStateEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsStatusAvailabilityState.online:
-      'online',
-  XubeGetAccountFacetsResponseDataFacetsStatusAvailabilityState.offline:
-      'offline',
-  XubeGetAccountFacetsResponseDataFacetsStatusAvailabilityState.unknown:
-      'unknown',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnection
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnection(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValueEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValue
-      .connected: 'connected',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltage
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltage(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltage
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState.error:
-      'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .healthy: 'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliary
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliary(
-          connection:
-              XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryVoltage
-                  .fromJson(json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliaryToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliary instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnection
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnection(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionState.disabled:
-      'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionState.pending:
-      'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionState.unknown:
-      'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionState.error:
-      'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionState.warning:
-      'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionState.healthy:
-      'healthy',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionValueEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionValue.connected:
-      'connected',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionValue.notInUse:
-      'notInUse',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnectionValue.pending:
-      'pending',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltage
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltage(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltage instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageState.disabled:
-      'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageState.pending:
-      'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageState.unknown:
-      'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageState.error:
-      'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageState.warning:
-      'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltageState.healthy:
-      'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerUsb
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerUsb(
-          connection:
-              XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbVoltage
-                  .fromJson(json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerUsbToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerUsb instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnection
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnection(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionState.pending:
-      'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionState.unknown:
-      'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionState.error:
-      'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionState.warning:
-      'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionState.healthy:
-      'healthy',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionValueEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionValue
-      .connected: 'connected',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnectionValue.pending:
-      'pending',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltage
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltage(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltage
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageState.disabled:
-      'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageState.pending:
-      'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageState.unknown:
-      'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageState.error:
-      'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageState.warning:
-      'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltageState.healthy:
-      'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerSolar
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSolar(
-          connection:
-              XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarVoltage
-                  .fromJson(json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSolarToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSolar instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSource
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSource(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSource
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValueEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .battery: 'battery',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue.usb:
-      'usb',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .solar: 'solar',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .auxiliary: 'auxiliary',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .noSource: 'noSource',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .unknownSource: 'unknownSource',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerSource
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerSource(
-          currentSource:
-              XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceCurrentSource
-                  .fromJson(json['currentSource'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerSourceToJson(
-            XubeGetAccountFacetsResponseDataFacetsStatusPowerSource instance) =>
-        <String, dynamic>{
-          'currentSource': instance.currentSource,
-        };
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryCharge
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryCharge(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryCharge
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeState.disabled:
-      'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeState.pending:
-      'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeState.unknown:
-      'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeState.error:
-      'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeState.warning:
-      'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargeState.healthy:
-      'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperature
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperature(
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperature
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .disabled: 'disabled',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .pending: 'pending',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .unknown: 'unknown',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .error: 'error',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .warning: 'warning',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .healthy: 'healthy',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPowerBattery
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerBattery(
-          charge: XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryCharge
-              .fromJson(json['charge'] as Map<String, dynamic>),
-          temperature: json['temperature'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryTemperature
-                  .fromJson(json['temperature'] as Map<String, dynamic>),
-          chargingState: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargingStateEnumMap,
-              json['chargingState']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryToJson(
-        XubeGetAccountFacetsResponseDataFacetsStatusPowerBattery instance) {
-  final val = <String, dynamic>{
-    'charge': instance.charge,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('temperature', instance.temperature);
-  val['chargingState'] =
-      _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargingStateEnumMap[
-          instance.chargingState]!;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargingStateEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargingState
-      .charging: 'charging',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargingState
-      .notCharging: 'notCharging',
-  XubeGetAccountFacetsResponseDataFacetsStatusPowerBatteryChargingState.unknown:
-      'unknown',
-};
-
-XubeGetAccountFacetsResponseDataFacetsStatusPower
-    _$XubeGetAccountFacetsResponseDataFacetsStatusPowerFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatusPower(
-          auxiliary: json['auxiliary'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusPowerAuxiliary
-                  .fromJson(json['auxiliary'] as Map<String, dynamic>),
-          usb: json['usb'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusPowerUsb.fromJson(
-                  json['usb'] as Map<String, dynamic>),
-          solar: json['solar'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusPowerSolar.fromJson(
-                  json['solar'] as Map<String, dynamic>),
-          source:
-              XubeGetAccountFacetsResponseDataFacetsStatusPowerSource.fromJson(
-                  json['source'] as Map<String, dynamic>),
-          battery: json['battery'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusPowerBattery
-                  .fromJson(json['battery'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsStatusPowerToJson(
-    XubeGetAccountFacetsResponseDataFacetsStatusPower instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('auxiliary', instance.auxiliary);
-  writeNotNull('usb', instance.usb);
-  writeNotNull('solar', instance.solar);
-  val['source'] = instance.source;
-  writeNotNull('battery', instance.battery);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsStatus
-    _$XubeGetAccountFacetsResponseDataFacetsStatusFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsStatus(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsStatusFacetTypeEnumMap,
-              json['facetType']),
-          connectivity:
-              XubeGetAccountFacetsResponseDataFacetsStatusConnectivity.fromJson(
-                  json['connectivity'] as Map<String, dynamic>),
-          engine: json['engine'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusEngine.fromJson(
-                  json['engine'] as Map<String, dynamic>),
-          facetId: json['facetId'] as String?,
-          temperature: json['temperature'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusTemperature
-                  .fromJson(json['temperature'] as Map<String, dynamic>),
-          availability: json['availability'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsStatusAvailability
-                  .fromJson(json['availability'] as Map<String, dynamic>),
-          power: XubeGetAccountFacetsResponseDataFacetsStatusPower.fromJson(
-              json['power'] as Map<String, dynamic>),
-          timestamp: json['timestamp'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsStatusToJson(
-    XubeGetAccountFacetsResponseDataFacetsStatus instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType': _$XubeGetAccountFacetsResponseDataFacetsStatusFacetTypeEnumMap[
-        instance.facetType]!,
-    'connectivity': instance.connectivity,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('engine', instance.engine);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('temperature', instance.temperature);
-  writeNotNull('availability', instance.availability);
-  val['power'] = instance.power;
-  val['timestamp'] = instance.timestamp;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsStatusFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsStatusFacetType.status: 'STATUS',
-};
-
-XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotFw
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotFwFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotFw(
-          v: json['v'] as num,
-        );
-
-Map<String,
-    dynamic> _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotFwToJson(
-        XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotFw instance) =>
-    <String, dynamic>{
-      'v': instance.v,
-    };
-
-XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1();
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1ToJson(
-            XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1
-                instance) =>
-        <String, dynamic>{};
-
-XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2();
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2ToJson(
-            XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2
-                instance) =>
-        <String, dynamic>{};
-
-XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsN
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsNFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsN();
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsNToJson(
-            XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsN
-                instance) =>
-        <String, dynamic>{};
-
-XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgProps
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgProps(
-          cv: json['cv'] as num,
-          v: json['v'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsV
-                  .fromJson(json['v'] as Map<String, dynamic>),
-          n: json['n'] == null
-              ? null
-              : XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsN
-                  .fromJson(json['n'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgPropsToJson(
-        XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgProps
-            instance) {
-  final val = <String, dynamic>{
-    'cv': instance.cv,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('v', instance.v);
-  writeNotNull('n', instance.n);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshot
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshot(
-          fw: XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotFw.fromJson(
-              json['fw'] as Map<String, dynamic>),
-          cfg: (json['cfg'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotCfgProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshotToJson(
-            XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshot instance) =>
-        <String, dynamic>{
-          'fw': instance.fw,
-          'cfg': instance.cfg,
-        };
-
-XubeGetAccountFacetsResponseDataFacetsSnapshot
-    _$XubeGetAccountFacetsResponseDataFacetsSnapshotFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsSnapshot(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsSnapshotFacetTypeEnumMap,
-              json['facetType']),
-          creator: json['creator'] as String?,
-          facetId: json['facetId'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          index: json['index'] as num,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          snapshot:
-              XubeGetAccountFacetsResponseDataFacetsSnapshotSnapshot.fromJson(
-                  json['snapshot'] as Map<String, dynamic>),
-          updater: json['updater'] as String?,
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsSnapshotToJson(
-    XubeGetAccountFacetsResponseDataFacetsSnapshot instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType':
-        _$XubeGetAccountFacetsResponseDataFacetsSnapshotFacetTypeEnumMap[
-            instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['index'] = instance.index;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['snapshot'] = instance.snapshot;
-  writeNotNull('updater', instance.updater);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsSnapshotFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsSnapshotFacetType.snapshot: 'SNAPSHOT',
-};
-
-XubeGetAccountFacetsResponseDataFacetsUpdateApproval
-    _$XubeGetAccountFacetsResponseDataFacetsUpdateApprovalFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsUpdateApproval(
-          created: DateTime.parse(json['created'] as String),
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsUpdateApprovalStateEnumMap,
-              json['state']),
-          conditions: (json['conditions'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(
-                  _$XubeGetAccountFacetsResponseDataFacetsUpdateApprovalConditionsEnumMap,
-                  e))
-              .toList(),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          updater: json['updater'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsUpdateApprovalToJson(
-        XubeGetAccountFacetsResponseDataFacetsUpdateApproval instance) {
-  final val = <String, dynamic>{
-    'created': instance.created.toIso8601String(),
-    'state': _$XubeGetAccountFacetsResponseDataFacetsUpdateApprovalStateEnumMap[
-        instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'conditions',
-      instance.conditions
-          ?.map((e) =>
-              _$XubeGetAccountFacetsResponseDataFacetsUpdateApprovalConditionsEnumMap[
-                  e]!)
-          .toList());
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  writeNotNull('updater', instance.updater);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsUpdateApprovalStateEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsUpdateApprovalState.approved:
-      'approved',
-  XubeGetAccountFacetsResponseDataFacetsUpdateApprovalState.denied: 'denied',
-  XubeGetAccountFacetsResponseDataFacetsUpdateApprovalState.pending: 'pending',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsUpdateApprovalConditionsEnumMap =
-    {
-  XubeGetAccountFacetsResponseDataFacetsUpdateApprovalConditions.local: 'local',
-  XubeGetAccountFacetsResponseDataFacetsUpdateApprovalConditions.remote:
-      'remote',
-};
-
-XubeGetAccountFacetsResponseDataFacetsUpdateMismatchProps
-    _$XubeGetAccountFacetsResponseDataFacetsUpdateMismatchPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsUpdateMismatchProps(
-          actual: json['actual'] as String,
-          expected: json['expected'] as String,
-        );
-
-Map<String,
-    dynamic> _$XubeGetAccountFacetsResponseDataFacetsUpdateMismatchPropsToJson(
-        XubeGetAccountFacetsResponseDataFacetsUpdateMismatchProps instance) =>
-    <String, dynamic>{
-      'actual': instance.actual,
-      'expected': instance.expected,
-    };
-
-XubeGetAccountFacetsResponseDataFacetsUpdateProgressProps
-    _$XubeGetAccountFacetsResponseDataFacetsUpdateProgressPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsUpdateProgressProps(
-          totalSize: json['totalSize'] as num?,
-          lastOffset: json['lastOffset'] as num?,
-          updated: json['updated'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetAccountFacetsResponseDataFacetsUpdateProgressPropsToJson(
-        XubeGetAccountFacetsResponseDataFacetsUpdateProgressProps instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('totalSize', instance.totalSize);
-  writeNotNull('lastOffset', instance.lastOffset);
-  writeNotNull('updated', instance.updated);
-  return val;
-}
-
-XubeGetAccountFacetsResponseDataFacetsUpdateTasks
-    _$XubeGetAccountFacetsResponseDataFacetsUpdateTasksFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsUpdateTasks(
-          a: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsUpdateTasksAEnumMap,
-              json['a']),
-          tries: json['tries'] as num?,
-          topics: (json['topics'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, e as String),
-          ),
-          ctx: json['ctx'] as Map<String, dynamic>?,
-          timeout: json['timeout'] as num?,
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsUpdateTasksToJson(
-    XubeGetAccountFacetsResponseDataFacetsUpdateTasks instance) {
-  final val = <String, dynamic>{
-    'a': _$XubeGetAccountFacetsResponseDataFacetsUpdateTasksAEnumMap[
-        instance.a]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('tries', instance.tries);
-  writeNotNull('topics', instance.topics);
-  writeNotNull('ctx', instance.ctx);
-  writeNotNull('timeout', instance.timeout);
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsUpdateTasksAEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.d: 'd',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.uf: 'uf',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.u: 'u',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.upd: 'upd',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.r: 'r',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.cdr: 'cdr',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.z: 'z',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.a: 'a',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.s: 's',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.b: 'b',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.e: 'e',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.k: 'k',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.x: 'x',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.crash: 'crash',
-  XubeGetAccountFacetsResponseDataFacetsUpdateTasksA.t: 't',
-};
-
-XubeGetAccountFacetsResponseDataFacetsUpdate
-    _$XubeGetAccountFacetsResponseDataFacetsUpdateFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsUpdate(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          approval:
-              XubeGetAccountFacetsResponseDataFacetsUpdateApproval.fromJson(
-                  json['approval'] as Map<String, dynamic>),
-          type: json['type'] as String?,
-          updater: json['updater'] as String?,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsUpdateFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          mismatch: (json['mismatch'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetAccountFacetsResponseDataFacetsUpdateMismatchProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          name: json['name'] as String?,
-          progress: (json['progress'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetAccountFacetsResponseDataFacetsUpdateProgressProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          id: json['id'] as String,
-          state: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsUpdateStateEnumMap,
-              json['state']),
-          job: json['job'] as String?,
-          conditions: (json['conditions'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(
-                  _$XubeGetAccountFacetsResponseDataFacetsUpdateConditionsEnumMap,
-                  e))
-              .toList(),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          device: json['device'] as String,
-          tasks: (json['tasks'] as List<dynamic>)
-              .map((e) =>
-                  XubeGetAccountFacetsResponseDataFacetsUpdateTasks.fromJson(
-                      e as Map<String, dynamic>))
-              .toList(),
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsUpdateToJson(
-    XubeGetAccountFacetsResponseDataFacetsUpdate instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['approval'] = instance.approval;
-  writeNotNull('type', instance.type);
-  writeNotNull('updater', instance.updater);
-  val['facetType'] =
-      _$XubeGetAccountFacetsResponseDataFacetsUpdateFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('mismatch', instance.mismatch);
-  writeNotNull('name', instance.name);
-  val['progress'] = instance.progress;
-  val['id'] = instance.id;
-  val['state'] = _$XubeGetAccountFacetsResponseDataFacetsUpdateStateEnumMap[
-      instance.state]!;
-  writeNotNull('job', instance.job);
-  writeNotNull(
-      'conditions',
-      instance.conditions
-          ?.map((e) =>
-              _$XubeGetAccountFacetsResponseDataFacetsUpdateConditionsEnumMap[
-                  e]!)
-          .toList());
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['device'] = instance.device;
-  val['tasks'] = instance.tasks;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsUpdateFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsUpdateFacetType.update: 'UPDATE',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsUpdateStateEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsUpdateState.waitingForDeviceStatus:
-      'waiting_for_device_status',
-  XubeGetAccountFacetsResponseDataFacetsUpdateState.readyToSend:
-      'ready_to_send',
-  XubeGetAccountFacetsResponseDataFacetsUpdateState.sent: 'sent',
-  XubeGetAccountFacetsResponseDataFacetsUpdateState.failed: 'failed',
-  XubeGetAccountFacetsResponseDataFacetsUpdateState.inProgress: 'in_progress',
-  XubeGetAccountFacetsResponseDataFacetsUpdateState.completed: 'completed',
-};
-
-const _$XubeGetAccountFacetsResponseDataFacetsUpdateConditionsEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsUpdateConditions.local: 'local',
-  XubeGetAccountFacetsResponseDataFacetsUpdateConditions.remote: 'remote',
-};
-
-XubeGetAccountFacetsResponseDataFacetsFirmwareInfo
-    _$XubeGetAccountFacetsResponseDataFacetsFirmwareInfoFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFirmwareInfo(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String,
-          created: json['created'] as String,
-          firmwareHash: json['firmwareHash'] as String,
-          firmwareSize: json['firmwareSize'] as num,
-          type: json['type'] as String?,
-          version: json['version'] as num,
-          deviceId: json['deviceId'] as String,
-          target: json['target'] as String,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsFirmwareInfoFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          firmwareVersion: json['firmwareVersion'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsFirmwareInfoToJson(
-    XubeGetAccountFacetsResponseDataFacetsFirmwareInfo instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'creator': instance.creator,
-    'created': instance.created,
-    'firmwareHash': instance.firmwareHash,
-    'firmwareSize': instance.firmwareSize,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('type', instance.type);
-  val['version'] = instance.version;
-  val['deviceId'] = instance.deviceId;
-  val['target'] = instance.target;
-  val['facetType'] =
-      _$XubeGetAccountFacetsResponseDataFacetsFirmwareInfoFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  val['firmwareVersion'] = instance.firmwareVersion;
-  val['key'] = instance.key;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsFirmwareInfoFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsFirmwareInfoFacetType.firmwareInfo:
-      'FIRMWARE-INFO',
-};
-
-XubeGetAccountFacetsResponseDataFacetsFirmware
-    _$XubeGetAccountFacetsResponseDataFacetsFirmwareFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetAccountFacetsResponseDataFacetsFirmware(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          facetType: $enumDecode(
-              _$XubeGetAccountFacetsResponseDataFacetsFirmwareFacetTypeEnumMap,
-              json['facetType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          objectVersionId: json['objectVersionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          version: json['version'] as num,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetAccountFacetsResponseDataFacetsFirmwareToJson(
-    XubeGetAccountFacetsResponseDataFacetsFirmware instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['facetType'] =
-      _$XubeGetAccountFacetsResponseDataFacetsFirmwareFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['objectVersionId'] = instance.objectVersionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-const _$XubeGetAccountFacetsResponseDataFacetsFirmwareFacetTypeEnumMap = {
-  XubeGetAccountFacetsResponseDataFacetsFirmwareFacetType.firmware: 'FIRMWARE',
 };
 
 XubeGetAccountFacetsResponseData _$XubeGetAccountFacetsResponseDataFromJson(
@@ -12908,7 +9126,7 @@ XubeGetDeviceHeartbeatsRequest _$XubeGetDeviceHeartbeatsRequestFromJson(
           : DateTime.parse(json['start'] as String),
       end: json['end'] == null ? null : DateTime.parse(json['end'] as String),
       device: json['device'] as String,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
     );
 
 Map<String, dynamic> _$XubeGetDeviceHeartbeatsRequestToJson(
@@ -12926,7 +9144,7 @@ Map<String, dynamic> _$XubeGetDeviceHeartbeatsRequestToJson(
   writeNotNull('start', instance.start?.toIso8601String());
   writeNotNull('end', instance.end?.toIso8601String());
   val['device'] = instance.device;
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   return val;
 }
 
@@ -13027,3072 +9245,6 @@ const _$XubeGetDevicesFacetsResponseDataComponentComponentTypeEnumMap = {
   XubeGetDevicesFacetsResponseDataComponentComponentType.device: 'DEVICE',
 };
 
-XubeGetDevicesFacetsResponseDataFacetsAccount
-    _$XubeGetDevicesFacetsResponseDataFacetsAccountFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsAccount(
-          accountId: json['accountId'] as String,
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsAccountFacetTypeEnumMap,
-              json['facetType']),
-          creator: json['creator'] as String?,
-          facetId: json['facetId'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsAccountToJson(
-    XubeGetDevicesFacetsResponseDataFacetsAccount instance) {
-  final val = <String, dynamic>{
-    'accountId': instance.accountId,
-    'componentType': instance.componentType,
-    'facetType':
-        _$XubeGetDevicesFacetsResponseDataFacetsAccountFacetTypeEnumMap[
-            instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsAccountFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsAccountFacetType.account: 'ACCOUNT',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsActivationStatus
-    _$XubeGetDevicesFacetsResponseDataFacetsActivationStatusFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsActivationStatus(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          activationStatus: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsActivationStatusActivationStatusEnumMap,
-              json['activationStatus']),
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          updater: json['updater'] as String?,
-          accountId: json['accountId'] as String,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsActivationStatusFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          timestamp: json['timestamp'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsActivationStatusToJson(
-        XubeGetDevicesFacetsResponseDataFacetsActivationStatus instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['activationStatus'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsActivationStatusActivationStatusEnumMap[
-          instance.activationStatus]!;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  writeNotNull('updater', instance.updater);
-  val['accountId'] = instance.accountId;
-  val['facetType'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsActivationStatusFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['timestamp'] = instance.timestamp;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsActivationStatusActivationStatusEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsActivationStatusActivationStatus.active:
-      'active',
-  XubeGetDevicesFacetsResponseDataFacetsActivationStatusActivationStatus
-      .inactive: 'inactive',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsActivationStatusFacetTypeEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsActivationStatusFacetType
-      .activationStatus: 'ACTIVATION-STATUS',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsHeartbeat
-    _$XubeGetDevicesFacetsResponseDataFacetsHeartbeatFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsHeartbeat(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsHeartbeatFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          id: json['id'] as String,
-          deviceId: json['deviceId'] as String,
-          timestamp: DateTime.parse(json['timestamp'] as String),
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsHeartbeatToJson(
-    XubeGetDevicesFacetsResponseDataFacetsHeartbeat instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType':
-        _$XubeGetDevicesFacetsResponseDataFacetsHeartbeatFacetTypeEnumMap[
-            instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('facetId', instance.facetId);
-  val['id'] = instance.id;
-  val['deviceId'] = instance.deviceId;
-  val['timestamp'] = instance.timestamp.toIso8601String();
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsHeartbeatFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsHeartbeatFacetType.heartbeat:
-      'HEARTBEAT',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsExisting
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsExistingToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsAcceptance
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsAcceptanceToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsActive
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsActiveToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedProps
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active: XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsActive
-              .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedPropsToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsExisting
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsExistingToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsAcceptance
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsAcceptanceToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsActive
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsActiveToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesStorageProps
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesStorageProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active: XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsActive
-              .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesStoragePropsToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesStorageProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsExisting
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsExistingToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsAcceptance
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsAcceptanceToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsActive
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsActiveToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesScriptingProps
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesScriptingProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsActive
-                  .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesScriptingPropsToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesScriptingProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesEnvironment
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesEnvironment(
-          release: json['release'] as String,
-          mqttEndpoint: json['mqttEndpoint'] as String,
-          region: json['region'] as String,
-          status: $enumDecodeNullable(
-              _$XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesEnvironment instance) {
-  final val = <String, dynamic>{
-    'release': instance.release,
-    'mqttEndpoint': instance.mqttEndpoint,
-    'region': instance.region,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'status',
-      _$XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatusEnumMap[
-          instance.status]);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatusEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatus.disabled:
-      'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatus.pending:
-      'pending',
-  XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatus.unknown:
-      'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatus.error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatus.warning:
-      'warning',
-  XubeGetDevicesFacetsResponseDataFacetsFilesEnvironmentStatus.healthy:
-      'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareExisting
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareExistingToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareAcceptance
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareAcceptanceToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareActive
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareActiveToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmware
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmware(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareActive
-                  .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmwareToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmware instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesSystem
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystem(
-          firmware: XubeGetDevicesFacetsResponseDataFacetsFilesSystemFirmware
-              .fromJson(json['firmware'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsFilesSystemToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesSystem instance) =>
-    <String, dynamic>{
-      'firmware': instance.firmware,
-    };
-
-XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsExisting
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsExistingToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsAcceptance
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsAcceptanceToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsActive
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsActiveToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsActive
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationProps
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsActive
-                  .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationPropsToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationProps
-            instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsExisting
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsExistingToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsAcceptance
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsAcceptanceToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsActive
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsActiveToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsActive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFilesConfigProps
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFilesConfigProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active: XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsActive
-              .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesConfigPropsToJson(
-        XubeGetDevicesFacetsResponseDataFacetsFilesConfigProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsFiles
-    _$XubeGetDevicesFacetsResponseDataFacetsFilesFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFiles(
-          componentType: json['componentType'] as String,
-          orphaned: (json['orphaned'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetDevicesFacetsResponseDataFacetsFilesOrphanedProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          storage: (json['storage'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetDevicesFacetsResponseDataFacetsFilesStorageProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          scripting: (json['scripting'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetDevicesFacetsResponseDataFacetsFilesScriptingProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsFilesFacetTypeEnumMap,
-              json['facetType']),
-          environment:
-              XubeGetDevicesFacetsResponseDataFacetsFilesEnvironment.fromJson(
-                  json['environment'] as Map<String, dynamic>),
-          system: XubeGetDevicesFacetsResponseDataFacetsFilesSystem.fromJson(
-              json['system'] as Map<String, dynamic>),
-          stage: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsFilesStageEnumMap,
-              json['stage']),
-          facetId: json['facetId'] as String?,
-          communication: (json['communication'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetDevicesFacetsResponseDataFacetsFilesCommunicationProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          device: json['device'] as String,
-          config: (json['config'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetDevicesFacetsResponseDataFacetsFilesConfigProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          status: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsFilesStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsFilesToJson(
-    XubeGetDevicesFacetsResponseDataFacetsFiles instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('orphaned', instance.orphaned);
-  writeNotNull('storage', instance.storage);
-  writeNotNull('scripting', instance.scripting);
-  val['facetType'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsFilesFacetTypeEnumMap[
-          instance.facetType]!;
-  val['environment'] = instance.environment;
-  val['system'] = instance.system;
-  val['stage'] = _$XubeGetDevicesFacetsResponseDataFacetsFilesStageEnumMap[
-      instance.stage]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('communication', instance.communication);
-  val['device'] = instance.device;
-  writeNotNull('config', instance.config);
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['status'] = _$XubeGetDevicesFacetsResponseDataFacetsFilesStatusEnumMap[
-      instance.status]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsFilesFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsFilesFacetType.files: 'FILES',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsFilesStageEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsFilesStage.current: 'current',
-  XubeGetDevicesFacetsResponseDataFacetsFilesStage.expected: 'expected',
-  XubeGetDevicesFacetsResponseDataFacetsFilesStage.historical: 'historical',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsFilesStatusEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsFilesStatus.disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsFilesStatus.pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsFilesStatus.unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsFilesStatus.error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsFilesStatus.warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsFilesStatus.healthy: 'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsLocation
-    _$XubeGetDevicesFacetsResponseDataFacetsLocationFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsLocation(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          latitude: json['latitude'] as num,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          updater: json['updater'] as String?,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsLocationFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          longitude: json['longitude'] as num,
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsLocationToJson(
-    XubeGetDevicesFacetsResponseDataFacetsLocation instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['latitude'] = instance.latitude;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  writeNotNull('updater', instance.updater);
-  val['facetType'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsLocationFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['longitude'] = instance.longitude;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsLocationFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsLocationFacetType.location: 'LOCATION',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrength
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrength(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrength
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrengthState
-      .healthy: 'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnection
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnection(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionValueEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionValue
-      .connected: 'connected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifi
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifi(
-          signalStrength: json['signalStrength'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiSignalStrength
-                  .fromJson(json['signalStrength'] as Map<String, dynamic>),
-          connection:
-              XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          ssid: json['ssid'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifiToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifi instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('signalStrength', instance.signalStrength);
-  val['connection'] = instance.connection;
-  writeNotNull('ssid', instance.ssid);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrength
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrength(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrength
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrengthState
-      .healthy: 'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnection
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnection(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionValueEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionValue
-      .connected: 'connected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellular
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellular(
-          signalStrength: json['signalStrength'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularSignalStrength
-                  .fromJson(json['signalStrength'] as Map<String, dynamic>),
-          connection:
-              XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellularToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellular
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('signalStrength', instance.signalStrength);
-  val['connection'] = instance.connection;
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnection
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnection(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionValueEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionValue
-      .connected: 'connected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEth
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEth(
-          connection:
-              XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          mac: json['mac'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEthToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEth instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('mac', instance.mac);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnection
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnection(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValueEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValue
-      .connected: 'connected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatform
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatform(
-          connection:
-              XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatformToJson(
-            XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatform
-                instance) =>
-        <String, dynamic>{
-          'connection': instance.connection,
-        };
-
-XubeGetDevicesFacetsResponseDataFacetsStatusConnectivity
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivity(
-          wifi: json['wifi'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityWifi
-                  .fromJson(json['wifi'] as Map<String, dynamic>),
-          cellular: json['cellular'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityCellular
-                  .fromJson(json['cellular'] as Map<String, dynamic>),
-          eth: json['eth'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityEth
-                  .fromJson(json['eth'] as Map<String, dynamic>),
-          platform: json['platform'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityPlatform
-                  .fromJson(json['platform'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusConnectivityToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusConnectivity instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('wifi', instance.wifi);
-  writeNotNull('cellular', instance.cellular);
-  writeNotNull('eth', instance.eth);
-  writeNotNull('platform', instance.platform);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsStatusEngine
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusEngineFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusEngine(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusEngineStateEnumMap,
-              json['state']),
-          updated: json['updated'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsStatusEngineToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusEngine instance) =>
-    <String, dynamic>{
-      'state': _$XubeGetDevicesFacetsResponseDataFacetsStatusEngineStateEnumMap[
-          instance.state]!,
-      'updated': instance.updated,
-    };
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusEngineStateEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsStatusEngineState.running: 'running',
-  XubeGetDevicesFacetsResponseDataFacetsStatusEngineState.stopped: 'stopped',
-  XubeGetDevicesFacetsResponseDataFacetsStatusEngineState.error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusEngineState.unknown: 'unknown',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusTemperature
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusTemperature(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusTemperature instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureStateEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureState.disabled:
-      'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureState.pending:
-      'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureState.unknown:
-      'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureState.error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureState.warning:
-      'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusTemperatureState.healthy:
-      'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusAvailability
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusAvailabilityFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusAvailability(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusAvailabilityStateEnumMap,
-              json['state']),
-          updated: json['updated'] as String,
-        );
-
-Map<String,
-    dynamic> _$XubeGetDevicesFacetsResponseDataFacetsStatusAvailabilityToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusAvailability instance) =>
-    <String, dynamic>{
-      'state':
-          _$XubeGetDevicesFacetsResponseDataFacetsStatusAvailabilityStateEnumMap[
-              instance.state]!,
-      'updated': instance.updated,
-    };
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusAvailabilityStateEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsStatusAvailabilityState.online:
-      'online',
-  XubeGetDevicesFacetsResponseDataFacetsStatusAvailabilityState.offline:
-      'offline',
-  XubeGetDevicesFacetsResponseDataFacetsStatusAvailabilityState.unknown:
-      'unknown',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnection
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnection(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValueEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValue
-      .connected: 'connected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnectionValue
-      .pending: 'pending',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltage
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltage(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltage
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState.error:
-      'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltageState
-      .healthy: 'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliary
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliary(
-          connection:
-              XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryVoltage
-                  .fromJson(json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliaryToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliary instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnection
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnection(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionState.disabled:
-      'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionState.pending:
-      'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionState.unknown:
-      'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionState.error:
-      'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionState.warning:
-      'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionState.healthy:
-      'healthy',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionValueEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionValue.connected:
-      'connected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionValue.notInUse:
-      'notInUse',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnectionValue.pending:
-      'pending',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltage
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltage(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltage instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageState.disabled:
-      'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageState.pending:
-      'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageState.unknown:
-      'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageState.error:
-      'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageState.warning:
-      'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltageState.healthy:
-      'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsb
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsb(
-          connection:
-              XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbVoltage
-                  .fromJson(json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsbToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsb instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnection
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnection(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionState.pending:
-      'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionState.unknown:
-      'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionState.error:
-      'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionState.warning:
-      'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionState.healthy:
-      'healthy',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionValueEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionValue
-      .connected: 'connected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionValue
-      .notConnected: 'notConnected',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionValue
-      .notInUse: 'notInUse',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnectionValue.pending:
-      'pending',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltage
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltage(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltage
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageState.disabled:
-      'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageState.pending:
-      'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageState.unknown:
-      'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageState.error:
-      'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageState.warning:
-      'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltageState.healthy:
-      'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolar
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolar(
-          connection:
-              XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarVoltage
-                  .fromJson(json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolarToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolar instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSource
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSource(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSource
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceState
-      .healthy: 'healthy',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValueEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .battery: 'battery',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue.usb:
-      'usb',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .solar: 'solar',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .auxiliary: 'auxiliary',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .noSource: 'noSource',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSourceValue
-      .unknownSource: 'unknownSource',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerSource
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerSource(
-          currentSource:
-              XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceCurrentSource
-                  .fromJson(json['currentSource'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerSourceToJson(
-            XubeGetDevicesFacetsResponseDataFacetsStatusPowerSource instance) =>
-        <String, dynamic>{
-          'currentSource': instance.currentSource,
-        };
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryCharge
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryCharge(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryCharge
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeState.disabled:
-      'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeState.pending:
-      'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeState.unknown:
-      'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeState.error:
-      'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeState.warning:
-      'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargeState.healthy:
-      'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperature
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperature(
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperature
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .disabled: 'disabled',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .pending: 'pending',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .unknown: 'unknown',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .error: 'error',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .warning: 'warning',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperatureState
-      .healthy: 'healthy',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPowerBattery
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerBattery(
-          charge: XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryCharge
-              .fromJson(json['charge'] as Map<String, dynamic>),
-          temperature: json['temperature'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryTemperature
-                  .fromJson(json['temperature'] as Map<String, dynamic>),
-          chargingState: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargingStateEnumMap,
-              json['chargingState']),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryToJson(
-        XubeGetDevicesFacetsResponseDataFacetsStatusPowerBattery instance) {
-  final val = <String, dynamic>{
-    'charge': instance.charge,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('temperature', instance.temperature);
-  val['chargingState'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargingStateEnumMap[
-          instance.chargingState]!;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargingStateEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargingState
-      .charging: 'charging',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargingState
-      .notCharging: 'notCharging',
-  XubeGetDevicesFacetsResponseDataFacetsStatusPowerBatteryChargingState.unknown:
-      'unknown',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsStatusPower
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatusPower(
-          auxiliary: json['auxiliary'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusPowerAuxiliary
-                  .fromJson(json['auxiliary'] as Map<String, dynamic>),
-          usb: json['usb'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusPowerUsb.fromJson(
-                  json['usb'] as Map<String, dynamic>),
-          solar: json['solar'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusPowerSolar.fromJson(
-                  json['solar'] as Map<String, dynamic>),
-          source:
-              XubeGetDevicesFacetsResponseDataFacetsStatusPowerSource.fromJson(
-                  json['source'] as Map<String, dynamic>),
-          battery: json['battery'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusPowerBattery
-                  .fromJson(json['battery'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsStatusPowerToJson(
-    XubeGetDevicesFacetsResponseDataFacetsStatusPower instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('auxiliary', instance.auxiliary);
-  writeNotNull('usb', instance.usb);
-  writeNotNull('solar', instance.solar);
-  val['source'] = instance.source;
-  writeNotNull('battery', instance.battery);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsStatus
-    _$XubeGetDevicesFacetsResponseDataFacetsStatusFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsStatus(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsStatusFacetTypeEnumMap,
-              json['facetType']),
-          connectivity:
-              XubeGetDevicesFacetsResponseDataFacetsStatusConnectivity.fromJson(
-                  json['connectivity'] as Map<String, dynamic>),
-          engine: json['engine'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusEngine.fromJson(
-                  json['engine'] as Map<String, dynamic>),
-          facetId: json['facetId'] as String?,
-          temperature: json['temperature'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusTemperature
-                  .fromJson(json['temperature'] as Map<String, dynamic>),
-          availability: json['availability'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsStatusAvailability
-                  .fromJson(json['availability'] as Map<String, dynamic>),
-          power: XubeGetDevicesFacetsResponseDataFacetsStatusPower.fromJson(
-              json['power'] as Map<String, dynamic>),
-          timestamp: json['timestamp'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsStatusToJson(
-    XubeGetDevicesFacetsResponseDataFacetsStatus instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType': _$XubeGetDevicesFacetsResponseDataFacetsStatusFacetTypeEnumMap[
-        instance.facetType]!,
-    'connectivity': instance.connectivity,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('engine', instance.engine);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('temperature', instance.temperature);
-  writeNotNull('availability', instance.availability);
-  val['power'] = instance.power;
-  val['timestamp'] = instance.timestamp;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsStatusFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsStatusFacetType.status: 'STATUS',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotFw
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotFwFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotFw(
-          v: json['v'] as num,
-        );
-
-Map<String,
-    dynamic> _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotFwToJson(
-        XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotFw instance) =>
-    <String, dynamic>{
-      'v': instance.v,
-    };
-
-XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1();
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1ToJson(
-            XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant1
-                instance) =>
-        <String, dynamic>{};
-
-XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2FromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2();
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2ToJson(
-            XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsVVariant2
-                instance) =>
-        <String, dynamic>{};
-
-XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsN
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsNFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsN();
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsNToJson(
-            XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsN
-                instance) =>
-        <String, dynamic>{};
-
-XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgProps
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgProps(
-          cv: json['cv'] as num,
-          v: json['v'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsV
-                  .fromJson(json['v'] as Map<String, dynamic>),
-          n: json['n'] == null
-              ? null
-              : XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsN
-                  .fromJson(json['n'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgPropsToJson(
-        XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgProps
-            instance) {
-  final val = <String, dynamic>{
-    'cv': instance.cv,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('v', instance.v);
-  writeNotNull('n', instance.n);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshot
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshot(
-          fw: XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotFw.fromJson(
-              json['fw'] as Map<String, dynamic>),
-          cfg: (json['cfg'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotCfgProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshotToJson(
-            XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshot instance) =>
-        <String, dynamic>{
-          'fw': instance.fw,
-          'cfg': instance.cfg,
-        };
-
-XubeGetDevicesFacetsResponseDataFacetsSnapshot
-    _$XubeGetDevicesFacetsResponseDataFacetsSnapshotFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsSnapshot(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsSnapshotFacetTypeEnumMap,
-              json['facetType']),
-          creator: json['creator'] as String?,
-          facetId: json['facetId'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          index: json['index'] as num,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          snapshot:
-              XubeGetDevicesFacetsResponseDataFacetsSnapshotSnapshot.fromJson(
-                  json['snapshot'] as Map<String, dynamic>),
-          updater: json['updater'] as String?,
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsSnapshotToJson(
-    XubeGetDevicesFacetsResponseDataFacetsSnapshot instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType':
-        _$XubeGetDevicesFacetsResponseDataFacetsSnapshotFacetTypeEnumMap[
-            instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['index'] = instance.index;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['snapshot'] = instance.snapshot;
-  writeNotNull('updater', instance.updater);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsSnapshotFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsSnapshotFacetType.snapshot: 'SNAPSHOT',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsUpdateApproval
-    _$XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsUpdateApproval(
-          created: DateTime.parse(json['created'] as String),
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalStateEnumMap,
-              json['state']),
-          conditions: (json['conditions'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(
-                  _$XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalConditionsEnumMap,
-                  e))
-              .toList(),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          updater: json['updater'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalToJson(
-        XubeGetDevicesFacetsResponseDataFacetsUpdateApproval instance) {
-  final val = <String, dynamic>{
-    'created': instance.created.toIso8601String(),
-    'state': _$XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalStateEnumMap[
-        instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'conditions',
-      instance.conditions
-          ?.map((e) =>
-              _$XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalConditionsEnumMap[
-                  e]!)
-          .toList());
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  writeNotNull('updater', instance.updater);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalStateEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalState.approved:
-      'approved',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalState.denied: 'denied',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalState.pending: 'pending',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalConditionsEnumMap =
-    {
-  XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalConditions.local: 'local',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateApprovalConditions.remote:
-      'remote',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsUpdateMismatchProps
-    _$XubeGetDevicesFacetsResponseDataFacetsUpdateMismatchPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsUpdateMismatchProps(
-          actual: json['actual'] as String,
-          expected: json['expected'] as String,
-        );
-
-Map<String,
-    dynamic> _$XubeGetDevicesFacetsResponseDataFacetsUpdateMismatchPropsToJson(
-        XubeGetDevicesFacetsResponseDataFacetsUpdateMismatchProps instance) =>
-    <String, dynamic>{
-      'actual': instance.actual,
-      'expected': instance.expected,
-    };
-
-XubeGetDevicesFacetsResponseDataFacetsUpdateProgressProps
-    _$XubeGetDevicesFacetsResponseDataFacetsUpdateProgressPropsFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsUpdateProgressProps(
-          totalSize: json['totalSize'] as num?,
-          lastOffset: json['lastOffset'] as num?,
-          updated: json['updated'] as String?,
-        );
-
-Map<String, dynamic>
-    _$XubeGetDevicesFacetsResponseDataFacetsUpdateProgressPropsToJson(
-        XubeGetDevicesFacetsResponseDataFacetsUpdateProgressProps instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('totalSize', instance.totalSize);
-  writeNotNull('lastOffset', instance.lastOffset);
-  writeNotNull('updated', instance.updated);
-  return val;
-}
-
-XubeGetDevicesFacetsResponseDataFacetsUpdateTasks
-    _$XubeGetDevicesFacetsResponseDataFacetsUpdateTasksFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsUpdateTasks(
-          a: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsUpdateTasksAEnumMap,
-              json['a']),
-          tries: json['tries'] as num?,
-          topics: (json['topics'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, e as String),
-          ),
-          ctx: json['ctx'] as Map<String, dynamic>?,
-          timeout: json['timeout'] as num?,
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsUpdateTasksToJson(
-    XubeGetDevicesFacetsResponseDataFacetsUpdateTasks instance) {
-  final val = <String, dynamic>{
-    'a': _$XubeGetDevicesFacetsResponseDataFacetsUpdateTasksAEnumMap[
-        instance.a]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('tries', instance.tries);
-  writeNotNull('topics', instance.topics);
-  writeNotNull('ctx', instance.ctx);
-  writeNotNull('timeout', instance.timeout);
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsUpdateTasksAEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.d: 'd',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.uf: 'uf',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.u: 'u',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.upd: 'upd',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.r: 'r',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.cdr: 'cdr',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.z: 'z',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.a: 'a',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.s: 's',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.b: 'b',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.e: 'e',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.k: 'k',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.x: 'x',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.crash: 'crash',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateTasksA.t: 't',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsUpdate
-    _$XubeGetDevicesFacetsResponseDataFacetsUpdateFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsUpdate(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          approval:
-              XubeGetDevicesFacetsResponseDataFacetsUpdateApproval.fromJson(
-                  json['approval'] as Map<String, dynamic>),
-          type: json['type'] as String?,
-          updater: json['updater'] as String?,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsUpdateFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          mismatch: (json['mismatch'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetDevicesFacetsResponseDataFacetsUpdateMismatchProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          name: json['name'] as String?,
-          progress: (json['progress'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(
-                k,
-                XubeGetDevicesFacetsResponseDataFacetsUpdateProgressProps
-                    .fromJson(e as Map<String, dynamic>)),
-          ),
-          id: json['id'] as String,
-          state: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsUpdateStateEnumMap,
-              json['state']),
-          job: json['job'] as String?,
-          conditions: (json['conditions'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(
-                  _$XubeGetDevicesFacetsResponseDataFacetsUpdateConditionsEnumMap,
-                  e))
-              .toList(),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          device: json['device'] as String,
-          tasks: (json['tasks'] as List<dynamic>)
-              .map((e) =>
-                  XubeGetDevicesFacetsResponseDataFacetsUpdateTasks.fromJson(
-                      e as Map<String, dynamic>))
-              .toList(),
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsUpdateToJson(
-    XubeGetDevicesFacetsResponseDataFacetsUpdate instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['approval'] = instance.approval;
-  writeNotNull('type', instance.type);
-  writeNotNull('updater', instance.updater);
-  val['facetType'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsUpdateFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('mismatch', instance.mismatch);
-  writeNotNull('name', instance.name);
-  val['progress'] = instance.progress;
-  val['id'] = instance.id;
-  val['state'] = _$XubeGetDevicesFacetsResponseDataFacetsUpdateStateEnumMap[
-      instance.state]!;
-  writeNotNull('job', instance.job);
-  writeNotNull(
-      'conditions',
-      instance.conditions
-          ?.map((e) =>
-              _$XubeGetDevicesFacetsResponseDataFacetsUpdateConditionsEnumMap[
-                  e]!)
-          .toList());
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['device'] = instance.device;
-  val['tasks'] = instance.tasks;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsUpdateFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsUpdateFacetType.update: 'UPDATE',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsUpdateStateEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsUpdateState.waitingForDeviceStatus:
-      'waiting_for_device_status',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateState.readyToSend:
-      'ready_to_send',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateState.sent: 'sent',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateState.failed: 'failed',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateState.inProgress: 'in_progress',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateState.completed: 'completed',
-};
-
-const _$XubeGetDevicesFacetsResponseDataFacetsUpdateConditionsEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsUpdateConditions.local: 'local',
-  XubeGetDevicesFacetsResponseDataFacetsUpdateConditions.remote: 'remote',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsFirmwareInfo
-    _$XubeGetDevicesFacetsResponseDataFacetsFirmwareInfoFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFirmwareInfo(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String,
-          created: json['created'] as String,
-          firmwareHash: json['firmwareHash'] as String,
-          firmwareSize: json['firmwareSize'] as num,
-          type: json['type'] as String?,
-          version: json['version'] as num,
-          deviceId: json['deviceId'] as String,
-          target: json['target'] as String,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsFirmwareInfoFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          firmwareVersion: json['firmwareVersion'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsFirmwareInfoToJson(
-    XubeGetDevicesFacetsResponseDataFacetsFirmwareInfo instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'creator': instance.creator,
-    'created': instance.created,
-    'firmwareHash': instance.firmwareHash,
-    'firmwareSize': instance.firmwareSize,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('type', instance.type);
-  val['version'] = instance.version;
-  val['deviceId'] = instance.deviceId;
-  val['target'] = instance.target;
-  val['facetType'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsFirmwareInfoFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  val['firmwareVersion'] = instance.firmwareVersion;
-  val['key'] = instance.key;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsFirmwareInfoFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsFirmwareInfoFacetType.firmwareInfo:
-      'FIRMWARE-INFO',
-};
-
-XubeGetDevicesFacetsResponseDataFacetsFirmware
-    _$XubeGetDevicesFacetsResponseDataFacetsFirmwareFromJson(
-            Map<String, dynamic> json) =>
-        XubeGetDevicesFacetsResponseDataFacetsFirmware(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          facetType: $enumDecode(
-              _$XubeGetDevicesFacetsResponseDataFacetsFirmwareFacetTypeEnumMap,
-              json['facetType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          objectVersionId: json['objectVersionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          version: json['version'] as num,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic> _$XubeGetDevicesFacetsResponseDataFacetsFirmwareToJson(
-    XubeGetDevicesFacetsResponseDataFacetsFirmware instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['facetType'] =
-      _$XubeGetDevicesFacetsResponseDataFacetsFirmwareFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['objectVersionId'] = instance.objectVersionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-const _$XubeGetDevicesFacetsResponseDataFacetsFirmwareFacetTypeEnumMap = {
-  XubeGetDevicesFacetsResponseDataFacetsFirmwareFacetType.firmware: 'FIRMWARE',
-};
-
 XubeGetDevicesFacetsResponseData _$XubeGetDevicesFacetsResponseDataFromJson(
         Map<String, dynamic> json) =>
     XubeGetDevicesFacetsResponseData(
@@ -16167,32 +9319,2506 @@ Map<String, dynamic> _$XubeSetFirmwareVersionsRequestToJson(
       'firmwareVersion': instance.firmwareVersion,
     };
 
-GetProvisioningDocsrequest _$GetProvisioningDocsrequestFromJson(
+XubeActivationStatus _$XubeActivationStatusFromJson(
         Map<String, dynamic> json) =>
-    GetProvisioningDocsrequest();
+    XubeActivationStatus(
+      componentType: json['componentType'] as String,
+      creator: json['creator'] as String?,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      activationStatus: $enumDecode(
+          _$XubeActivationStatusActivationStatusEnumMap,
+          json['activationStatus']),
+      type: json['type'] as String?,
+      deviceId: json['deviceId'] as String,
+      updater: json['updater'] as String?,
+      accountId: json['accountId'] as String,
+      facetType: $enumDecode(
+          _$XubeActivationStatusFacetTypeEnumMap, json['facetType']),
+      facetId: json['facetId'] as String?,
+      name: json['name'] as String?,
+      id: json['id'] as String,
+      updated: json['updated'] == null
+          ? null
+          : DateTime.parse(json['updated'] as String),
+      timestamp: json['timestamp'] as String,
+    );
 
-Map<String, dynamic> _$GetProvisioningDocsrequestToJson(
-        GetProvisioningDocsrequest instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$XubeActivationStatusToJson(
+    XubeActivationStatus instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+  };
 
-GetApiDocsresponse _$GetApiDocsresponseFromJson(Map<String, dynamic> json) =>
-    GetApiDocsresponse();
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
 
-Map<String, dynamic> _$GetApiDocsresponseToJson(GetApiDocsresponse instance) =>
-    <String, dynamic>{};
+  writeNotNull('creator', instance.creator);
+  writeNotNull('created', instance.created?.toIso8601String());
+  val['activationStatus'] =
+      _$XubeActivationStatusActivationStatusEnumMap[instance.activationStatus]!;
+  writeNotNull('type', instance.type);
+  val['deviceId'] = instance.deviceId;
+  writeNotNull('updater', instance.updater);
+  val['accountId'] = instance.accountId;
+  val['facetType'] =
+      _$XubeActivationStatusFacetTypeEnumMap[instance.facetType]!;
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('name', instance.name);
+  val['id'] = instance.id;
+  writeNotNull('updated', instance.updated?.toIso8601String());
+  val['timestamp'] = instance.timestamp;
+  return val;
+}
 
-GetProvisioningDocsresponse _$GetProvisioningDocsresponseFromJson(
+const _$XubeActivationStatusActivationStatusEnumMap = {
+  XubeActivationStatusActivationStatus.active: 'active',
+  XubeActivationStatusActivationStatus.inactive: 'inactive',
+};
+
+const _$XubeActivationStatusFacetTypeEnumMap = {
+  XubeActivationStatusFacetType.activationStatus: 'ACTIVATION-STATUS',
+};
+
+XubeHeartbeat _$XubeHeartbeatFromJson(Map<String, dynamic> json) =>
+    XubeHeartbeat(
+      componentType: json['componentType'] as String,
+      facetType:
+          $enumDecode(_$XubeHeartbeatFacetTypeEnumMap, json['facetType']),
+      facetId: json['facetId'] as String?,
+      id: json['id'] as String,
+      deviceId: json['deviceId'] as String,
+      timestamp: DateTime.parse(json['timestamp'] as String),
+    );
+
+Map<String, dynamic> _$XubeHeartbeatToJson(XubeHeartbeat instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+    'facetType': _$XubeHeartbeatFacetTypeEnumMap[instance.facetType]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('facetId', instance.facetId);
+  val['id'] = instance.id;
+  val['deviceId'] = instance.deviceId;
+  val['timestamp'] = instance.timestamp.toIso8601String();
+  return val;
+}
+
+const _$XubeHeartbeatFacetTypeEnumMap = {
+  XubeHeartbeatFacetType.heartbeat: 'HEARTBEAT',
+};
+
+XubeFilesOrphanedPropsExisting _$XubeFilesOrphanedPropsExistingFromJson(
         Map<String, dynamic> json) =>
-    GetProvisioningDocsresponse();
+    XubeFilesOrphanedPropsExisting(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
 
-Map<String, dynamic> _$GetProvisioningDocsresponseToJson(
-        GetProvisioningDocsresponse instance) =>
+Map<String, dynamic> _$XubeFilesOrphanedPropsExistingToJson(
+    XubeFilesOrphanedPropsExisting instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesOrphanedPropsAcceptance _$XubeFilesOrphanedPropsAcceptanceFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesOrphanedPropsAcceptance(
+      accepted: json['accepted'] as bool,
+      timestamp: json['timestamp'] as String?,
+    );
+
+Map<String, dynamic> _$XubeFilesOrphanedPropsAcceptanceToJson(
+    XubeFilesOrphanedPropsAcceptance instance) {
+  final val = <String, dynamic>{
+    'accepted': instance.accepted,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('timestamp', instance.timestamp);
+  return val;
+}
+
+XubeFilesOrphanedPropsActive _$XubeFilesOrphanedPropsActiveFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesOrphanedPropsActive(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesOrphanedPropsActiveToJson(
+    XubeFilesOrphanedPropsActive instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesOrphanedProps _$XubeFilesOrphanedPropsFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesOrphanedProps(
+      path: json['path'] as String,
+      existing: (json['existing'] as List<dynamic>?)
+          ?.map((e) => XubeFilesOrphanedPropsExisting.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
+      acceptance: json['acceptance'] == null
+          ? null
+          : XubeFilesOrphanedPropsAcceptance.fromJson(
+              json['acceptance'] as Map<String, dynamic>),
+      active: XubeFilesOrphanedPropsActive.fromJson(
+          json['active'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeFilesOrphanedPropsToJson(
+    XubeFilesOrphanedProps instance) {
+  final val = <String, dynamic>{
+    'path': instance.path,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('existing', instance.existing);
+  writeNotNull('acceptance', instance.acceptance);
+  val['active'] = instance.active;
+  return val;
+}
+
+XubeFilesStoragePropsExisting _$XubeFilesStoragePropsExistingFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesStoragePropsExisting(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesStoragePropsExistingToJson(
+    XubeFilesStoragePropsExisting instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesStoragePropsAcceptance _$XubeFilesStoragePropsAcceptanceFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesStoragePropsAcceptance(
+      accepted: json['accepted'] as bool,
+      timestamp: json['timestamp'] as String?,
+    );
+
+Map<String, dynamic> _$XubeFilesStoragePropsAcceptanceToJson(
+    XubeFilesStoragePropsAcceptance instance) {
+  final val = <String, dynamic>{
+    'accepted': instance.accepted,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('timestamp', instance.timestamp);
+  return val;
+}
+
+XubeFilesStoragePropsActive _$XubeFilesStoragePropsActiveFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesStoragePropsActive(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesStoragePropsActiveToJson(
+    XubeFilesStoragePropsActive instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesStorageProps _$XubeFilesStoragePropsFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesStorageProps(
+      path: json['path'] as String,
+      existing: (json['existing'] as List<dynamic>?)
+          ?.map((e) =>
+              XubeFilesStoragePropsExisting.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      acceptance: json['acceptance'] == null
+          ? null
+          : XubeFilesStoragePropsAcceptance.fromJson(
+              json['acceptance'] as Map<String, dynamic>),
+      active: XubeFilesStoragePropsActive.fromJson(
+          json['active'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeFilesStoragePropsToJson(
+    XubeFilesStorageProps instance) {
+  final val = <String, dynamic>{
+    'path': instance.path,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('existing', instance.existing);
+  writeNotNull('acceptance', instance.acceptance);
+  val['active'] = instance.active;
+  return val;
+}
+
+XubeFilesScriptingPropsExisting _$XubeFilesScriptingPropsExistingFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesScriptingPropsExisting(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesScriptingPropsExistingToJson(
+    XubeFilesScriptingPropsExisting instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesScriptingPropsAcceptance _$XubeFilesScriptingPropsAcceptanceFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesScriptingPropsAcceptance(
+      accepted: json['accepted'] as bool,
+      timestamp: json['timestamp'] as String?,
+    );
+
+Map<String, dynamic> _$XubeFilesScriptingPropsAcceptanceToJson(
+    XubeFilesScriptingPropsAcceptance instance) {
+  final val = <String, dynamic>{
+    'accepted': instance.accepted,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('timestamp', instance.timestamp);
+  return val;
+}
+
+XubeFilesScriptingPropsActive _$XubeFilesScriptingPropsActiveFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesScriptingPropsActive(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesScriptingPropsActiveToJson(
+    XubeFilesScriptingPropsActive instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesScriptingProps _$XubeFilesScriptingPropsFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesScriptingProps(
+      path: json['path'] as String,
+      existing: (json['existing'] as List<dynamic>?)
+          ?.map((e) => XubeFilesScriptingPropsExisting.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
+      acceptance: json['acceptance'] == null
+          ? null
+          : XubeFilesScriptingPropsAcceptance.fromJson(
+              json['acceptance'] as Map<String, dynamic>),
+      active: XubeFilesScriptingPropsActive.fromJson(
+          json['active'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeFilesScriptingPropsToJson(
+    XubeFilesScriptingProps instance) {
+  final val = <String, dynamic>{
+    'path': instance.path,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('existing', instance.existing);
+  writeNotNull('acceptance', instance.acceptance);
+  val['active'] = instance.active;
+  return val;
+}
+
+XubeFilesEnvironment _$XubeFilesEnvironmentFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesEnvironment(
+      release: json['release'] as String,
+      mqttEndpoint: json['mqttEndpoint'] as String,
+      region: json['region'] as String,
+      status: $enumDecodeNullable(
+          _$XubeFilesEnvironmentStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeFilesEnvironmentToJson(
+    XubeFilesEnvironment instance) {
+  final val = <String, dynamic>{
+    'release': instance.release,
+    'mqttEndpoint': instance.mqttEndpoint,
+    'region': instance.region,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('status', _$XubeFilesEnvironmentStatusEnumMap[instance.status]);
+  return val;
+}
+
+const _$XubeFilesEnvironmentStatusEnumMap = {
+  XubeFilesEnvironmentStatus.disabled: 'disabled',
+  XubeFilesEnvironmentStatus.pending: 'pending',
+  XubeFilesEnvironmentStatus.unknown: 'unknown',
+  XubeFilesEnvironmentStatus.error: 'error',
+  XubeFilesEnvironmentStatus.warning: 'warning',
+  XubeFilesEnvironmentStatus.healthy: 'healthy',
+};
+
+XubeFilesSystemFirmwareExisting _$XubeFilesSystemFirmwareExistingFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesSystemFirmwareExisting(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesSystemFirmwareExistingToJson(
+    XubeFilesSystemFirmwareExisting instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesSystemFirmwareAcceptance _$XubeFilesSystemFirmwareAcceptanceFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesSystemFirmwareAcceptance(
+      accepted: json['accepted'] as bool,
+      timestamp: json['timestamp'] as String?,
+    );
+
+Map<String, dynamic> _$XubeFilesSystemFirmwareAcceptanceToJson(
+    XubeFilesSystemFirmwareAcceptance instance) {
+  final val = <String, dynamic>{
+    'accepted': instance.accepted,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('timestamp', instance.timestamp);
+  return val;
+}
+
+XubeFilesSystemFirmwareActive _$XubeFilesSystemFirmwareActiveFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesSystemFirmwareActive(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesSystemFirmwareActiveToJson(
+    XubeFilesSystemFirmwareActive instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesSystemFirmware _$XubeFilesSystemFirmwareFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesSystemFirmware(
+      path: json['path'] as String,
+      existing: (json['existing'] as List<dynamic>?)
+          ?.map((e) => XubeFilesSystemFirmwareExisting.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
+      acceptance: json['acceptance'] == null
+          ? null
+          : XubeFilesSystemFirmwareAcceptance.fromJson(
+              json['acceptance'] as Map<String, dynamic>),
+      active: XubeFilesSystemFirmwareActive.fromJson(
+          json['active'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeFilesSystemFirmwareToJson(
+    XubeFilesSystemFirmware instance) {
+  final val = <String, dynamic>{
+    'path': instance.path,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('existing', instance.existing);
+  writeNotNull('acceptance', instance.acceptance);
+  val['active'] = instance.active;
+  return val;
+}
+
+XubeFilesSystem _$XubeFilesSystemFromJson(Map<String, dynamic> json) =>
+    XubeFilesSystem(
+      firmware: XubeFilesSystemFirmware.fromJson(
+          json['firmware'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeFilesSystemToJson(XubeFilesSystem instance) =>
+    <String, dynamic>{
+      'firmware': instance.firmware,
+    };
+
+XubeFilesCommunicationPropsExisting
+    _$XubeFilesCommunicationPropsExistingFromJson(Map<String, dynamic> json) =>
+        XubeFilesCommunicationPropsExisting(
+          partition: json['partition'] as String?,
+          size: json['size'] as num?,
+          checksum: json['checksum'] as num?,
+          version: json['version'] as String,
+          key: json['key'] as String,
+        );
+
+Map<String, dynamic> _$XubeFilesCommunicationPropsExistingToJson(
+    XubeFilesCommunicationPropsExisting instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesCommunicationPropsAcceptance
+    _$XubeFilesCommunicationPropsAcceptanceFromJson(
+            Map<String, dynamic> json) =>
+        XubeFilesCommunicationPropsAcceptance(
+          accepted: json['accepted'] as bool,
+          timestamp: json['timestamp'] as String?,
+        );
+
+Map<String, dynamic> _$XubeFilesCommunicationPropsAcceptanceToJson(
+    XubeFilesCommunicationPropsAcceptance instance) {
+  final val = <String, dynamic>{
+    'accepted': instance.accepted,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('timestamp', instance.timestamp);
+  return val;
+}
+
+XubeFilesCommunicationPropsActive _$XubeFilesCommunicationPropsActiveFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesCommunicationPropsActive(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesCommunicationPropsActiveToJson(
+    XubeFilesCommunicationPropsActive instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesCommunicationProps _$XubeFilesCommunicationPropsFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesCommunicationProps(
+      path: json['path'] as String,
+      existing: (json['existing'] as List<dynamic>?)
+          ?.map((e) => XubeFilesCommunicationPropsExisting.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
+      acceptance: json['acceptance'] == null
+          ? null
+          : XubeFilesCommunicationPropsAcceptance.fromJson(
+              json['acceptance'] as Map<String, dynamic>),
+      active: XubeFilesCommunicationPropsActive.fromJson(
+          json['active'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeFilesCommunicationPropsToJson(
+    XubeFilesCommunicationProps instance) {
+  final val = <String, dynamic>{
+    'path': instance.path,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('existing', instance.existing);
+  writeNotNull('acceptance', instance.acceptance);
+  val['active'] = instance.active;
+  return val;
+}
+
+XubeFilesConfigPropsExisting _$XubeFilesConfigPropsExistingFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesConfigPropsExisting(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesConfigPropsExistingToJson(
+    XubeFilesConfigPropsExisting instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesConfigPropsAcceptance _$XubeFilesConfigPropsAcceptanceFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesConfigPropsAcceptance(
+      accepted: json['accepted'] as bool,
+      timestamp: json['timestamp'] as String?,
+    );
+
+Map<String, dynamic> _$XubeFilesConfigPropsAcceptanceToJson(
+    XubeFilesConfigPropsAcceptance instance) {
+  final val = <String, dynamic>{
+    'accepted': instance.accepted,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('timestamp', instance.timestamp);
+  return val;
+}
+
+XubeFilesConfigPropsActive _$XubeFilesConfigPropsActiveFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesConfigPropsActive(
+      partition: json['partition'] as String?,
+      size: json['size'] as num?,
+      checksum: json['checksum'] as num?,
+      version: json['version'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFilesConfigPropsActiveToJson(
+    XubeFilesConfigPropsActive instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('partition', instance.partition);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+XubeFilesConfigProps _$XubeFilesConfigPropsFromJson(
+        Map<String, dynamic> json) =>
+    XubeFilesConfigProps(
+      path: json['path'] as String,
+      existing: (json['existing'] as List<dynamic>?)
+          ?.map((e) =>
+              XubeFilesConfigPropsExisting.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      acceptance: json['acceptance'] == null
+          ? null
+          : XubeFilesConfigPropsAcceptance.fromJson(
+              json['acceptance'] as Map<String, dynamic>),
+      active: XubeFilesConfigPropsActive.fromJson(
+          json['active'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeFilesConfigPropsToJson(
+    XubeFilesConfigProps instance) {
+  final val = <String, dynamic>{
+    'path': instance.path,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('existing', instance.existing);
+  writeNotNull('acceptance', instance.acceptance);
+  val['active'] = instance.active;
+  return val;
+}
+
+XubeFiles _$XubeFilesFromJson(Map<String, dynamic> json) => XubeFiles(
+      componentType: json['componentType'] as String,
+      orphaned: (json['orphaned'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            k, XubeFilesOrphanedProps.fromJson(e as Map<String, dynamic>)),
+      ),
+      storage: (json['storage'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            k, XubeFilesStorageProps.fromJson(e as Map<String, dynamic>)),
+      ),
+      scripting: (json['scripting'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            k, XubeFilesScriptingProps.fromJson(e as Map<String, dynamic>)),
+      ),
+      facetType: $enumDecode(_$XubeFilesFacetTypeEnumMap, json['facetType']),
+      environment: XubeFilesEnvironment.fromJson(
+          json['environment'] as Map<String, dynamic>),
+      system: XubeFilesSystem.fromJson(json['system'] as Map<String, dynamic>),
+      stage: $enumDecode(_$XubeFilesStageEnumMap, json['stage']),
+      facetId: json['facetId'] as String?,
+      communication: (json['communication'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            k, XubeFilesCommunicationProps.fromJson(e as Map<String, dynamic>)),
+      ),
+      device: json['device'] as String,
+      config: (json['config'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            k, XubeFilesConfigProps.fromJson(e as Map<String, dynamic>)),
+      ),
+      updated: json['updated'] == null
+          ? null
+          : DateTime.parse(json['updated'] as String),
+      status: $enumDecode(_$XubeFilesStatusEnumMap, json['status']),
+    );
+
+Map<String, dynamic> _$XubeFilesToJson(XubeFiles instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('orphaned', instance.orphaned);
+  writeNotNull('storage', instance.storage);
+  writeNotNull('scripting', instance.scripting);
+  val['facetType'] = _$XubeFilesFacetTypeEnumMap[instance.facetType]!;
+  val['environment'] = instance.environment;
+  val['system'] = instance.system;
+  val['stage'] = _$XubeFilesStageEnumMap[instance.stage]!;
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('communication', instance.communication);
+  val['device'] = instance.device;
+  writeNotNull('config', instance.config);
+  writeNotNull('updated', instance.updated?.toIso8601String());
+  val['status'] = _$XubeFilesStatusEnumMap[instance.status]!;
+  return val;
+}
+
+const _$XubeFilesFacetTypeEnumMap = {
+  XubeFilesFacetType.files: 'FILES',
+};
+
+const _$XubeFilesStageEnumMap = {
+  XubeFilesStage.current: 'current',
+  XubeFilesStage.expected: 'expected',
+  XubeFilesStage.historical: 'historical',
+};
+
+const _$XubeFilesStatusEnumMap = {
+  XubeFilesStatus.disabled: 'disabled',
+  XubeFilesStatus.pending: 'pending',
+  XubeFilesStatus.unknown: 'unknown',
+  XubeFilesStatus.error: 'error',
+  XubeFilesStatus.warning: 'warning',
+  XubeFilesStatus.healthy: 'healthy',
+};
+
+XubeLocation _$XubeLocationFromJson(Map<String, dynamic> json) => XubeLocation(
+      componentType: json['componentType'] as String,
+      creator: json['creator'] as String?,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      latitude: json['latitude'] as num,
+      type: json['type'] as String?,
+      deviceId: json['deviceId'] as String,
+      updater: json['updater'] as String?,
+      facetType: $enumDecode(_$XubeLocationFacetTypeEnumMap, json['facetType']),
+      facetId: json['facetId'] as String?,
+      name: json['name'] as String?,
+      id: json['id'] as String,
+      updated: json['updated'] == null
+          ? null
+          : DateTime.parse(json['updated'] as String),
+      longitude: json['longitude'] as num,
+    );
+
+Map<String, dynamic> _$XubeLocationToJson(XubeLocation instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('creator', instance.creator);
+  writeNotNull('created', instance.created?.toIso8601String());
+  val['latitude'] = instance.latitude;
+  writeNotNull('type', instance.type);
+  val['deviceId'] = instance.deviceId;
+  writeNotNull('updater', instance.updater);
+  val['facetType'] = _$XubeLocationFacetTypeEnumMap[instance.facetType]!;
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('name', instance.name);
+  val['id'] = instance.id;
+  writeNotNull('updated', instance.updated?.toIso8601String());
+  val['longitude'] = instance.longitude;
+  return val;
+}
+
+const _$XubeLocationFacetTypeEnumMap = {
+  XubeLocationFacetType.location: 'LOCATION',
+};
+
+XubeStatusConnectivityWifiSignalStrength
+    _$XubeStatusConnectivityWifiSignalStrengthFromJson(
+            Map<String, dynamic> json) =>
+        XubeStatusConnectivityWifiSignalStrength(
+          state: $enumDecode(
+              _$XubeStatusConnectivityWifiSignalStrengthStateEnumMap,
+              json['state']),
+          message: json['message'] as String?,
+          updated: json['updated'] as String,
+          value: json['value'] as num?,
+        );
+
+Map<String, dynamic> _$XubeStatusConnectivityWifiSignalStrengthToJson(
+    XubeStatusConnectivityWifiSignalStrength instance) {
+  final val = <String, dynamic>{
+    'state':
+        _$XubeStatusConnectivityWifiSignalStrengthStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  writeNotNull('value', instance.value);
+  return val;
+}
+
+const _$XubeStatusConnectivityWifiSignalStrengthStateEnumMap = {
+  XubeStatusConnectivityWifiSignalStrengthState.disabled: 'disabled',
+  XubeStatusConnectivityWifiSignalStrengthState.pending: 'pending',
+  XubeStatusConnectivityWifiSignalStrengthState.unknown: 'unknown',
+  XubeStatusConnectivityWifiSignalStrengthState.error: 'error',
+  XubeStatusConnectivityWifiSignalStrengthState.warning: 'warning',
+  XubeStatusConnectivityWifiSignalStrengthState.healthy: 'healthy',
+};
+
+XubeStatusConnectivityWifiConnection
+    _$XubeStatusConnectivityWifiConnectionFromJson(Map<String, dynamic> json) =>
+        XubeStatusConnectivityWifiConnection(
+          state: $enumDecode(_$XubeStatusConnectivityWifiConnectionStateEnumMap,
+              json['state']),
+          message: json['message'] as String?,
+          updated: json['updated'] as String,
+          value: $enumDecode(_$XubeStatusConnectivityWifiConnectionValueEnumMap,
+              json['value']),
+        );
+
+Map<String, dynamic> _$XubeStatusConnectivityWifiConnectionToJson(
+    XubeStatusConnectivityWifiConnection instance) {
+  final val = <String, dynamic>{
+    'state':
+        _$XubeStatusConnectivityWifiConnectionStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] =
+      _$XubeStatusConnectivityWifiConnectionValueEnumMap[instance.value]!;
+  return val;
+}
+
+const _$XubeStatusConnectivityWifiConnectionStateEnumMap = {
+  XubeStatusConnectivityWifiConnectionState.disabled: 'disabled',
+  XubeStatusConnectivityWifiConnectionState.pending: 'pending',
+  XubeStatusConnectivityWifiConnectionState.unknown: 'unknown',
+  XubeStatusConnectivityWifiConnectionState.error: 'error',
+  XubeStatusConnectivityWifiConnectionState.warning: 'warning',
+  XubeStatusConnectivityWifiConnectionState.healthy: 'healthy',
+};
+
+const _$XubeStatusConnectivityWifiConnectionValueEnumMap = {
+  XubeStatusConnectivityWifiConnectionValue.connected: 'connected',
+  XubeStatusConnectivityWifiConnectionValue.notConnected: 'notConnected',
+  XubeStatusConnectivityWifiConnectionValue.notInUse: 'notInUse',
+  XubeStatusConnectivityWifiConnectionValue.pending: 'pending',
+};
+
+XubeStatusConnectivityWifi _$XubeStatusConnectivityWifiFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusConnectivityWifi(
+      signalStrength: json['signalStrength'] == null
+          ? null
+          : XubeStatusConnectivityWifiSignalStrength.fromJson(
+              json['signalStrength'] as Map<String, dynamic>),
+      connection: XubeStatusConnectivityWifiConnection.fromJson(
+          json['connection'] as Map<String, dynamic>),
+      ssid: json['ssid'] as String?,
+    );
+
+Map<String, dynamic> _$XubeStatusConnectivityWifiToJson(
+    XubeStatusConnectivityWifi instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('signalStrength', instance.signalStrength);
+  val['connection'] = instance.connection;
+  writeNotNull('ssid', instance.ssid);
+  return val;
+}
+
+XubeStatusConnectivityCellularSignalStrength
+    _$XubeStatusConnectivityCellularSignalStrengthFromJson(
+            Map<String, dynamic> json) =>
+        XubeStatusConnectivityCellularSignalStrength(
+          state: $enumDecode(
+              _$XubeStatusConnectivityCellularSignalStrengthStateEnumMap,
+              json['state']),
+          message: json['message'] as String?,
+          updated: json['updated'] as String,
+          value: json['value'] as num?,
+        );
+
+Map<String, dynamic> _$XubeStatusConnectivityCellularSignalStrengthToJson(
+    XubeStatusConnectivityCellularSignalStrength instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusConnectivityCellularSignalStrengthStateEnumMap[
+        instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  writeNotNull('value', instance.value);
+  return val;
+}
+
+const _$XubeStatusConnectivityCellularSignalStrengthStateEnumMap = {
+  XubeStatusConnectivityCellularSignalStrengthState.disabled: 'disabled',
+  XubeStatusConnectivityCellularSignalStrengthState.pending: 'pending',
+  XubeStatusConnectivityCellularSignalStrengthState.unknown: 'unknown',
+  XubeStatusConnectivityCellularSignalStrengthState.error: 'error',
+  XubeStatusConnectivityCellularSignalStrengthState.warning: 'warning',
+  XubeStatusConnectivityCellularSignalStrengthState.healthy: 'healthy',
+};
+
+XubeStatusConnectivityCellularConnection
+    _$XubeStatusConnectivityCellularConnectionFromJson(
+            Map<String, dynamic> json) =>
+        XubeStatusConnectivityCellularConnection(
+          state: $enumDecode(
+              _$XubeStatusConnectivityCellularConnectionStateEnumMap,
+              json['state']),
+          message: json['message'] as String?,
+          updated: json['updated'] as String,
+          value: $enumDecode(
+              _$XubeStatusConnectivityCellularConnectionValueEnumMap,
+              json['value']),
+        );
+
+Map<String, dynamic> _$XubeStatusConnectivityCellularConnectionToJson(
+    XubeStatusConnectivityCellularConnection instance) {
+  final val = <String, dynamic>{
+    'state':
+        _$XubeStatusConnectivityCellularConnectionStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] =
+      _$XubeStatusConnectivityCellularConnectionValueEnumMap[instance.value]!;
+  return val;
+}
+
+const _$XubeStatusConnectivityCellularConnectionStateEnumMap = {
+  XubeStatusConnectivityCellularConnectionState.disabled: 'disabled',
+  XubeStatusConnectivityCellularConnectionState.pending: 'pending',
+  XubeStatusConnectivityCellularConnectionState.unknown: 'unknown',
+  XubeStatusConnectivityCellularConnectionState.error: 'error',
+  XubeStatusConnectivityCellularConnectionState.warning: 'warning',
+  XubeStatusConnectivityCellularConnectionState.healthy: 'healthy',
+};
+
+const _$XubeStatusConnectivityCellularConnectionValueEnumMap = {
+  XubeStatusConnectivityCellularConnectionValue.connected: 'connected',
+  XubeStatusConnectivityCellularConnectionValue.notConnected: 'notConnected',
+  XubeStatusConnectivityCellularConnectionValue.notInUse: 'notInUse',
+  XubeStatusConnectivityCellularConnectionValue.pending: 'pending',
+};
+
+XubeStatusConnectivityCellular _$XubeStatusConnectivityCellularFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusConnectivityCellular(
+      signalStrength: json['signalStrength'] == null
+          ? null
+          : XubeStatusConnectivityCellularSignalStrength.fromJson(
+              json['signalStrength'] as Map<String, dynamic>),
+      connection: XubeStatusConnectivityCellularConnection.fromJson(
+          json['connection'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeStatusConnectivityCellularToJson(
+    XubeStatusConnectivityCellular instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('signalStrength', instance.signalStrength);
+  val['connection'] = instance.connection;
+  return val;
+}
+
+XubeStatusConnectivityEthConnection
+    _$XubeStatusConnectivityEthConnectionFromJson(Map<String, dynamic> json) =>
+        XubeStatusConnectivityEthConnection(
+          state: $enumDecode(
+              _$XubeStatusConnectivityEthConnectionStateEnumMap, json['state']),
+          message: json['message'] as String?,
+          updated: json['updated'] as String,
+          value: $enumDecode(
+              _$XubeStatusConnectivityEthConnectionValueEnumMap, json['value']),
+        );
+
+Map<String, dynamic> _$XubeStatusConnectivityEthConnectionToJson(
+    XubeStatusConnectivityEthConnection instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusConnectivityEthConnectionStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] =
+      _$XubeStatusConnectivityEthConnectionValueEnumMap[instance.value]!;
+  return val;
+}
+
+const _$XubeStatusConnectivityEthConnectionStateEnumMap = {
+  XubeStatusConnectivityEthConnectionState.disabled: 'disabled',
+  XubeStatusConnectivityEthConnectionState.pending: 'pending',
+  XubeStatusConnectivityEthConnectionState.unknown: 'unknown',
+  XubeStatusConnectivityEthConnectionState.error: 'error',
+  XubeStatusConnectivityEthConnectionState.warning: 'warning',
+  XubeStatusConnectivityEthConnectionState.healthy: 'healthy',
+};
+
+const _$XubeStatusConnectivityEthConnectionValueEnumMap = {
+  XubeStatusConnectivityEthConnectionValue.connected: 'connected',
+  XubeStatusConnectivityEthConnectionValue.notConnected: 'notConnected',
+  XubeStatusConnectivityEthConnectionValue.notInUse: 'notInUse',
+  XubeStatusConnectivityEthConnectionValue.pending: 'pending',
+};
+
+XubeStatusConnectivityEth _$XubeStatusConnectivityEthFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusConnectivityEth(
+      connection: XubeStatusConnectivityEthConnection.fromJson(
+          json['connection'] as Map<String, dynamic>),
+      mac: json['mac'] as String?,
+    );
+
+Map<String, dynamic> _$XubeStatusConnectivityEthToJson(
+    XubeStatusConnectivityEth instance) {
+  final val = <String, dynamic>{
+    'connection': instance.connection,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('mac', instance.mac);
+  return val;
+}
+
+XubeStatusConnectivityPlatformConnection
+    _$XubeStatusConnectivityPlatformConnectionFromJson(
+            Map<String, dynamic> json) =>
+        XubeStatusConnectivityPlatformConnection(
+          state: $enumDecode(
+              _$XubeStatusConnectivityPlatformConnectionStateEnumMap,
+              json['state']),
+          message: json['message'] as String?,
+          updated: json['updated'] as String,
+          value: $enumDecode(
+              _$XubeStatusConnectivityPlatformConnectionValueEnumMap,
+              json['value']),
+        );
+
+Map<String, dynamic> _$XubeStatusConnectivityPlatformConnectionToJson(
+    XubeStatusConnectivityPlatformConnection instance) {
+  final val = <String, dynamic>{
+    'state':
+        _$XubeStatusConnectivityPlatformConnectionStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] =
+      _$XubeStatusConnectivityPlatformConnectionValueEnumMap[instance.value]!;
+  return val;
+}
+
+const _$XubeStatusConnectivityPlatformConnectionStateEnumMap = {
+  XubeStatusConnectivityPlatformConnectionState.disabled: 'disabled',
+  XubeStatusConnectivityPlatformConnectionState.pending: 'pending',
+  XubeStatusConnectivityPlatformConnectionState.unknown: 'unknown',
+  XubeStatusConnectivityPlatformConnectionState.error: 'error',
+  XubeStatusConnectivityPlatformConnectionState.warning: 'warning',
+  XubeStatusConnectivityPlatformConnectionState.healthy: 'healthy',
+};
+
+const _$XubeStatusConnectivityPlatformConnectionValueEnumMap = {
+  XubeStatusConnectivityPlatformConnectionValue.connected: 'connected',
+  XubeStatusConnectivityPlatformConnectionValue.notConnected: 'notConnected',
+  XubeStatusConnectivityPlatformConnectionValue.notInUse: 'notInUse',
+  XubeStatusConnectivityPlatformConnectionValue.pending: 'pending',
+};
+
+XubeStatusConnectivityPlatform _$XubeStatusConnectivityPlatformFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusConnectivityPlatform(
+      connection: XubeStatusConnectivityPlatformConnection.fromJson(
+          json['connection'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeStatusConnectivityPlatformToJson(
+        XubeStatusConnectivityPlatform instance) =>
+    <String, dynamic>{
+      'connection': instance.connection,
+    };
+
+XubeStatusConnectivity _$XubeStatusConnectivityFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusConnectivity(
+      wifi: json['wifi'] == null
+          ? null
+          : XubeStatusConnectivityWifi.fromJson(
+              json['wifi'] as Map<String, dynamic>),
+      cellular: json['cellular'] == null
+          ? null
+          : XubeStatusConnectivityCellular.fromJson(
+              json['cellular'] as Map<String, dynamic>),
+      eth: json['eth'] == null
+          ? null
+          : XubeStatusConnectivityEth.fromJson(
+              json['eth'] as Map<String, dynamic>),
+      platform: json['platform'] == null
+          ? null
+          : XubeStatusConnectivityPlatform.fromJson(
+              json['platform'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeStatusConnectivityToJson(
+    XubeStatusConnectivity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('wifi', instance.wifi);
+  writeNotNull('cellular', instance.cellular);
+  writeNotNull('eth', instance.eth);
+  writeNotNull('platform', instance.platform);
+  return val;
+}
+
+XubeStatusEngine _$XubeStatusEngineFromJson(Map<String, dynamic> json) =>
+    XubeStatusEngine(
+      state: $enumDecode(_$XubeStatusEngineStateEnumMap, json['state']),
+      updated: json['updated'] as String,
+    );
+
+Map<String, dynamic> _$XubeStatusEngineToJson(XubeStatusEngine instance) =>
+    <String, dynamic>{
+      'state': _$XubeStatusEngineStateEnumMap[instance.state]!,
+      'updated': instance.updated,
+    };
+
+const _$XubeStatusEngineStateEnumMap = {
+  XubeStatusEngineState.running: 'running',
+  XubeStatusEngineState.stopped: 'stopped',
+  XubeStatusEngineState.error: 'error',
+  XubeStatusEngineState.unknown: 'unknown',
+};
+
+XubeStatusTemperature _$XubeStatusTemperatureFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusTemperature(
+      state: $enumDecode(_$XubeStatusTemperatureStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: json['value'] as num,
+    );
+
+Map<String, dynamic> _$XubeStatusTemperatureToJson(
+    XubeStatusTemperature instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusTemperatureStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] = instance.value;
+  return val;
+}
+
+const _$XubeStatusTemperatureStateEnumMap = {
+  XubeStatusTemperatureState.disabled: 'disabled',
+  XubeStatusTemperatureState.pending: 'pending',
+  XubeStatusTemperatureState.unknown: 'unknown',
+  XubeStatusTemperatureState.error: 'error',
+  XubeStatusTemperatureState.warning: 'warning',
+  XubeStatusTemperatureState.healthy: 'healthy',
+};
+
+XubeStatusAvailability _$XubeStatusAvailabilityFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusAvailability(
+      state: $enumDecode(_$XubeStatusAvailabilityStateEnumMap, json['state']),
+      updated: json['updated'] as String,
+    );
+
+Map<String, dynamic> _$XubeStatusAvailabilityToJson(
+        XubeStatusAvailability instance) =>
+    <String, dynamic>{
+      'state': _$XubeStatusAvailabilityStateEnumMap[instance.state]!,
+      'updated': instance.updated,
+    };
+
+const _$XubeStatusAvailabilityStateEnumMap = {
+  XubeStatusAvailabilityState.online: 'online',
+  XubeStatusAvailabilityState.offline: 'offline',
+  XubeStatusAvailabilityState.unknown: 'unknown',
+};
+
+XubeStatusPowerAuxiliaryConnection _$XubeStatusPowerAuxiliaryConnectionFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerAuxiliaryConnection(
+      state: $enumDecode(
+          _$XubeStatusPowerAuxiliaryConnectionStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: $enumDecode(
+          _$XubeStatusPowerAuxiliaryConnectionValueEnumMap, json['value']),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerAuxiliaryConnectionToJson(
+    XubeStatusPowerAuxiliaryConnection instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerAuxiliaryConnectionStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] =
+      _$XubeStatusPowerAuxiliaryConnectionValueEnumMap[instance.value]!;
+  return val;
+}
+
+const _$XubeStatusPowerAuxiliaryConnectionStateEnumMap = {
+  XubeStatusPowerAuxiliaryConnectionState.disabled: 'disabled',
+  XubeStatusPowerAuxiliaryConnectionState.pending: 'pending',
+  XubeStatusPowerAuxiliaryConnectionState.unknown: 'unknown',
+  XubeStatusPowerAuxiliaryConnectionState.error: 'error',
+  XubeStatusPowerAuxiliaryConnectionState.warning: 'warning',
+  XubeStatusPowerAuxiliaryConnectionState.healthy: 'healthy',
+};
+
+const _$XubeStatusPowerAuxiliaryConnectionValueEnumMap = {
+  XubeStatusPowerAuxiliaryConnectionValue.connected: 'connected',
+  XubeStatusPowerAuxiliaryConnectionValue.notConnected: 'notConnected',
+  XubeStatusPowerAuxiliaryConnectionValue.notInUse: 'notInUse',
+  XubeStatusPowerAuxiliaryConnectionValue.pending: 'pending',
+};
+
+XubeStatusPowerAuxiliaryVoltage _$XubeStatusPowerAuxiliaryVoltageFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerAuxiliaryVoltage(
+      state: $enumDecode(
+          _$XubeStatusPowerAuxiliaryVoltageStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: json['value'] as num?,
+    );
+
+Map<String, dynamic> _$XubeStatusPowerAuxiliaryVoltageToJson(
+    XubeStatusPowerAuxiliaryVoltage instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerAuxiliaryVoltageStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  writeNotNull('value', instance.value);
+  return val;
+}
+
+const _$XubeStatusPowerAuxiliaryVoltageStateEnumMap = {
+  XubeStatusPowerAuxiliaryVoltageState.disabled: 'disabled',
+  XubeStatusPowerAuxiliaryVoltageState.pending: 'pending',
+  XubeStatusPowerAuxiliaryVoltageState.unknown: 'unknown',
+  XubeStatusPowerAuxiliaryVoltageState.error: 'error',
+  XubeStatusPowerAuxiliaryVoltageState.warning: 'warning',
+  XubeStatusPowerAuxiliaryVoltageState.healthy: 'healthy',
+};
+
+XubeStatusPowerAuxiliary _$XubeStatusPowerAuxiliaryFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerAuxiliary(
+      connection: XubeStatusPowerAuxiliaryConnection.fromJson(
+          json['connection'] as Map<String, dynamic>),
+      voltage: json['voltage'] == null
+          ? null
+          : XubeStatusPowerAuxiliaryVoltage.fromJson(
+              json['voltage'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerAuxiliaryToJson(
+    XubeStatusPowerAuxiliary instance) {
+  final val = <String, dynamic>{
+    'connection': instance.connection,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('voltage', instance.voltage);
+  return val;
+}
+
+XubeStatusPowerUsbConnection _$XubeStatusPowerUsbConnectionFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerUsbConnection(
+      state: $enumDecode(
+          _$XubeStatusPowerUsbConnectionStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: $enumDecode(
+          _$XubeStatusPowerUsbConnectionValueEnumMap, json['value']),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerUsbConnectionToJson(
+    XubeStatusPowerUsbConnection instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerUsbConnectionStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] = _$XubeStatusPowerUsbConnectionValueEnumMap[instance.value]!;
+  return val;
+}
+
+const _$XubeStatusPowerUsbConnectionStateEnumMap = {
+  XubeStatusPowerUsbConnectionState.disabled: 'disabled',
+  XubeStatusPowerUsbConnectionState.pending: 'pending',
+  XubeStatusPowerUsbConnectionState.unknown: 'unknown',
+  XubeStatusPowerUsbConnectionState.error: 'error',
+  XubeStatusPowerUsbConnectionState.warning: 'warning',
+  XubeStatusPowerUsbConnectionState.healthy: 'healthy',
+};
+
+const _$XubeStatusPowerUsbConnectionValueEnumMap = {
+  XubeStatusPowerUsbConnectionValue.connected: 'connected',
+  XubeStatusPowerUsbConnectionValue.notConnected: 'notConnected',
+  XubeStatusPowerUsbConnectionValue.notInUse: 'notInUse',
+  XubeStatusPowerUsbConnectionValue.pending: 'pending',
+};
+
+XubeStatusPowerUsbVoltage _$XubeStatusPowerUsbVoltageFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerUsbVoltage(
+      state:
+          $enumDecode(_$XubeStatusPowerUsbVoltageStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: json['value'] as num?,
+    );
+
+Map<String, dynamic> _$XubeStatusPowerUsbVoltageToJson(
+    XubeStatusPowerUsbVoltage instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerUsbVoltageStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  writeNotNull('value', instance.value);
+  return val;
+}
+
+const _$XubeStatusPowerUsbVoltageStateEnumMap = {
+  XubeStatusPowerUsbVoltageState.disabled: 'disabled',
+  XubeStatusPowerUsbVoltageState.pending: 'pending',
+  XubeStatusPowerUsbVoltageState.unknown: 'unknown',
+  XubeStatusPowerUsbVoltageState.error: 'error',
+  XubeStatusPowerUsbVoltageState.warning: 'warning',
+  XubeStatusPowerUsbVoltageState.healthy: 'healthy',
+};
+
+XubeStatusPowerUsb _$XubeStatusPowerUsbFromJson(Map<String, dynamic> json) =>
+    XubeStatusPowerUsb(
+      connection: XubeStatusPowerUsbConnection.fromJson(
+          json['connection'] as Map<String, dynamic>),
+      voltage: json['voltage'] == null
+          ? null
+          : XubeStatusPowerUsbVoltage.fromJson(
+              json['voltage'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerUsbToJson(XubeStatusPowerUsb instance) {
+  final val = <String, dynamic>{
+    'connection': instance.connection,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('voltage', instance.voltage);
+  return val;
+}
+
+XubeStatusPowerSolarConnection _$XubeStatusPowerSolarConnectionFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerSolarConnection(
+      state: $enumDecode(
+          _$XubeStatusPowerSolarConnectionStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: $enumDecode(
+          _$XubeStatusPowerSolarConnectionValueEnumMap, json['value']),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerSolarConnectionToJson(
+    XubeStatusPowerSolarConnection instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerSolarConnectionStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] = _$XubeStatusPowerSolarConnectionValueEnumMap[instance.value]!;
+  return val;
+}
+
+const _$XubeStatusPowerSolarConnectionStateEnumMap = {
+  XubeStatusPowerSolarConnectionState.disabled: 'disabled',
+  XubeStatusPowerSolarConnectionState.pending: 'pending',
+  XubeStatusPowerSolarConnectionState.unknown: 'unknown',
+  XubeStatusPowerSolarConnectionState.error: 'error',
+  XubeStatusPowerSolarConnectionState.warning: 'warning',
+  XubeStatusPowerSolarConnectionState.healthy: 'healthy',
+};
+
+const _$XubeStatusPowerSolarConnectionValueEnumMap = {
+  XubeStatusPowerSolarConnectionValue.connected: 'connected',
+  XubeStatusPowerSolarConnectionValue.notConnected: 'notConnected',
+  XubeStatusPowerSolarConnectionValue.notInUse: 'notInUse',
+  XubeStatusPowerSolarConnectionValue.pending: 'pending',
+};
+
+XubeStatusPowerSolarVoltage _$XubeStatusPowerSolarVoltageFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerSolarVoltage(
+      state:
+          $enumDecode(_$XubeStatusPowerSolarVoltageStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: json['value'] as num?,
+    );
+
+Map<String, dynamic> _$XubeStatusPowerSolarVoltageToJson(
+    XubeStatusPowerSolarVoltage instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerSolarVoltageStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  writeNotNull('value', instance.value);
+  return val;
+}
+
+const _$XubeStatusPowerSolarVoltageStateEnumMap = {
+  XubeStatusPowerSolarVoltageState.disabled: 'disabled',
+  XubeStatusPowerSolarVoltageState.pending: 'pending',
+  XubeStatusPowerSolarVoltageState.unknown: 'unknown',
+  XubeStatusPowerSolarVoltageState.error: 'error',
+  XubeStatusPowerSolarVoltageState.warning: 'warning',
+  XubeStatusPowerSolarVoltageState.healthy: 'healthy',
+};
+
+XubeStatusPowerSolar _$XubeStatusPowerSolarFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerSolar(
+      connection: XubeStatusPowerSolarConnection.fromJson(
+          json['connection'] as Map<String, dynamic>),
+      voltage: json['voltage'] == null
+          ? null
+          : XubeStatusPowerSolarVoltage.fromJson(
+              json['voltage'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerSolarToJson(
+    XubeStatusPowerSolar instance) {
+  final val = <String, dynamic>{
+    'connection': instance.connection,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('voltage', instance.voltage);
+  return val;
+}
+
+XubeStatusPowerSourceCurrentSource _$XubeStatusPowerSourceCurrentSourceFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerSourceCurrentSource(
+      state: $enumDecode(
+          _$XubeStatusPowerSourceCurrentSourceStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: $enumDecode(
+          _$XubeStatusPowerSourceCurrentSourceValueEnumMap, json['value']),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerSourceCurrentSourceToJson(
+    XubeStatusPowerSourceCurrentSource instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerSourceCurrentSourceStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] =
+      _$XubeStatusPowerSourceCurrentSourceValueEnumMap[instance.value]!;
+  return val;
+}
+
+const _$XubeStatusPowerSourceCurrentSourceStateEnumMap = {
+  XubeStatusPowerSourceCurrentSourceState.disabled: 'disabled',
+  XubeStatusPowerSourceCurrentSourceState.pending: 'pending',
+  XubeStatusPowerSourceCurrentSourceState.unknown: 'unknown',
+  XubeStatusPowerSourceCurrentSourceState.error: 'error',
+  XubeStatusPowerSourceCurrentSourceState.warning: 'warning',
+  XubeStatusPowerSourceCurrentSourceState.healthy: 'healthy',
+};
+
+const _$XubeStatusPowerSourceCurrentSourceValueEnumMap = {
+  XubeStatusPowerSourceCurrentSourceValue.battery: 'battery',
+  XubeStatusPowerSourceCurrentSourceValue.usb: 'usb',
+  XubeStatusPowerSourceCurrentSourceValue.solar: 'solar',
+  XubeStatusPowerSourceCurrentSourceValue.auxiliary: 'auxiliary',
+  XubeStatusPowerSourceCurrentSourceValue.noSource: 'noSource',
+  XubeStatusPowerSourceCurrentSourceValue.unknownSource: 'unknownSource',
+};
+
+XubeStatusPowerSource _$XubeStatusPowerSourceFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerSource(
+      currentSource: XubeStatusPowerSourceCurrentSource.fromJson(
+          json['currentSource'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerSourceToJson(
+        XubeStatusPowerSource instance) =>
+    <String, dynamic>{
+      'currentSource': instance.currentSource,
+    };
+
+XubeStatusPowerBatteryCharge _$XubeStatusPowerBatteryChargeFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerBatteryCharge(
+      state: $enumDecode(
+          _$XubeStatusPowerBatteryChargeStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: json['value'] as num,
+    );
+
+Map<String, dynamic> _$XubeStatusPowerBatteryChargeToJson(
+    XubeStatusPowerBatteryCharge instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerBatteryChargeStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] = instance.value;
+  return val;
+}
+
+const _$XubeStatusPowerBatteryChargeStateEnumMap = {
+  XubeStatusPowerBatteryChargeState.disabled: 'disabled',
+  XubeStatusPowerBatteryChargeState.pending: 'pending',
+  XubeStatusPowerBatteryChargeState.unknown: 'unknown',
+  XubeStatusPowerBatteryChargeState.error: 'error',
+  XubeStatusPowerBatteryChargeState.warning: 'warning',
+  XubeStatusPowerBatteryChargeState.healthy: 'healthy',
+};
+
+XubeStatusPowerBatteryTemperature _$XubeStatusPowerBatteryTemperatureFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerBatteryTemperature(
+      state: $enumDecode(
+          _$XubeStatusPowerBatteryTemperatureStateEnumMap, json['state']),
+      message: json['message'] as String?,
+      updated: json['updated'] as String,
+      value: json['value'] as num,
+    );
+
+Map<String, dynamic> _$XubeStatusPowerBatteryTemperatureToJson(
+    XubeStatusPowerBatteryTemperature instance) {
+  final val = <String, dynamic>{
+    'state': _$XubeStatusPowerBatteryTemperatureStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  val['updated'] = instance.updated;
+  val['value'] = instance.value;
+  return val;
+}
+
+const _$XubeStatusPowerBatteryTemperatureStateEnumMap = {
+  XubeStatusPowerBatteryTemperatureState.disabled: 'disabled',
+  XubeStatusPowerBatteryTemperatureState.pending: 'pending',
+  XubeStatusPowerBatteryTemperatureState.unknown: 'unknown',
+  XubeStatusPowerBatteryTemperatureState.error: 'error',
+  XubeStatusPowerBatteryTemperatureState.warning: 'warning',
+  XubeStatusPowerBatteryTemperatureState.healthy: 'healthy',
+};
+
+XubeStatusPowerBattery _$XubeStatusPowerBatteryFromJson(
+        Map<String, dynamic> json) =>
+    XubeStatusPowerBattery(
+      charge: XubeStatusPowerBatteryCharge.fromJson(
+          json['charge'] as Map<String, dynamic>),
+      temperature: json['temperature'] == null
+          ? null
+          : XubeStatusPowerBatteryTemperature.fromJson(
+              json['temperature'] as Map<String, dynamic>),
+      chargingState: $enumDecode(
+          _$XubeStatusPowerBatteryChargingStateEnumMap, json['chargingState']),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerBatteryToJson(
+    XubeStatusPowerBattery instance) {
+  final val = <String, dynamic>{
+    'charge': instance.charge,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('temperature', instance.temperature);
+  val['chargingState'] =
+      _$XubeStatusPowerBatteryChargingStateEnumMap[instance.chargingState]!;
+  return val;
+}
+
+const _$XubeStatusPowerBatteryChargingStateEnumMap = {
+  XubeStatusPowerBatteryChargingState.charging: 'charging',
+  XubeStatusPowerBatteryChargingState.notCharging: 'notCharging',
+  XubeStatusPowerBatteryChargingState.unknown: 'unknown',
+};
+
+XubeStatusPower _$XubeStatusPowerFromJson(Map<String, dynamic> json) =>
+    XubeStatusPower(
+      auxiliary: json['auxiliary'] == null
+          ? null
+          : XubeStatusPowerAuxiliary.fromJson(
+              json['auxiliary'] as Map<String, dynamic>),
+      usb: json['usb'] == null
+          ? null
+          : XubeStatusPowerUsb.fromJson(json['usb'] as Map<String, dynamic>),
+      solar: json['solar'] == null
+          ? null
+          : XubeStatusPowerSolar.fromJson(
+              json['solar'] as Map<String, dynamic>),
+      source: XubeStatusPowerSource.fromJson(
+          json['source'] as Map<String, dynamic>),
+      battery: json['battery'] == null
+          ? null
+          : XubeStatusPowerBattery.fromJson(
+              json['battery'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeStatusPowerToJson(XubeStatusPower instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('auxiliary', instance.auxiliary);
+  writeNotNull('usb', instance.usb);
+  writeNotNull('solar', instance.solar);
+  val['source'] = instance.source;
+  writeNotNull('battery', instance.battery);
+  return val;
+}
+
+XubeStatus _$XubeStatusFromJson(Map<String, dynamic> json) => XubeStatus(
+      componentType: json['componentType'] as String,
+      facetType: $enumDecode(_$XubeStatusFacetTypeEnumMap, json['facetType']),
+      connectivity: XubeStatusConnectivity.fromJson(
+          json['connectivity'] as Map<String, dynamic>),
+      engine: json['engine'] == null
+          ? null
+          : XubeStatusEngine.fromJson(json['engine'] as Map<String, dynamic>),
+      facetId: json['facetId'] as String?,
+      temperature: json['temperature'] == null
+          ? null
+          : XubeStatusTemperature.fromJson(
+              json['temperature'] as Map<String, dynamic>),
+      availability: json['availability'] == null
+          ? null
+          : XubeStatusAvailability.fromJson(
+              json['availability'] as Map<String, dynamic>),
+      power: XubeStatusPower.fromJson(json['power'] as Map<String, dynamic>),
+      timestamp: json['timestamp'] as String,
+    );
+
+Map<String, dynamic> _$XubeStatusToJson(XubeStatus instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+    'facetType': _$XubeStatusFacetTypeEnumMap[instance.facetType]!,
+    'connectivity': instance.connectivity,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('engine', instance.engine);
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('temperature', instance.temperature);
+  writeNotNull('availability', instance.availability);
+  val['power'] = instance.power;
+  val['timestamp'] = instance.timestamp;
+  return val;
+}
+
+const _$XubeStatusFacetTypeEnumMap = {
+  XubeStatusFacetType.status: 'STATUS',
+};
+
+XubeSnapshotSnapshotFw _$XubeSnapshotSnapshotFwFromJson(
+        Map<String, dynamic> json) =>
+    XubeSnapshotSnapshotFw(
+      v: json['v'] as num,
+    );
+
+Map<String, dynamic> _$XubeSnapshotSnapshotFwToJson(
+        XubeSnapshotSnapshotFw instance) =>
+    <String, dynamic>{
+      'v': instance.v,
+    };
+
+XubeSnapshotSnapshotCfgPropsVVariant1
+    _$XubeSnapshotSnapshotCfgPropsVVariant1FromJson(
+            Map<String, dynamic> json) =>
+        XubeSnapshotSnapshotCfgPropsVVariant1();
+
+Map<String, dynamic> _$XubeSnapshotSnapshotCfgPropsVVariant1ToJson(
+        XubeSnapshotSnapshotCfgPropsVVariant1 instance) =>
     <String, dynamic>{};
 
-GetApiDocsrequest _$GetApiDocsrequestFromJson(Map<String, dynamic> json) =>
-    GetApiDocsrequest();
+XubeSnapshotSnapshotCfgPropsVVariant2
+    _$XubeSnapshotSnapshotCfgPropsVVariant2FromJson(
+            Map<String, dynamic> json) =>
+        XubeSnapshotSnapshotCfgPropsVVariant2();
 
-Map<String, dynamic> _$GetApiDocsrequestToJson(GetApiDocsrequest instance) =>
+Map<String, dynamic> _$XubeSnapshotSnapshotCfgPropsVVariant2ToJson(
+        XubeSnapshotSnapshotCfgPropsVVariant2 instance) =>
+    <String, dynamic>{};
+
+XubeSnapshotSnapshotCfgPropsN _$XubeSnapshotSnapshotCfgPropsNFromJson(
+        Map<String, dynamic> json) =>
+    XubeSnapshotSnapshotCfgPropsN();
+
+Map<String, dynamic> _$XubeSnapshotSnapshotCfgPropsNToJson(
+        XubeSnapshotSnapshotCfgPropsN instance) =>
+    <String, dynamic>{};
+
+XubeSnapshotSnapshotCfgProps _$XubeSnapshotSnapshotCfgPropsFromJson(
+        Map<String, dynamic> json) =>
+    XubeSnapshotSnapshotCfgProps(
+      cv: json['cv'] as num,
+      v: json['v'] == null
+          ? null
+          : XubeSnapshotSnapshotCfgPropsV.fromJson(
+              json['v'] as Map<String, dynamic>),
+      n: json['n'] == null
+          ? null
+          : XubeSnapshotSnapshotCfgPropsN.fromJson(
+              json['n'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$XubeSnapshotSnapshotCfgPropsToJson(
+    XubeSnapshotSnapshotCfgProps instance) {
+  final val = <String, dynamic>{
+    'cv': instance.cv,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('v', instance.v);
+  writeNotNull('n', instance.n);
+  return val;
+}
+
+XubeSnapshotSnapshot _$XubeSnapshotSnapshotFromJson(
+        Map<String, dynamic> json) =>
+    XubeSnapshotSnapshot(
+      fw: XubeSnapshotSnapshotFw.fromJson(json['fw'] as Map<String, dynamic>),
+      cfg: (json['cfg'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k,
+            XubeSnapshotSnapshotCfgProps.fromJson(e as Map<String, dynamic>)),
+      ),
+    );
+
+Map<String, dynamic> _$XubeSnapshotSnapshotToJson(
+        XubeSnapshotSnapshot instance) =>
+    <String, dynamic>{
+      'fw': instance.fw,
+      'cfg': instance.cfg,
+    };
+
+XubeSnapshot _$XubeSnapshotFromJson(Map<String, dynamic> json) => XubeSnapshot(
+      componentType: json['componentType'] as String,
+      facetType: $enumDecode(_$XubeSnapshotFacetTypeEnumMap, json['facetType']),
+      creator: json['creator'] as String?,
+      facetId: json['facetId'] as String?,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      name: json['name'] as String?,
+      index: json['index'] as num,
+      id: json['id'] as String,
+      type: json['type'] as String?,
+      updated: json['updated'] == null
+          ? null
+          : DateTime.parse(json['updated'] as String),
+      snapshot: XubeSnapshotSnapshot.fromJson(
+          json['snapshot'] as Map<String, dynamic>),
+      updater: json['updater'] as String?,
+    );
+
+Map<String, dynamic> _$XubeSnapshotToJson(XubeSnapshot instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+    'facetType': _$XubeSnapshotFacetTypeEnumMap[instance.facetType]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('creator', instance.creator);
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('name', instance.name);
+  val['index'] = instance.index;
+  val['id'] = instance.id;
+  writeNotNull('type', instance.type);
+  writeNotNull('updated', instance.updated?.toIso8601String());
+  val['snapshot'] = instance.snapshot;
+  writeNotNull('updater', instance.updater);
+  return val;
+}
+
+const _$XubeSnapshotFacetTypeEnumMap = {
+  XubeSnapshotFacetType.snapshot: 'SNAPSHOT',
+};
+
+XubeUpdateApproval _$XubeUpdateApprovalFromJson(Map<String, dynamic> json) =>
+    XubeUpdateApproval(
+      created: DateTime.parse(json['created'] as String),
+      state: $enumDecode(_$XubeUpdateApprovalStateEnumMap, json['state']),
+      conditions: (json['conditions'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$XubeUpdateApprovalConditionsEnumMap, e))
+          .toList(),
+      updated: json['updated'] == null
+          ? null
+          : DateTime.parse(json['updated'] as String),
+      updater: json['updater'] as String?,
+    );
+
+Map<String, dynamic> _$XubeUpdateApprovalToJson(XubeUpdateApproval instance) {
+  final val = <String, dynamic>{
+    'created': instance.created.toIso8601String(),
+    'state': _$XubeUpdateApprovalStateEnumMap[instance.state]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'conditions',
+      instance.conditions
+          ?.map((e) => _$XubeUpdateApprovalConditionsEnumMap[e]!)
+          .toList());
+  writeNotNull('updated', instance.updated?.toIso8601String());
+  writeNotNull('updater', instance.updater);
+  return val;
+}
+
+const _$XubeUpdateApprovalStateEnumMap = {
+  XubeUpdateApprovalState.approved: 'approved',
+  XubeUpdateApprovalState.denied: 'denied',
+  XubeUpdateApprovalState.pending: 'pending',
+};
+
+const _$XubeUpdateApprovalConditionsEnumMap = {
+  XubeUpdateApprovalConditions.local: 'local',
+  XubeUpdateApprovalConditions.remote: 'remote',
+};
+
+XubeUpdateMismatchProps _$XubeUpdateMismatchPropsFromJson(
+        Map<String, dynamic> json) =>
+    XubeUpdateMismatchProps(
+      actual: json['actual'] as String,
+      expected: json['expected'] as String,
+    );
+
+Map<String, dynamic> _$XubeUpdateMismatchPropsToJson(
+        XubeUpdateMismatchProps instance) =>
+    <String, dynamic>{
+      'actual': instance.actual,
+      'expected': instance.expected,
+    };
+
+XubeUpdateProgressProps _$XubeUpdateProgressPropsFromJson(
+        Map<String, dynamic> json) =>
+    XubeUpdateProgressProps(
+      totalSize: json['totalSize'] as num?,
+      lastOffset: json['lastOffset'] as num?,
+      updated: json['updated'] as String?,
+    );
+
+Map<String, dynamic> _$XubeUpdateProgressPropsToJson(
+    XubeUpdateProgressProps instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('totalSize', instance.totalSize);
+  writeNotNull('lastOffset', instance.lastOffset);
+  writeNotNull('updated', instance.updated);
+  return val;
+}
+
+XubeUpdateTasks _$XubeUpdateTasksFromJson(Map<String, dynamic> json) =>
+    XubeUpdateTasks(
+      a: $enumDecode(_$XubeUpdateTasksAEnumMap, json['a']),
+      tries: json['tries'] as num?,
+      topics: (json['topics'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+      ctx: json['ctx'] as Map<String, dynamic>?,
+      timeout: json['timeout'] as num?,
+    );
+
+Map<String, dynamic> _$XubeUpdateTasksToJson(XubeUpdateTasks instance) {
+  final val = <String, dynamic>{
+    'a': _$XubeUpdateTasksAEnumMap[instance.a]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tries', instance.tries);
+  writeNotNull('topics', instance.topics);
+  writeNotNull('ctx', instance.ctx);
+  writeNotNull('timeout', instance.timeout);
+  return val;
+}
+
+const _$XubeUpdateTasksAEnumMap = {
+  XubeUpdateTasksA.d: 'd',
+  XubeUpdateTasksA.uf: 'uf',
+  XubeUpdateTasksA.u: 'u',
+  XubeUpdateTasksA.upd: 'upd',
+  XubeUpdateTasksA.r: 'r',
+  XubeUpdateTasksA.cdr: 'cdr',
+  XubeUpdateTasksA.z: 'z',
+  XubeUpdateTasksA.a: 'a',
+  XubeUpdateTasksA.s: 's',
+  XubeUpdateTasksA.b: 'b',
+  XubeUpdateTasksA.e: 'e',
+  XubeUpdateTasksA.k: 'k',
+  XubeUpdateTasksA.x: 'x',
+  XubeUpdateTasksA.crash: 'crash',
+  XubeUpdateTasksA.t: 't',
+};
+
+XubeUpdate _$XubeUpdateFromJson(Map<String, dynamic> json) => XubeUpdate(
+      componentType: json['componentType'] as String,
+      creator: json['creator'] as String?,
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      approval:
+          XubeUpdateApproval.fromJson(json['approval'] as Map<String, dynamic>),
+      type: json['type'] as String?,
+      updater: json['updater'] as String?,
+      facetType: $enumDecode(_$XubeUpdateFacetTypeEnumMap, json['facetType']),
+      facetId: json['facetId'] as String?,
+      mismatch: (json['mismatch'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            k, XubeUpdateMismatchProps.fromJson(e as Map<String, dynamic>)),
+      ),
+      name: json['name'] as String?,
+      progress: (json['progress'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(
+            k, XubeUpdateProgressProps.fromJson(e as Map<String, dynamic>)),
+      ),
+      id: json['id'] as String,
+      state: $enumDecode(_$XubeUpdateStateEnumMap, json['state']),
+      job: json['job'] as String?,
+      conditions: (json['conditions'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$XubeUpdateConditionsEnumMap, e))
+          .toList(),
+      updated: json['updated'] == null
+          ? null
+          : DateTime.parse(json['updated'] as String),
+      device: json['device'] as String,
+      tasks: (json['tasks'] as List<dynamic>)
+          .map((e) => XubeUpdateTasks.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$XubeUpdateToJson(XubeUpdate instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('creator', instance.creator);
+  writeNotNull('created', instance.created?.toIso8601String());
+  val['approval'] = instance.approval;
+  writeNotNull('type', instance.type);
+  writeNotNull('updater', instance.updater);
+  val['facetType'] = _$XubeUpdateFacetTypeEnumMap[instance.facetType]!;
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('mismatch', instance.mismatch);
+  writeNotNull('name', instance.name);
+  val['progress'] = instance.progress;
+  val['id'] = instance.id;
+  val['state'] = _$XubeUpdateStateEnumMap[instance.state]!;
+  writeNotNull('job', instance.job);
+  writeNotNull(
+      'conditions',
+      instance.conditions
+          ?.map((e) => _$XubeUpdateConditionsEnumMap[e]!)
+          .toList());
+  writeNotNull('updated', instance.updated?.toIso8601String());
+  val['device'] = instance.device;
+  val['tasks'] = instance.tasks;
+  return val;
+}
+
+const _$XubeUpdateFacetTypeEnumMap = {
+  XubeUpdateFacetType.update: 'UPDATE',
+};
+
+const _$XubeUpdateStateEnumMap = {
+  XubeUpdateState.waitingForDeviceStatus: 'waiting_for_device_status',
+  XubeUpdateState.readyToSend: 'ready_to_send',
+  XubeUpdateState.sent: 'sent',
+  XubeUpdateState.failed: 'failed',
+  XubeUpdateState.inProgress: 'in_progress',
+  XubeUpdateState.completed: 'completed',
+};
+
+const _$XubeUpdateConditionsEnumMap = {
+  XubeUpdateConditions.local: 'local',
+  XubeUpdateConditions.remote: 'remote',
+};
+
+XubeFirmwareInfo _$XubeFirmwareInfoFromJson(Map<String, dynamic> json) =>
+    XubeFirmwareInfo(
+      componentType: json['componentType'] as String,
+      creator: json['creator'] as String,
+      created: json['created'] as String,
+      firmwareHash: json['firmwareHash'] as String,
+      firmwareSize: json['firmwareSize'] as num,
+      type: json['type'] as String?,
+      version: json['version'] as num,
+      deviceId: json['deviceId'] as String,
+      target: json['target'] as String,
+      facetType:
+          $enumDecode(_$XubeFirmwareInfoFacetTypeEnumMap, json['facetType']),
+      facetId: json['facetId'] as String?,
+      name: json['name'] as String?,
+      id: json['id'] as String,
+      firmwareVersion: json['firmwareVersion'] as String,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFirmwareInfoToJson(XubeFirmwareInfo instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+    'creator': instance.creator,
+    'created': instance.created,
+    'firmwareHash': instance.firmwareHash,
+    'firmwareSize': instance.firmwareSize,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', instance.type);
+  val['version'] = instance.version;
+  val['deviceId'] = instance.deviceId;
+  val['target'] = instance.target;
+  val['facetType'] = _$XubeFirmwareInfoFacetTypeEnumMap[instance.facetType]!;
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('name', instance.name);
+  val['id'] = instance.id;
+  val['firmwareVersion'] = instance.firmwareVersion;
+  val['key'] = instance.key;
+  return val;
+}
+
+const _$XubeFirmwareInfoFacetTypeEnumMap = {
+  XubeFirmwareInfoFacetType.firmwareInfo: 'FIRMWARE-INFO',
+};
+
+XubeFirmware _$XubeFirmwareFromJson(Map<String, dynamic> json) => XubeFirmware(
+      componentType: json['componentType'] as String,
+      creator: json['creator'] as String?,
+      facetType: $enumDecode(_$XubeFirmwareFacetTypeEnumMap, json['facetType']),
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      facetId: json['facetId'] as String?,
+      name: json['name'] as String?,
+      objectVersionId: json['objectVersionId'] as String,
+      id: json['id'] as String,
+      type: json['type'] as String?,
+      deviceId: json['deviceId'] as String,
+      version: json['version'] as num,
+      key: json['key'] as String,
+    );
+
+Map<String, dynamic> _$XubeFirmwareToJson(XubeFirmware instance) {
+  final val = <String, dynamic>{
+    'componentType': instance.componentType,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('creator', instance.creator);
+  val['facetType'] = _$XubeFirmwareFacetTypeEnumMap[instance.facetType]!;
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('facetId', instance.facetId);
+  writeNotNull('name', instance.name);
+  val['objectVersionId'] = instance.objectVersionId;
+  val['id'] = instance.id;
+  writeNotNull('type', instance.type);
+  val['deviceId'] = instance.deviceId;
+  val['version'] = instance.version;
+  val['key'] = instance.key;
+  return val;
+}
+
+const _$XubeFirmwareFacetTypeEnumMap = {
+  XubeFirmwareFacetType.firmware: 'FIRMWARE',
+};
+
+XubeGetProvisioningDocsrequest _$XubeGetProvisioningDocsrequestFromJson(
+        Map<String, dynamic> json) =>
+    XubeGetProvisioningDocsrequest();
+
+Map<String, dynamic> _$XubeGetProvisioningDocsrequestToJson(
+        XubeGetProvisioningDocsrequest instance) =>
+    <String, dynamic>{};
+
+XubeGetApiDocsresponse _$XubeGetApiDocsresponseFromJson(
+        Map<String, dynamic> json) =>
+    XubeGetApiDocsresponse();
+
+Map<String, dynamic> _$XubeGetApiDocsresponseToJson(
+        XubeGetApiDocsresponse instance) =>
+    <String, dynamic>{};
+
+XubeGetProvisioningDocsresponse _$XubeGetProvisioningDocsresponseFromJson(
+        Map<String, dynamic> json) =>
+    XubeGetProvisioningDocsresponse();
+
+Map<String, dynamic> _$XubeGetProvisioningDocsresponseToJson(
+        XubeGetProvisioningDocsresponse instance) =>
+    <String, dynamic>{};
+
+XubeGetApiDocsrequest _$XubeGetApiDocsrequestFromJson(
+        Map<String, dynamic> json) =>
+    XubeGetApiDocsrequest();
+
+Map<String, dynamic> _$XubeGetApiDocsrequestToJson(
+        XubeGetApiDocsrequest instance) =>
     <String, dynamic>{};
 
 XubeCreateGroupResponse _$XubeCreateGroupResponseFromJson(
@@ -16328,7 +11954,7 @@ XubeGetAccountGroupsRequest _$XubeGetAccountGroupsRequestFromJson(
       componentType: json['componentType'] as String?,
       nextToken: json['nextToken'] as String?,
       limit: json['limit'] as num?,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
       account: json['account'] as String,
     );
 
@@ -16345,7 +11971,7 @@ Map<String, dynamic> _$XubeGetAccountGroupsRequestToJson(
   writeNotNull('componentType', instance.componentType);
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('limit', instance.limit);
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   val['account'] = instance.account;
   return val;
 }
@@ -16646,7 +12272,7 @@ XubeGetSystemDesignsRequest _$XubeGetSystemDesignsRequestFromJson(
       nextToken: json['nextToken'] as String?,
       limit: json['limit'] as num?,
       account: json['account'] as String,
-      descending: json['descending'] as bool? ?? false,
+      descending: json['descending'] as bool?,
     );
 
 Map<String, dynamic> _$XubeGetSystemDesignsRequestToJson(
@@ -16662,7 +12288,7 @@ Map<String, dynamic> _$XubeGetSystemDesignsRequestToJson(
   writeNotNull('nextToken', instance.nextToken);
   writeNotNull('limit', instance.limit);
   val['account'] = instance.account;
-  val['descending'] = instance.descending;
+  writeNotNull('descending', instance.descending);
   return val;
 }
 
@@ -16673,21 +12299,29 @@ XubeGetDevicesTransactionCountsRequest
           from: json['from'] as String,
           to: json['to'] as String,
           groupBy: $enumDecodeNullable(
-                  _$XubeGetDevicesTransactionCountsRequestGroupByEnumMap,
-                  json['groupBy']) ??
-              XubeGetDevicesTransactionCountsRequestGroupBy.date,
+              _$XubeGetDevicesTransactionCountsRequestGroupByEnumMap,
+              json['groupBy']),
           account: json['account'] as String,
         );
 
 Map<String, dynamic> _$XubeGetDevicesTransactionCountsRequestToJson(
-        XubeGetDevicesTransactionCountsRequest instance) =>
-    <String, dynamic>{
-      'from': instance.from,
-      'to': instance.to,
-      'groupBy': _$XubeGetDevicesTransactionCountsRequestGroupByEnumMap[
-          instance.groupBy]!,
-      'account': instance.account,
-    };
+    XubeGetDevicesTransactionCountsRequest instance) {
+  final val = <String, dynamic>{
+    'from': instance.from,
+    'to': instance.to,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('groupBy',
+      _$XubeGetDevicesTransactionCountsRequestGroupByEnumMap[instance.groupBy]);
+  val['account'] = instance.account;
+  return val;
+}
 
 const _$XubeGetDevicesTransactionCountsRequestGroupByEnumMap = {
   XubeGetDevicesTransactionCountsRequestGroupBy.date: 'date',
@@ -16736,23 +12370,31 @@ XubeGetDeviceTransactionCountsRequest
           from: json['from'] as String,
           to: json['to'] as String,
           groupBy: $enumDecodeNullable(
-                  _$XubeGetDeviceTransactionCountsRequestGroupByEnumMap,
-                  json['groupBy']) ??
-              XubeGetDeviceTransactionCountsRequestGroupBy.date,
+              _$XubeGetDeviceTransactionCountsRequestGroupByEnumMap,
+              json['groupBy']),
           device: json['device'] as String,
           account: json['account'] as String,
         );
 
 Map<String, dynamic> _$XubeGetDeviceTransactionCountsRequestToJson(
-        XubeGetDeviceTransactionCountsRequest instance) =>
-    <String, dynamic>{
-      'from': instance.from,
-      'to': instance.to,
-      'groupBy': _$XubeGetDeviceTransactionCountsRequestGroupByEnumMap[
-          instance.groupBy]!,
-      'device': instance.device,
-      'account': instance.account,
-    };
+    XubeGetDeviceTransactionCountsRequest instance) {
+  final val = <String, dynamic>{
+    'from': instance.from,
+    'to': instance.to,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('groupBy',
+      _$XubeGetDeviceTransactionCountsRequestGroupByEnumMap[instance.groupBy]);
+  val['device'] = instance.device;
+  val['account'] = instance.account;
+  return val;
+}
 
 const _$XubeGetDeviceTransactionCountsRequestGroupByEnumMap = {
   XubeGetDeviceTransactionCountsRequestGroupBy.date: 'date',
@@ -16892,15 +12534,15 @@ Map<String, dynamic> _$XubeUserToJson(XubeUser instance) {
   return val;
 }
 
-GetAccountsResponseBody200 _$GetAccountsResponseBody200FromJson(
+XubeGetAccountsResponseBody200 _$XubeGetAccountsResponseBody200FromJson(
         Map<String, dynamic> json) =>
-    GetAccountsResponseBody200(
+    XubeGetAccountsResponseBody200(
       creator: json['creator'] as String,
       created: DateTime.parse(json['created'] as String),
       name: json['name'] as String,
       accountTypes: (json['accountTypes'] as List<dynamic>?)
-          ?.map((e) =>
-              $enumDecode(_$GetAccountsResponseBody200AccountTypesEnumMap, e))
+          ?.map((e) => $enumDecode(
+              _$XubeGetAccountsResponseBody200AccountTypesEnumMap, e))
           .toList(),
       id: json['id'] as String,
       avatar: json['avatar'] as String?,
@@ -16909,8 +12551,8 @@ GetAccountsResponseBody200 _$GetAccountsResponseBody200FromJson(
       email: json['email'] as String?,
     );
 
-Map<String, dynamic> _$GetAccountsResponseBody200ToJson(
-    GetAccountsResponseBody200 instance) {
+Map<String, dynamic> _$XubeGetAccountsResponseBody200ToJson(
+    XubeGetAccountsResponseBody200 instance) {
   final val = <String, dynamic>{
     'creator': instance.creator,
     'created': instance.created.toIso8601String(),
@@ -16926,7 +12568,7 @@ Map<String, dynamic> _$GetAccountsResponseBody200ToJson(
   writeNotNull(
       'accountTypes',
       instance.accountTypes
-          ?.map((e) => _$GetAccountsResponseBody200AccountTypesEnumMap[e]!)
+          ?.map((e) => _$XubeGetAccountsResponseBody200AccountTypesEnumMap[e]!)
           .toList());
   val['id'] = instance.id;
   writeNotNull('avatar', instance.avatar);
@@ -16936,32 +12578,32 @@ Map<String, dynamic> _$GetAccountsResponseBody200ToJson(
   return val;
 }
 
-const _$GetAccountsResponseBody200AccountTypesEnumMap = {
-  GetAccountsResponseBody200AccountTypes.businessPartner: 'BusinessPartner',
-  GetAccountsResponseBody200AccountTypes.customer: 'Customer',
-  GetAccountsResponseBody200AccountTypes.developmentPartner:
+const _$XubeGetAccountsResponseBody200AccountTypesEnumMap = {
+  XubeGetAccountsResponseBody200AccountTypes.businessPartner: 'BusinessPartner',
+  XubeGetAccountsResponseBody200AccountTypes.customer: 'Customer',
+  XubeGetAccountsResponseBody200AccountTypes.developmentPartner:
       'DevelopmentPartner',
-  GetAccountsResponseBody200AccountTypes.educator: 'Educator',
-  GetAccountsResponseBody200AccountTypes.emerging: 'Emerging',
-  GetAccountsResponseBody200AccountTypes.fulfiller: 'Fulfiller',
-  GetAccountsResponseBody200AccountTypes.reseller: 'Reseller',
-  GetAccountsResponseBody200AccountTypes.installer: 'Installer',
-  GetAccountsResponseBody200AccountTypes.startup: 'Startup',
-  GetAccountsResponseBody200AccountTypes.supplier: 'Supplier',
-  GetAccountsResponseBody200AccountTypes.xube: 'Xube',
+  XubeGetAccountsResponseBody200AccountTypes.educator: 'Educator',
+  XubeGetAccountsResponseBody200AccountTypes.emerging: 'Emerging',
+  XubeGetAccountsResponseBody200AccountTypes.fulfiller: 'Fulfiller',
+  XubeGetAccountsResponseBody200AccountTypes.reseller: 'Reseller',
+  XubeGetAccountsResponseBody200AccountTypes.installer: 'Installer',
+  XubeGetAccountsResponseBody200AccountTypes.startup: 'Startup',
+  XubeGetAccountsResponseBody200AccountTypes.supplier: 'Supplier',
+  XubeGetAccountsResponseBody200AccountTypes.xube: 'Xube',
 };
 
-GetAccountUserPermissionsResponseBody200
-    _$GetAccountUserPermissionsResponseBody200FromJson(
+XubeGetAccountUserPermissionsResponseBody200
+    _$XubeGetAccountUserPermissionsResponseBody200FromJson(
             Map<String, dynamic> json) =>
-        GetAccountUserPermissionsResponseBody200(
+        XubeGetAccountUserPermissionsResponseBody200(
           creator: json['creator'] as String?,
           service: json['service'] as String,
           created: json['created'] == null
               ? null
               : DateTime.parse(json['created'] as String),
           effect: $enumDecode(
-              _$GetAccountUserPermissionsResponseBody200EffectEnumMap,
+              _$XubeGetAccountUserPermissionsResponseBody200EffectEnumMap,
               json['effect']),
           name: json['name'] as String?,
           action: json['action'] as String,
@@ -16972,8 +12614,8 @@ GetAccountUserPermissionsResponseBody200
           account: json['account'] as String,
         );
 
-Map<String, dynamic> _$GetAccountUserPermissionsResponseBody200ToJson(
-    GetAccountUserPermissionsResponseBody200 instance) {
+Map<String, dynamic> _$XubeGetAccountUserPermissionsResponseBody200ToJson(
+    XubeGetAccountUserPermissionsResponseBody200 instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -16985,8 +12627,8 @@ Map<String, dynamic> _$GetAccountUserPermissionsResponseBody200ToJson(
   writeNotNull('creator', instance.creator);
   val['service'] = instance.service;
   writeNotNull('created', instance.created?.toIso8601String());
-  val['effect'] =
-      _$GetAccountUserPermissionsResponseBody200EffectEnumMap[instance.effect]!;
+  val['effect'] = _$XubeGetAccountUserPermissionsResponseBody200EffectEnumMap[
+      instance.effect]!;
   writeNotNull('name', instance.name);
   val['action'] = instance.action;
   val['id'] = instance.id;
@@ -16997,14 +12639,14 @@ Map<String, dynamic> _$GetAccountUserPermissionsResponseBody200ToJson(
   return val;
 }
 
-const _$GetAccountUserPermissionsResponseBody200EffectEnumMap = {
-  GetAccountUserPermissionsResponseBody200Effect.allow: 'Allow',
-  GetAccountUserPermissionsResponseBody200Effect.deny: 'Deny',
+const _$XubeGetAccountUserPermissionsResponseBody200EffectEnumMap = {
+  XubeGetAccountUserPermissionsResponseBody200Effect.allow: 'Allow',
+  XubeGetAccountUserPermissionsResponseBody200Effect.deny: 'Deny',
 };
 
-GetParentsSubscriptionSchema _$GetParentsSubscriptionSchemaFromJson(
+XubeGetParentsSubscriptionSchema _$XubeGetParentsSubscriptionSchemaFromJson(
         Map<String, dynamic> json) =>
-    GetParentsSubscriptionSchema(
+    XubeGetParentsSubscriptionSchema(
       parent: json['parent'] as String,
       creator: json['creator'] as String?,
       created: json['created'] == null
@@ -17016,8 +12658,8 @@ GetParentsSubscriptionSchema _$GetParentsSubscriptionSchemaFromJson(
       child: json['child'] as String,
     );
 
-Map<String, dynamic> _$GetParentsSubscriptionSchemaToJson(
-    GetParentsSubscriptionSchema instance) {
+Map<String, dynamic> _$XubeGetParentsSubscriptionSchemaToJson(
+    XubeGetParentsSubscriptionSchema instance) {
   final val = <String, dynamic>{
     'parent': instance.parent,
   };
@@ -17037,1581 +12679,32 @@ Map<String, dynamic> _$GetParentsSubscriptionSchemaToJson(
   return val;
 }
 
-GetSubscriptionsByDestinationResponseBody200Variant1Delivery
-    _$GetSubscriptionsByDestinationResponseBody200Variant1DeliveryFromJson(
+XubeCreateSubscriptionsResponseBody200
+    _$XubeCreateSubscriptionsResponseBody200FromJson(
             Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant1Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant1DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant1DeliveryToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant1Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant1DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant1DeliveryStatusEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant1DeliveryStatus.active:
-      'ACTIVE',
-  GetSubscriptionsByDestinationResponseBody200Variant1DeliveryStatus.paused:
-      'PAUSED',
-  GetSubscriptionsByDestinationResponseBody200Variant1DeliveryStatus.failed:
-      'FAILED',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant1
-    _$GetSubscriptionsByDestinationResponseBody200Variant1FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant1(
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsByDestinationResponseBody200Variant1Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-          accountId: json['accountId'] as String?,
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant1SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant1DestinationTypeEnumMap,
-              json['destinationType']),
+        XubeCreateSubscriptionsResponseBody200(
           id: json['id'] as String,
         );
 
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant1ToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant1 instance) {
-  final val = <String, dynamic>{
-    'delivery': instance.delivery,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  writeNotNull('accountId', instance.accountId);
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant1SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant1DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant1SubscriptionTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant1SubscriptionType.facet:
-      'FACET',
-};
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant1DestinationTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant1DestinationType.webhook:
-      'WEBHOOK',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant2Delivery
-    _$GetSubscriptionsByDestinationResponseBody200Variant2DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant2Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant2DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant2DeliveryToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant2Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant2DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant2DeliveryStatusEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant2DeliveryStatus.active:
-      'ACTIVE',
-  GetSubscriptionsByDestinationResponseBody200Variant2DeliveryStatus.paused:
-      'PAUSED',
-  GetSubscriptionsByDestinationResponseBody200Variant2DeliveryStatus.failed:
-      'FAILED',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant2
-    _$GetSubscriptionsByDestinationResponseBody200Variant2FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant2(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsByDestinationResponseBody200Variant2Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant2SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant2DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant2ToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant2 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant2SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant2DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant2SubscriptionTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant2SubscriptionType.data:
-      'DATA',
-};
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant2DestinationTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant2DestinationType.webhook:
-      'WEBHOOK',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant3Delivery
-    _$GetSubscriptionsByDestinationResponseBody200Variant3DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant3Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant3DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant3DeliveryToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant3Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant3DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant3DeliveryStatusEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant3DeliveryStatus.active:
-      'ACTIVE',
-  GetSubscriptionsByDestinationResponseBody200Variant3DeliveryStatus.paused:
-      'PAUSED',
-  GetSubscriptionsByDestinationResponseBody200Variant3DeliveryStatus.failed:
-      'FAILED',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant3
-    _$GetSubscriptionsByDestinationResponseBody200Variant3FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant3(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsByDestinationResponseBody200Variant3Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant3SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant3DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant3ToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant3 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant3SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant3DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant3SubscriptionTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant3SubscriptionType.member:
-      'MEMBER',
-};
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant3DestinationTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant3DestinationType.webhook:
-      'WEBHOOK',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant4Delivery
-    _$GetSubscriptionsByDestinationResponseBody200Variant4DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant4Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant4DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant4DeliveryToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant4Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant4DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant4DeliveryStatusEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant4DeliveryStatus.active:
-      'ACTIVE',
-  GetSubscriptionsByDestinationResponseBody200Variant4DeliveryStatus.paused:
-      'PAUSED',
-  GetSubscriptionsByDestinationResponseBody200Variant4DeliveryStatus.failed:
-      'FAILED',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant4
-    _$GetSubscriptionsByDestinationResponseBody200Variant4FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant4(
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsByDestinationResponseBody200Variant4Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          accountId: json['accountId'] as String?,
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant4SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant4DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant4ToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant4 instance) {
-  final val = <String, dynamic>{
-    'delivery': instance.delivery,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  writeNotNull('accountId', instance.accountId);
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant4SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant4DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant4SubscriptionTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant4SubscriptionType.facet:
-      'FACET',
-};
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant4DestinationTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant4DestinationType.websocket:
-      'WEBSOCKET',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant5Delivery
-    _$GetSubscriptionsByDestinationResponseBody200Variant5DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant5Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant5DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant5DeliveryToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant5Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant5DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant5DeliveryStatusEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant5DeliveryStatus.active:
-      'ACTIVE',
-  GetSubscriptionsByDestinationResponseBody200Variant5DeliveryStatus.paused:
-      'PAUSED',
-  GetSubscriptionsByDestinationResponseBody200Variant5DeliveryStatus.failed:
-      'FAILED',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant5
-    _$GetSubscriptionsByDestinationResponseBody200Variant5FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant5(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsByDestinationResponseBody200Variant5Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant5SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant5DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant5ToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant5 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant5SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant5DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant5SubscriptionTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant5SubscriptionType.data:
-      'DATA',
-};
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant5DestinationTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant5DestinationType.websocket:
-      'WEBSOCKET',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant6Delivery
-    _$GetSubscriptionsByDestinationResponseBody200Variant6DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant6Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant6DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant6DeliveryToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant6Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant6DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant6DeliveryStatusEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant6DeliveryStatus.active:
-      'ACTIVE',
-  GetSubscriptionsByDestinationResponseBody200Variant6DeliveryStatus.paused:
-      'PAUSED',
-  GetSubscriptionsByDestinationResponseBody200Variant6DeliveryStatus.failed:
-      'FAILED',
-};
-
-GetSubscriptionsByDestinationResponseBody200Variant6
-    _$GetSubscriptionsByDestinationResponseBody200Variant6FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsByDestinationResponseBody200Variant6(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsByDestinationResponseBody200Variant6Delivery
-                  .fromJson(json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant6SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsByDestinationResponseBody200Variant6DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetSubscriptionsByDestinationResponseBody200Variant6ToJson(
-        GetSubscriptionsByDestinationResponseBody200Variant6 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant6SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsByDestinationResponseBody200Variant6DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  return val;
-}
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant6SubscriptionTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant6SubscriptionType.member:
-      'MEMBER',
-};
-
-const _$GetSubscriptionsByDestinationResponseBody200Variant6DestinationTypeEnumMap =
-    {
-  GetSubscriptionsByDestinationResponseBody200Variant6DestinationType.websocket:
-      'WEBSOCKET',
-};
-
-CreateSubscriptionsResponseBody200 _$CreateSubscriptionsResponseBody200FromJson(
-        Map<String, dynamic> json) =>
-    CreateSubscriptionsResponseBody200(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$CreateSubscriptionsResponseBody200ToJson(
-        CreateSubscriptionsResponseBody200 instance) =>
+Map<String, dynamic> _$XubeCreateSubscriptionsResponseBody200ToJson(
+        XubeCreateSubscriptionsResponseBody200 instance) =>
     <String, dynamic>{
       'id': instance.id,
     };
 
-GetSubscriptionsResponseBody200Variant1Delivery
-    _$GetSubscriptionsResponseBody200Variant1DeliveryFromJson(
+XubeGetDeviceModelsResponseBody200UpdatesConfig
+    _$XubeGetDeviceModelsResponseBody200UpdatesConfigFromJson(
             Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant1Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant1DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant1DeliveryToJson(
-    GetSubscriptionsResponseBody200Variant1Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsResponseBody200Variant1DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant1DeliveryStatusEnumMap = {
-  GetSubscriptionsResponseBody200Variant1DeliveryStatus.active: 'ACTIVE',
-  GetSubscriptionsResponseBody200Variant1DeliveryStatus.paused: 'PAUSED',
-  GetSubscriptionsResponseBody200Variant1DeliveryStatus.failed: 'FAILED',
-};
-
-GetSubscriptionsResponseBody200Variant1
-    _$GetSubscriptionsResponseBody200Variant1FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant1(
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsResponseBody200Variant1Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-          accountId: json['accountId'] as String?,
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant1SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant1DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant1ToJson(
-    GetSubscriptionsResponseBody200Variant1 instance) {
-  final val = <String, dynamic>{
-    'delivery': instance.delivery,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  writeNotNull('accountId', instance.accountId);
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$GetSubscriptionsResponseBody200Variant1SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsResponseBody200Variant1DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant1SubscriptionTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant1SubscriptionType.facet: 'FACET',
-};
-
-const _$GetSubscriptionsResponseBody200Variant1DestinationTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant1DestinationType.webhook: 'WEBHOOK',
-};
-
-GetSubscriptionsResponseBody200Variant2Delivery
-    _$GetSubscriptionsResponseBody200Variant2DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant2Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant2DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant2DeliveryToJson(
-    GetSubscriptionsResponseBody200Variant2Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsResponseBody200Variant2DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant2DeliveryStatusEnumMap = {
-  GetSubscriptionsResponseBody200Variant2DeliveryStatus.active: 'ACTIVE',
-  GetSubscriptionsResponseBody200Variant2DeliveryStatus.paused: 'PAUSED',
-  GetSubscriptionsResponseBody200Variant2DeliveryStatus.failed: 'FAILED',
-};
-
-GetSubscriptionsResponseBody200Variant2
-    _$GetSubscriptionsResponseBody200Variant2FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant2(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsResponseBody200Variant2Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant2SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant2DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant2ToJson(
-    GetSubscriptionsResponseBody200Variant2 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$GetSubscriptionsResponseBody200Variant2SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsResponseBody200Variant2DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant2SubscriptionTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant2SubscriptionType.data: 'DATA',
-};
-
-const _$GetSubscriptionsResponseBody200Variant2DestinationTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant2DestinationType.webhook: 'WEBHOOK',
-};
-
-GetSubscriptionsResponseBody200Variant3Delivery
-    _$GetSubscriptionsResponseBody200Variant3DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant3Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant3DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant3DeliveryToJson(
-    GetSubscriptionsResponseBody200Variant3Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsResponseBody200Variant3DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant3DeliveryStatusEnumMap = {
-  GetSubscriptionsResponseBody200Variant3DeliveryStatus.active: 'ACTIVE',
-  GetSubscriptionsResponseBody200Variant3DeliveryStatus.paused: 'PAUSED',
-  GetSubscriptionsResponseBody200Variant3DeliveryStatus.failed: 'FAILED',
-};
-
-GetSubscriptionsResponseBody200Variant3
-    _$GetSubscriptionsResponseBody200Variant3FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant3(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsResponseBody200Variant3Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant3SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant3DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant3ToJson(
-    GetSubscriptionsResponseBody200Variant3 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$GetSubscriptionsResponseBody200Variant3SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsResponseBody200Variant3DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant3SubscriptionTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant3SubscriptionType.member: 'MEMBER',
-};
-
-const _$GetSubscriptionsResponseBody200Variant3DestinationTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant3DestinationType.webhook: 'WEBHOOK',
-};
-
-GetSubscriptionsResponseBody200Variant4Delivery
-    _$GetSubscriptionsResponseBody200Variant4DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant4Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant4DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant4DeliveryToJson(
-    GetSubscriptionsResponseBody200Variant4Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsResponseBody200Variant4DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant4DeliveryStatusEnumMap = {
-  GetSubscriptionsResponseBody200Variant4DeliveryStatus.active: 'ACTIVE',
-  GetSubscriptionsResponseBody200Variant4DeliveryStatus.paused: 'PAUSED',
-  GetSubscriptionsResponseBody200Variant4DeliveryStatus.failed: 'FAILED',
-};
-
-GetSubscriptionsResponseBody200Variant4
-    _$GetSubscriptionsResponseBody200Variant4FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant4(
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsResponseBody200Variant4Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-          accountId: json['accountId'] as String?,
-          facetType: json['facetType'] as String?,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant4SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant4DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant4ToJson(
-    GetSubscriptionsResponseBody200Variant4 instance) {
-  final val = <String, dynamic>{
-    'delivery': instance.delivery,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  writeNotNull('accountId', instance.accountId);
-  writeNotNull('facetType', instance.facetType);
-  val['subscriptionType'] =
-      _$GetSubscriptionsResponseBody200Variant4SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsResponseBody200Variant4DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant4SubscriptionTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant4SubscriptionType.facet: 'FACET',
-};
-
-const _$GetSubscriptionsResponseBody200Variant4DestinationTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant4DestinationType.websocket: 'WEBSOCKET',
-};
-
-GetSubscriptionsResponseBody200Variant5Delivery
-    _$GetSubscriptionsResponseBody200Variant5DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant5Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant5DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant5DeliveryToJson(
-    GetSubscriptionsResponseBody200Variant5Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsResponseBody200Variant5DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant5DeliveryStatusEnumMap = {
-  GetSubscriptionsResponseBody200Variant5DeliveryStatus.active: 'ACTIVE',
-  GetSubscriptionsResponseBody200Variant5DeliveryStatus.paused: 'PAUSED',
-  GetSubscriptionsResponseBody200Variant5DeliveryStatus.failed: 'FAILED',
-};
-
-GetSubscriptionsResponseBody200Variant5
-    _$GetSubscriptionsResponseBody200Variant5FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant5(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsResponseBody200Variant5Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant5SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant5DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant5ToJson(
-    GetSubscriptionsResponseBody200Variant5 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$GetSubscriptionsResponseBody200Variant5SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsResponseBody200Variant5DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant5SubscriptionTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant5SubscriptionType.data: 'DATA',
-};
-
-const _$GetSubscriptionsResponseBody200Variant5DestinationTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant5DestinationType.websocket: 'WEBSOCKET',
-};
-
-GetSubscriptionsResponseBody200Variant6Delivery
-    _$GetSubscriptionsResponseBody200Variant6DeliveryFromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant6Delivery(
-          lastDeliveryAttempt: json['lastDeliveryAttempt'] as String?,
-          nextRetryAt: json['nextRetryAt'] as String?,
-          lastSuccessfulDelivery: json['lastSuccessfulDelivery'] as String?,
-          failedAttempts: json['failedAttempts'] as num? ?? 0,
-          status: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant6DeliveryStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant6DeliveryToJson(
-    GetSubscriptionsResponseBody200Variant6Delivery instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lastDeliveryAttempt', instance.lastDeliveryAttempt);
-  writeNotNull('nextRetryAt', instance.nextRetryAt);
-  writeNotNull('lastSuccessfulDelivery', instance.lastSuccessfulDelivery);
-  val['failedAttempts'] = instance.failedAttempts;
-  val['status'] =
-      _$GetSubscriptionsResponseBody200Variant6DeliveryStatusEnumMap[
-          instance.status]!;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant6DeliveryStatusEnumMap = {
-  GetSubscriptionsResponseBody200Variant6DeliveryStatus.active: 'ACTIVE',
-  GetSubscriptionsResponseBody200Variant6DeliveryStatus.paused: 'PAUSED',
-  GetSubscriptionsResponseBody200Variant6DeliveryStatus.failed: 'FAILED',
-};
-
-GetSubscriptionsResponseBody200Variant6
-    _$GetSubscriptionsResponseBody200Variant6FromJson(
-            Map<String, dynamic> json) =>
-        GetSubscriptionsResponseBody200Variant6(
-          accountId: json['accountId'] as String?,
-          delivery: json['delivery'] == null
-              ? {'failedAttempts': 0, 'status': 'ACTIVE'}
-              : GetSubscriptionsResponseBody200Variant6Delivery.fromJson(
-                  json['delivery'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          targetId: json['targetId'] as String,
-          subscriptionType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant6SubscriptionTypeEnumMap,
-              json['subscriptionType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          destinationType: $enumDecode(
-              _$GetSubscriptionsResponseBody200Variant6DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          destinationId: json['destinationId'] as String,
-        );
-
-Map<String, dynamic> _$GetSubscriptionsResponseBody200Variant6ToJson(
-    GetSubscriptionsResponseBody200Variant6 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('accountId', instance.accountId);
-  val['delivery'] = instance.delivery;
-  writeNotNull('creator', instance.creator);
-  val['targetId'] = instance.targetId;
-  val['subscriptionType'] =
-      _$GetSubscriptionsResponseBody200Variant6SubscriptionTypeEnumMap[
-          instance.subscriptionType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['destinationType'] =
-      _$GetSubscriptionsResponseBody200Variant6DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['destinationId'] = instance.destinationId;
-  return val;
-}
-
-const _$GetSubscriptionsResponseBody200Variant6SubscriptionTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant6SubscriptionType.member: 'MEMBER',
-};
-
-const _$GetSubscriptionsResponseBody200Variant6DestinationTypeEnumMap = {
-  GetSubscriptionsResponseBody200Variant6DestinationType.websocket: 'WEBSOCKET',
-};
-
-GetDestinationsResponseBody200Variant1HeadersVariant1
-    _$GetDestinationsResponseBody200Variant1HeadersVariant1FromJson(
-            Map<String, dynamic> json) =>
-        GetDestinationsResponseBody200Variant1HeadersVariant1(
-          authorization: json['Authorization'] as String?,
-          xApiKey: json['x-api-key'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDestinationsResponseBody200Variant1HeadersVariant1ToJson(
-        GetDestinationsResponseBody200Variant1HeadersVariant1 instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('Authorization', instance.authorization);
-  writeNotNull('x-api-key', instance.xApiKey);
-  return val;
-}
-
-GetDestinationsResponseBody200Variant1HeadersVariant2
-    _$GetDestinationsResponseBody200Variant1HeadersVariant2FromJson(
-            Map<String, dynamic> json) =>
-        GetDestinationsResponseBody200Variant1HeadersVariant2(
-          additionalProps:
-              Map<String, String>.from(json['additionalProps'] as Map),
-        );
-
-Map<String, dynamic>
-    _$GetDestinationsResponseBody200Variant1HeadersVariant2ToJson(
-            GetDestinationsResponseBody200Variant1HeadersVariant2 instance) =>
-        <String, dynamic>{
-          'additionalProps': instance.additionalProps,
-        };
-
-GetDestinationsResponseBody200Variant1IotDestination
-    _$GetDestinationsResponseBody200Variant1IotDestinationFromJson(
-            Map<String, dynamic> json) =>
-        GetDestinationsResponseBody200Variant1IotDestination(
-          state: $enumDecode(
-              _$GetDestinationsResponseBody200Variant1IotDestinationStateEnumMap,
-              json['state']),
-          arn: json['arn'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDestinationsResponseBody200Variant1IotDestinationToJson(
-            GetDestinationsResponseBody200Variant1IotDestination instance) =>
-        <String, dynamic>{
-          'state':
-              _$GetDestinationsResponseBody200Variant1IotDestinationStateEnumMap[
-                  instance.state]!,
-          'arn': instance.arn,
-        };
-
-const _$GetDestinationsResponseBody200Variant1IotDestinationStateEnumMap = {
-  GetDestinationsResponseBody200Variant1IotDestinationState.notSent: 'NOT_SENT',
-  GetDestinationsResponseBody200Variant1IotDestinationState.pending: 'PENDING',
-  GetDestinationsResponseBody200Variant1IotDestinationState.confirmed:
-      'CONFIRMED',
-};
-
-GetDestinationsResponseBody200Variant1Confirmation
-    _$GetDestinationsResponseBody200Variant1ConfirmationFromJson(
-            Map<String, dynamic> json) =>
-        GetDestinationsResponseBody200Variant1Confirmation(
-          state: $enumDecode(
-              _$GetDestinationsResponseBody200Variant1ConfirmationStateEnumMap,
-              json['state']),
-          sent: json['sent'] as String?,
-          token: json['token'] as String?,
-        );
-
-Map<String, dynamic> _$GetDestinationsResponseBody200Variant1ConfirmationToJson(
-    GetDestinationsResponseBody200Variant1Confirmation instance) {
-  final val = <String, dynamic>{
-    'state': _$GetDestinationsResponseBody200Variant1ConfirmationStateEnumMap[
-        instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('sent', instance.sent);
-  writeNotNull('token', instance.token);
-  return val;
-}
-
-const _$GetDestinationsResponseBody200Variant1ConfirmationStateEnumMap = {
-  GetDestinationsResponseBody200Variant1ConfirmationState.notSent: 'NOT_SENT',
-  GetDestinationsResponseBody200Variant1ConfirmationState.pending: 'PENDING',
-  GetDestinationsResponseBody200Variant1ConfirmationState.confirmed:
-      'CONFIRMED',
-};
-
-GetDestinationsResponseBody200Variant1
-    _$GetDestinationsResponseBody200Variant1FromJson(
-            Map<String, dynamic> json) =>
-        GetDestinationsResponseBody200Variant1(
-          accountId: json['accountId'] as String,
-          headers: json['headers'] == null
-              ? null
-              : GetDestinationsResponseBody200Variant1Headers.fromJson(
-                  json['headers'] as Map<String, dynamic>),
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          iotDestination: json['iotDestination'] == null
-              ? null
-              : GetDestinationsResponseBody200Variant1IotDestination.fromJson(
-                  json['iotDestination'] as Map<String, dynamic>),
-          name: json['name'] as String,
-          destinationType: $enumDecode(
-              _$GetDestinationsResponseBody200Variant1DestinationTypeEnumMap,
-              json['destinationType']),
-          id: json['id'] as String,
-          confirmation:
-              GetDestinationsResponseBody200Variant1Confirmation.fromJson(
-                  json['confirmation'] as Map<String, dynamic>),
-          state: $enumDecode(
-              _$GetDestinationsResponseBody200Variant1StateEnumMap,
-              json['state']),
-          type: json['type'] as String?,
-          url: json['url'] as String,
-        );
-
-Map<String, dynamic> _$GetDestinationsResponseBody200Variant1ToJson(
-    GetDestinationsResponseBody200Variant1 instance) {
-  final val = <String, dynamic>{
-    'accountId': instance.accountId,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('headers', instance.headers);
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('iotDestination', instance.iotDestination);
-  val['name'] = instance.name;
-  val['destinationType'] =
-      _$GetDestinationsResponseBody200Variant1DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['id'] = instance.id;
-  val['confirmation'] = instance.confirmation;
-  val['state'] =
-      _$GetDestinationsResponseBody200Variant1StateEnumMap[instance.state]!;
-  writeNotNull('type', instance.type);
-  val['url'] = instance.url;
-  return val;
-}
-
-const _$GetDestinationsResponseBody200Variant1DestinationTypeEnumMap = {
-  GetDestinationsResponseBody200Variant1DestinationType.webhook: 'WEBHOOK',
-};
-
-const _$GetDestinationsResponseBody200Variant1StateEnumMap = {
-  GetDestinationsResponseBody200Variant1State.active: 'ACTIVE',
-  GetDestinationsResponseBody200Variant1State.pending: 'PENDING',
-  GetDestinationsResponseBody200Variant1State.unsecure: 'UNSECURE',
-};
-
-GetDestinationsResponseBody200Variant2
-    _$GetDestinationsResponseBody200Variant2FromJson(
-            Map<String, dynamic> json) =>
-        GetDestinationsResponseBody200Variant2(
-          accountId: json['accountId'] as String,
-          creator: json['creator'] as String?,
-          lastHeartbeat: DateTime.parse(json['lastHeartbeat'] as String),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String,
-          missedHeartbeats: json['missedHeartbeats'] as num? ?? 0,
-          destinationType: $enumDecode(
-              _$GetDestinationsResponseBody200Variant2DestinationTypeEnumMap,
-              json['destinationType']),
-          connectionId: json['connectionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          status: $enumDecode(
-              _$GetDestinationsResponseBody200Variant2StatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetDestinationsResponseBody200Variant2ToJson(
-    GetDestinationsResponseBody200Variant2 instance) {
-  final val = <String, dynamic>{
-    'accountId': instance.accountId,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['lastHeartbeat'] = instance.lastHeartbeat.toIso8601String();
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['name'] = instance.name;
-  val['missedHeartbeats'] = instance.missedHeartbeats;
-  val['destinationType'] =
-      _$GetDestinationsResponseBody200Variant2DestinationTypeEnumMap[
-          instance.destinationType]!;
-  val['connectionId'] = instance.connectionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['status'] =
-      _$GetDestinationsResponseBody200Variant2StatusEnumMap[instance.status]!;
-  return val;
-}
-
-const _$GetDestinationsResponseBody200Variant2DestinationTypeEnumMap = {
-  GetDestinationsResponseBody200Variant2DestinationType.websocket: 'WEBSOCKET',
-};
-
-const _$GetDestinationsResponseBody200Variant2StatusEnumMap = {
-  GetDestinationsResponseBody200Variant2Status.active: 'ACTIVE',
-  GetDestinationsResponseBody200Variant2Status.stale: 'STALE',
-  GetDestinationsResponseBody200Variant2Status.disconnected: 'DISCONNECTED',
-};
-
-GetDeviceModelsResponseBody200UpdatesConfig
-    _$GetDeviceModelsResponseBody200UpdatesConfigFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceModelsResponseBody200UpdatesConfig(
+        XubeGetDeviceModelsResponseBody200UpdatesConfig(
           conditions: (json['conditions'] as List<dynamic>?)
               ?.map((e) => $enumDecode(
-                  _$GetDeviceModelsResponseBody200UpdatesConfigConditionsEnumMap,
+                  _$XubeGetDeviceModelsResponseBody200UpdatesConfigConditionsEnumMap,
                   e))
               .toList(),
         );
 
-Map<String, dynamic> _$GetDeviceModelsResponseBody200UpdatesConfigToJson(
-    GetDeviceModelsResponseBody200UpdatesConfig instance) {
+Map<String, dynamic> _$XubeGetDeviceModelsResponseBody200UpdatesConfigToJson(
+    XubeGetDeviceModelsResponseBody200UpdatesConfig instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -18624,30 +12717,30 @@ Map<String, dynamic> _$GetDeviceModelsResponseBody200UpdatesConfigToJson(
       'conditions',
       instance.conditions
           ?.map((e) =>
-              _$GetDeviceModelsResponseBody200UpdatesConfigConditionsEnumMap[
+              _$XubeGetDeviceModelsResponseBody200UpdatesConfigConditionsEnumMap[
                   e]!)
           .toList());
   return val;
 }
 
-const _$GetDeviceModelsResponseBody200UpdatesConfigConditionsEnumMap = {
-  GetDeviceModelsResponseBody200UpdatesConfigConditions.local: 'local',
-  GetDeviceModelsResponseBody200UpdatesConfigConditions.remote: 'remote',
+const _$XubeGetDeviceModelsResponseBody200UpdatesConfigConditionsEnumMap = {
+  XubeGetDeviceModelsResponseBody200UpdatesConfigConditions.local: 'local',
+  XubeGetDeviceModelsResponseBody200UpdatesConfigConditions.remote: 'remote',
 };
 
-GetDeviceModelsResponseBody200UpdatesFirmware
-    _$GetDeviceModelsResponseBody200UpdatesFirmwareFromJson(
+XubeGetDeviceModelsResponseBody200UpdatesFirmware
+    _$XubeGetDeviceModelsResponseBody200UpdatesFirmwareFromJson(
             Map<String, dynamic> json) =>
-        GetDeviceModelsResponseBody200UpdatesFirmware(
+        XubeGetDeviceModelsResponseBody200UpdatesFirmware(
           conditions: (json['conditions'] as List<dynamic>?)
               ?.map((e) => $enumDecode(
-                  _$GetDeviceModelsResponseBody200UpdatesFirmwareConditionsEnumMap,
+                  _$XubeGetDeviceModelsResponseBody200UpdatesFirmwareConditionsEnumMap,
                   e))
               .toList(),
         );
 
-Map<String, dynamic> _$GetDeviceModelsResponseBody200UpdatesFirmwareToJson(
-    GetDeviceModelsResponseBody200UpdatesFirmware instance) {
+Map<String, dynamic> _$XubeGetDeviceModelsResponseBody200UpdatesFirmwareToJson(
+    XubeGetDeviceModelsResponseBody200UpdatesFirmware instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -18660,33 +12753,33 @@ Map<String, dynamic> _$GetDeviceModelsResponseBody200UpdatesFirmwareToJson(
       'conditions',
       instance.conditions
           ?.map((e) =>
-              _$GetDeviceModelsResponseBody200UpdatesFirmwareConditionsEnumMap[
+              _$XubeGetDeviceModelsResponseBody200UpdatesFirmwareConditionsEnumMap[
                   e]!)
           .toList());
   return val;
 }
 
-const _$GetDeviceModelsResponseBody200UpdatesFirmwareConditionsEnumMap = {
-  GetDeviceModelsResponseBody200UpdatesFirmwareConditions.local: 'local',
-  GetDeviceModelsResponseBody200UpdatesFirmwareConditions.remote: 'remote',
+const _$XubeGetDeviceModelsResponseBody200UpdatesFirmwareConditionsEnumMap = {
+  XubeGetDeviceModelsResponseBody200UpdatesFirmwareConditions.local: 'local',
+  XubeGetDeviceModelsResponseBody200UpdatesFirmwareConditions.remote: 'remote',
 };
 
-GetDeviceModelsResponseBody200Updates
-    _$GetDeviceModelsResponseBody200UpdatesFromJson(
+XubeGetDeviceModelsResponseBody200Updates
+    _$XubeGetDeviceModelsResponseBody200UpdatesFromJson(
             Map<String, dynamic> json) =>
-        GetDeviceModelsResponseBody200Updates(
+        XubeGetDeviceModelsResponseBody200Updates(
           config: json['config'] == null
               ? null
-              : GetDeviceModelsResponseBody200UpdatesConfig.fromJson(
+              : XubeGetDeviceModelsResponseBody200UpdatesConfig.fromJson(
                   json['config'] as Map<String, dynamic>),
           firmware: json['firmware'] == null
               ? null
-              : GetDeviceModelsResponseBody200UpdatesFirmware.fromJson(
+              : XubeGetDeviceModelsResponseBody200UpdatesFirmware.fromJson(
                   json['firmware'] as Map<String, dynamic>),
         );
 
-Map<String, dynamic> _$GetDeviceModelsResponseBody200UpdatesToJson(
-    GetDeviceModelsResponseBody200Updates instance) {
+Map<String, dynamic> _$XubeGetDeviceModelsResponseBody200UpdatesToJson(
+    XubeGetDeviceModelsResponseBody200Updates instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -18700,13 +12793,13 @@ Map<String, dynamic> _$GetDeviceModelsResponseBody200UpdatesToJson(
   return val;
 }
 
-GetDeviceModelsResponseBody200ConfigProperties
-    _$GetDeviceModelsResponseBody200ConfigPropertiesFromJson(
+XubeGetDeviceModelsResponseBody200ConfigProperties
+    _$XubeGetDeviceModelsResponseBody200ConfigPropertiesFromJson(
             Map<String, dynamic> json) =>
-        GetDeviceModelsResponseBody200ConfigProperties(
+        XubeGetDeviceModelsResponseBody200ConfigProperties(
           readable: json['readable'] as bool?,
           format: $enumDecodeNullable(
-              _$GetDeviceModelsResponseBody200ConfigPropertiesFormatEnumMap,
+              _$XubeGetDeviceModelsResponseBody200ConfigPropertiesFormatEnumMap,
               json['format']),
           label: json['label'] as String,
           value: json['value'] as String?,
@@ -18714,8 +12807,8 @@ GetDeviceModelsResponseBody200ConfigProperties
           writable: json['writable'] as bool?,
         );
 
-Map<String, dynamic> _$GetDeviceModelsResponseBody200ConfigPropertiesToJson(
-    GetDeviceModelsResponseBody200ConfigProperties instance) {
+Map<String, dynamic> _$XubeGetDeviceModelsResponseBody200ConfigPropertiesToJson(
+    XubeGetDeviceModelsResponseBody200ConfigProperties instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -18727,7 +12820,7 @@ Map<String, dynamic> _$GetDeviceModelsResponseBody200ConfigPropertiesToJson(
   writeNotNull('readable', instance.readable);
   writeNotNull(
       'format',
-      _$GetDeviceModelsResponseBody200ConfigPropertiesFormatEnumMap[
+      _$XubeGetDeviceModelsResponseBody200ConfigPropertiesFormatEnumMap[
           instance.format]);
   val['label'] = instance.label;
   writeNotNull('value', instance.value);
@@ -18736,25 +12829,26 @@ Map<String, dynamic> _$GetDeviceModelsResponseBody200ConfigPropertiesToJson(
   return val;
 }
 
-const _$GetDeviceModelsResponseBody200ConfigPropertiesFormatEnumMap = {
-  GetDeviceModelsResponseBody200ConfigPropertiesFormat.wifiCredentials:
+const _$XubeGetDeviceModelsResponseBody200ConfigPropertiesFormatEnumMap = {
+  XubeGetDeviceModelsResponseBody200ConfigPropertiesFormat.wifiCredentials:
       'WIFI_CREDENTIALS',
-  GetDeviceModelsResponseBody200ConfigPropertiesFormat.general: 'GENERAL',
+  XubeGetDeviceModelsResponseBody200ConfigPropertiesFormat.general: 'GENERAL',
 };
 
-GetDeviceModelsResponseBody200Config
-    _$GetDeviceModelsResponseBody200ConfigFromJson(Map<String, dynamic> json) =>
-        GetDeviceModelsResponseBody200Config(
+XubeGetDeviceModelsResponseBody200Config
+    _$XubeGetDeviceModelsResponseBody200ConfigFromJson(
+            Map<String, dynamic> json) =>
+        XubeGetDeviceModelsResponseBody200Config(
           schema: json['schema'] as Map<String, dynamic>?,
           properties: (json['properties'] as List<dynamic>?)
               ?.map((e) =>
-                  GetDeviceModelsResponseBody200ConfigProperties.fromJson(
+                  XubeGetDeviceModelsResponseBody200ConfigProperties.fromJson(
                       e as Map<String, dynamic>))
               .toList(),
         );
 
-Map<String, dynamic> _$GetDeviceModelsResponseBody200ConfigToJson(
-    GetDeviceModelsResponseBody200Config instance) {
+Map<String, dynamic> _$XubeGetDeviceModelsResponseBody200ConfigToJson(
+    XubeGetDeviceModelsResponseBody200Config instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -18768,9 +12862,9 @@ Map<String, dynamic> _$GetDeviceModelsResponseBody200ConfigToJson(
   return val;
 }
 
-GetDeviceModelsResponseBody200 _$GetDeviceModelsResponseBody200FromJson(
+XubeGetDeviceModelsResponseBody200 _$XubeGetDeviceModelsResponseBody200FromJson(
         Map<String, dynamic> json) =>
-    GetDeviceModelsResponseBody200(
+    XubeGetDeviceModelsResponseBody200(
       generation: json['generation'] as String,
       creator: json['creator'] as String?,
       created: DateTime.parse(json['created'] as String),
@@ -18780,17 +12874,17 @@ GetDeviceModelsResponseBody200 _$GetDeviceModelsResponseBody200FromJson(
       type: json['type'] as String?,
       updates: json['updates'] == null
           ? null
-          : GetDeviceModelsResponseBody200Updates.fromJson(
+          : XubeGetDeviceModelsResponseBody200Updates.fromJson(
               json['updates'] as Map<String, dynamic>),
       make: json['make'] as String,
       config: json['config'] == null
           ? null
-          : GetDeviceModelsResponseBody200Config.fromJson(
+          : XubeGetDeviceModelsResponseBody200Config.fromJson(
               json['config'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$GetDeviceModelsResponseBody200ToJson(
-    GetDeviceModelsResponseBody200 instance) {
+Map<String, dynamic> _$XubeGetDeviceModelsResponseBody200ToJson(
+    XubeGetDeviceModelsResponseBody200 instance) {
   final val = <String, dynamic>{
     'generation': instance.generation,
   };
@@ -18813,13 +12907,14 @@ Map<String, dynamic> _$GetDeviceModelsResponseBody200ToJson(
   return val;
 }
 
-GetDevicesHeartbeatsResponseBody200
-    _$GetDevicesHeartbeatsResponseBody200FromJson(Map<String, dynamic> json) =>
-        GetDevicesHeartbeatsResponseBody200(
+XubeGetDevicesHeartbeatsResponseBody200
+    _$XubeGetDevicesHeartbeatsResponseBody200FromJson(
+            Map<String, dynamic> json) =>
+        XubeGetDevicesHeartbeatsResponseBody200(
           skGsi2: json['SK_GSI2'] as String,
           componentType: json['componentType'] as String,
           facetType: $enumDecode(
-              _$GetDevicesHeartbeatsResponseBody200FacetTypeEnumMap,
+              _$XubeGetDevicesHeartbeatsResponseBody200FacetTypeEnumMap,
               json['facetType']),
           pkGsi2: json['PK_GSI2'] as String,
           facetId: json['facetId'] as String?,
@@ -18830,12 +12925,12 @@ GetDevicesHeartbeatsResponseBody200
           timestamp: DateTime.parse(json['timestamp'] as String),
         );
 
-Map<String, dynamic> _$GetDevicesHeartbeatsResponseBody200ToJson(
-    GetDevicesHeartbeatsResponseBody200 instance) {
+Map<String, dynamic> _$XubeGetDevicesHeartbeatsResponseBody200ToJson(
+    XubeGetDevicesHeartbeatsResponseBody200 instance) {
   final val = <String, dynamic>{
     'SK_GSI2': instance.skGsi2,
     'componentType': instance.componentType,
-    'facetType': _$GetDevicesHeartbeatsResponseBody200FacetTypeEnumMap[
+    'facetType': _$XubeGetDevicesHeartbeatsResponseBody200FacetTypeEnumMap[
         instance.facetType]!,
     'PK_GSI2': instance.pkGsi2,
   };
@@ -18855,3024 +12950,21 @@ Map<String, dynamic> _$GetDevicesHeartbeatsResponseBody200ToJson(
   return val;
 }
 
-const _$GetDevicesHeartbeatsResponseBody200FacetTypeEnumMap = {
-  GetDevicesHeartbeatsResponseBody200FacetType.heartbeat: 'HEARTBEAT',
+const _$XubeGetDevicesHeartbeatsResponseBody200FacetTypeEnumMap = {
+  XubeGetDevicesHeartbeatsResponseBody200FacetType.heartbeat: 'HEARTBEAT',
 };
 
-GetDeviceFacetsResponseBody200Account
-    _$GetDeviceFacetsResponseBody200AccountFromJson(
+XubeListFirmwareVersionsResponseBody200CompatibilityBootloader
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityBootloaderFromJson(
             Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200Account(
-          accountId: json['accountId'] as String,
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200AccountFacetTypeEnumMap,
-              json['facetType']),
-          creator: json['creator'] as String?,
-          facetId: json['facetId'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200AccountToJson(
-    GetDeviceFacetsResponseBody200Account instance) {
-  final val = <String, dynamic>{
-    'accountId': instance.accountId,
-    'componentType': instance.componentType,
-    'facetType': _$GetDeviceFacetsResponseBody200AccountFacetTypeEnumMap[
-        instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200AccountFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200AccountFacetType.account: 'ACCOUNT',
-};
-
-GetDeviceFacetsResponseBody200ActivationStatus
-    _$GetDeviceFacetsResponseBody200ActivationStatusFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200ActivationStatus(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          activationStatus: $enumDecode(
-              _$GetDeviceFacetsResponseBody200ActivationStatusActivationStatusEnumMap,
-              json['activationStatus']),
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          updater: json['updater'] as String?,
-          accountId: json['accountId'] as String,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200ActivationStatusFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          timestamp: json['timestamp'] as String,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200ActivationStatusToJson(
-    GetDeviceFacetsResponseBody200ActivationStatus instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['activationStatus'] =
-      _$GetDeviceFacetsResponseBody200ActivationStatusActivationStatusEnumMap[
-          instance.activationStatus]!;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  writeNotNull('updater', instance.updater);
-  val['accountId'] = instance.accountId;
-  val['facetType'] =
-      _$GetDeviceFacetsResponseBody200ActivationStatusFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['timestamp'] = instance.timestamp;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200ActivationStatusActivationStatusEnumMap =
-    {
-  GetDeviceFacetsResponseBody200ActivationStatusActivationStatus.active:
-      'active',
-  GetDeviceFacetsResponseBody200ActivationStatusActivationStatus.inactive:
-      'inactive',
-};
-
-const _$GetDeviceFacetsResponseBody200ActivationStatusFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200ActivationStatusFacetType.activationStatus:
-      'ACTIVATION-STATUS',
-};
-
-GetDeviceFacetsResponseBody200Heartbeat
-    _$GetDeviceFacetsResponseBody200HeartbeatFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200Heartbeat(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200HeartbeatFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          id: json['id'] as String,
-          deviceId: json['deviceId'] as String,
-          timestamp: DateTime.parse(json['timestamp'] as String),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200HeartbeatToJson(
-    GetDeviceFacetsResponseBody200Heartbeat instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType': _$GetDeviceFacetsResponseBody200HeartbeatFacetTypeEnumMap[
-        instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('facetId', instance.facetId);
-  val['id'] = instance.id;
-  val['deviceId'] = instance.deviceId;
-  val['timestamp'] = instance.timestamp.toIso8601String();
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200HeartbeatFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200HeartbeatFacetType.heartbeat: 'HEARTBEAT',
-};
-
-GetDeviceFacetsResponseBody200FilesOrphanedPropsExisting
-    _$GetDeviceFacetsResponseBody200FilesOrphanedPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesOrphanedPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesOrphanedPropsExistingToJson(
-        GetDeviceFacetsResponseBody200FilesOrphanedPropsExisting instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesOrphanedPropsAcceptance
-    _$GetDeviceFacetsResponseBody200FilesOrphanedPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesOrphanedPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesOrphanedPropsAcceptanceToJson(
-        GetDeviceFacetsResponseBody200FilesOrphanedPropsAcceptance instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesOrphanedPropsActive
-    _$GetDeviceFacetsResponseBody200FilesOrphanedPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesOrphanedPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesOrphanedPropsActiveToJson(
-        GetDeviceFacetsResponseBody200FilesOrphanedPropsActive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesOrphanedProps
-    _$GetDeviceFacetsResponseBody200FilesOrphanedPropsFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesOrphanedProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  GetDeviceFacetsResponseBody200FilesOrphanedPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200FilesOrphanedPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              GetDeviceFacetsResponseBody200FilesOrphanedPropsActive.fromJson(
-                  json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FilesOrphanedPropsToJson(
-    GetDeviceFacetsResponseBody200FilesOrphanedProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesStoragePropsExisting
-    _$GetDeviceFacetsResponseBody200FilesStoragePropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesStoragePropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesStoragePropsExistingToJson(
-        GetDeviceFacetsResponseBody200FilesStoragePropsExisting instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesStoragePropsAcceptance
-    _$GetDeviceFacetsResponseBody200FilesStoragePropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesStoragePropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesStoragePropsAcceptanceToJson(
-        GetDeviceFacetsResponseBody200FilesStoragePropsAcceptance instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesStoragePropsActive
-    _$GetDeviceFacetsResponseBody200FilesStoragePropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesStoragePropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesStoragePropsActiveToJson(
-        GetDeviceFacetsResponseBody200FilesStoragePropsActive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesStorageProps
-    _$GetDeviceFacetsResponseBody200FilesStoragePropsFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesStorageProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  GetDeviceFacetsResponseBody200FilesStoragePropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200FilesStoragePropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              GetDeviceFacetsResponseBody200FilesStoragePropsActive.fromJson(
-                  json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FilesStoragePropsToJson(
-    GetDeviceFacetsResponseBody200FilesStorageProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesScriptingPropsExisting
-    _$GetDeviceFacetsResponseBody200FilesScriptingPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesScriptingPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesScriptingPropsExistingToJson(
-        GetDeviceFacetsResponseBody200FilesScriptingPropsExisting instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesScriptingPropsAcceptance
-    _$GetDeviceFacetsResponseBody200FilesScriptingPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesScriptingPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesScriptingPropsAcceptanceToJson(
-        GetDeviceFacetsResponseBody200FilesScriptingPropsAcceptance instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesScriptingPropsActive
-    _$GetDeviceFacetsResponseBody200FilesScriptingPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesScriptingPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesScriptingPropsActiveToJson(
-        GetDeviceFacetsResponseBody200FilesScriptingPropsActive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesScriptingProps
-    _$GetDeviceFacetsResponseBody200FilesScriptingPropsFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesScriptingProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  GetDeviceFacetsResponseBody200FilesScriptingPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200FilesScriptingPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              GetDeviceFacetsResponseBody200FilesScriptingPropsActive.fromJson(
-                  json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FilesScriptingPropsToJson(
-    GetDeviceFacetsResponseBody200FilesScriptingProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesEnvironment
-    _$GetDeviceFacetsResponseBody200FilesEnvironmentFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesEnvironment(
-          release: json['release'] as String,
-          mqttEndpoint: json['mqttEndpoint'] as String,
-          region: json['region'] as String,
-          status: $enumDecodeNullable(
-              _$GetDeviceFacetsResponseBody200FilesEnvironmentStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FilesEnvironmentToJson(
-    GetDeviceFacetsResponseBody200FilesEnvironment instance) {
-  final val = <String, dynamic>{
-    'release': instance.release,
-    'mqttEndpoint': instance.mqttEndpoint,
-    'region': instance.region,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'status',
-      _$GetDeviceFacetsResponseBody200FilesEnvironmentStatusEnumMap[
-          instance.status]);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200FilesEnvironmentStatusEnumMap = {
-  GetDeviceFacetsResponseBody200FilesEnvironmentStatus.disabled: 'disabled',
-  GetDeviceFacetsResponseBody200FilesEnvironmentStatus.pending: 'pending',
-  GetDeviceFacetsResponseBody200FilesEnvironmentStatus.unknown: 'unknown',
-  GetDeviceFacetsResponseBody200FilesEnvironmentStatus.error: 'error',
-  GetDeviceFacetsResponseBody200FilesEnvironmentStatus.warning: 'warning',
-  GetDeviceFacetsResponseBody200FilesEnvironmentStatus.healthy: 'healthy',
-};
-
-GetDeviceFacetsResponseBody200FilesSystemFirmwareExisting
-    _$GetDeviceFacetsResponseBody200FilesSystemFirmwareExistingFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesSystemFirmwareExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesSystemFirmwareExistingToJson(
-        GetDeviceFacetsResponseBody200FilesSystemFirmwareExisting instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesSystemFirmwareAcceptance
-    _$GetDeviceFacetsResponseBody200FilesSystemFirmwareAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesSystemFirmwareAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesSystemFirmwareAcceptanceToJson(
-        GetDeviceFacetsResponseBody200FilesSystemFirmwareAcceptance instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesSystemFirmwareActive
-    _$GetDeviceFacetsResponseBody200FilesSystemFirmwareActiveFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesSystemFirmwareActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesSystemFirmwareActiveToJson(
-        GetDeviceFacetsResponseBody200FilesSystemFirmwareActive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesSystemFirmware
-    _$GetDeviceFacetsResponseBody200FilesSystemFirmwareFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesSystemFirmware(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  GetDeviceFacetsResponseBody200FilesSystemFirmwareExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200FilesSystemFirmwareAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active:
-              GetDeviceFacetsResponseBody200FilesSystemFirmwareActive.fromJson(
-                  json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FilesSystemFirmwareToJson(
-    GetDeviceFacetsResponseBody200FilesSystemFirmware instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesSystem
-    _$GetDeviceFacetsResponseBody200FilesSystemFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesSystem(
-          firmware: GetDeviceFacetsResponseBody200FilesSystemFirmware.fromJson(
-              json['firmware'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FilesSystemToJson(
-        GetDeviceFacetsResponseBody200FilesSystem instance) =>
-    <String, dynamic>{
-      'firmware': instance.firmware,
-    };
-
-GetDeviceFacetsResponseBody200FilesCommunicationPropsExisting
-    _$GetDeviceFacetsResponseBody200FilesCommunicationPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesCommunicationPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesCommunicationPropsExistingToJson(
-        GetDeviceFacetsResponseBody200FilesCommunicationPropsExisting
-            instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesCommunicationPropsAcceptance
-    _$GetDeviceFacetsResponseBody200FilesCommunicationPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesCommunicationPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesCommunicationPropsAcceptanceToJson(
-        GetDeviceFacetsResponseBody200FilesCommunicationPropsAcceptance
-            instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesCommunicationPropsActive
-    _$GetDeviceFacetsResponseBody200FilesCommunicationPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesCommunicationPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesCommunicationPropsActiveToJson(
-        GetDeviceFacetsResponseBody200FilesCommunicationPropsActive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesCommunicationProps
-    _$GetDeviceFacetsResponseBody200FilesCommunicationPropsFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesCommunicationProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  GetDeviceFacetsResponseBody200FilesCommunicationPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200FilesCommunicationPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active: GetDeviceFacetsResponseBody200FilesCommunicationPropsActive
-              .fromJson(json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesCommunicationPropsToJson(
-        GetDeviceFacetsResponseBody200FilesCommunicationProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesConfigPropsExisting
-    _$GetDeviceFacetsResponseBody200FilesConfigPropsExistingFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesConfigPropsExisting(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesConfigPropsExistingToJson(
-        GetDeviceFacetsResponseBody200FilesConfigPropsExisting instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesConfigPropsAcceptance
-    _$GetDeviceFacetsResponseBody200FilesConfigPropsAcceptanceFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesConfigPropsAcceptance(
-          accepted: json['accepted'] as bool,
-          timestamp: json['timestamp'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesConfigPropsAcceptanceToJson(
-        GetDeviceFacetsResponseBody200FilesConfigPropsAcceptance instance) {
-  final val = <String, dynamic>{
-    'accepted': instance.accepted,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('timestamp', instance.timestamp);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesConfigPropsActive
-    _$GetDeviceFacetsResponseBody200FilesConfigPropsActiveFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesConfigPropsActive(
-          partition: json['partition'] as String?,
-          size: json['size'] as num?,
-          checksum: json['checksum'] as num?,
-          version: json['version'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200FilesConfigPropsActiveToJson(
-        GetDeviceFacetsResponseBody200FilesConfigPropsActive instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('partition', instance.partition);
-  writeNotNull('size', instance.size);
-  writeNotNull('checksum', instance.checksum);
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200FilesConfigProps
-    _$GetDeviceFacetsResponseBody200FilesConfigPropsFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FilesConfigProps(
-          path: json['path'] as String,
-          existing: (json['existing'] as List<dynamic>?)
-              ?.map((e) =>
-                  GetDeviceFacetsResponseBody200FilesConfigPropsExisting
-                      .fromJson(e as Map<String, dynamic>))
-              .toList(),
-          acceptance: json['acceptance'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200FilesConfigPropsAcceptance
-                  .fromJson(json['acceptance'] as Map<String, dynamic>),
-          active: GetDeviceFacetsResponseBody200FilesConfigPropsActive.fromJson(
-              json['active'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FilesConfigPropsToJson(
-    GetDeviceFacetsResponseBody200FilesConfigProps instance) {
-  final val = <String, dynamic>{
-    'path': instance.path,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('existing', instance.existing);
-  writeNotNull('acceptance', instance.acceptance);
-  val['active'] = instance.active;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200Files
-    _$GetDeviceFacetsResponseBody200FilesFromJson(Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200Files(
-          componentType: json['componentType'] as String,
-          orphaned: (json['orphaned'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                GetDeviceFacetsResponseBody200FilesOrphanedProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          storage: (json['storage'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                GetDeviceFacetsResponseBody200FilesStorageProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          scripting: (json['scripting'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                GetDeviceFacetsResponseBody200FilesScriptingProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200FilesFacetTypeEnumMap,
-              json['facetType']),
-          environment: GetDeviceFacetsResponseBody200FilesEnvironment.fromJson(
-              json['environment'] as Map<String, dynamic>),
-          system: GetDeviceFacetsResponseBody200FilesSystem.fromJson(
-              json['system'] as Map<String, dynamic>),
-          stage: $enumDecode(
-              _$GetDeviceFacetsResponseBody200FilesStageEnumMap, json['stage']),
-          facetId: json['facetId'] as String?,
-          communication: (json['communication'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                GetDeviceFacetsResponseBody200FilesCommunicationProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          device: json['device'] as String,
-          config: (json['config'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                GetDeviceFacetsResponseBody200FilesConfigProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          status: $enumDecode(
-              _$GetDeviceFacetsResponseBody200FilesStatusEnumMap,
-              json['status']),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FilesToJson(
-    GetDeviceFacetsResponseBody200Files instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('orphaned', instance.orphaned);
-  writeNotNull('storage', instance.storage);
-  writeNotNull('scripting', instance.scripting);
-  val['facetType'] = _$GetDeviceFacetsResponseBody200FilesFacetTypeEnumMap[
-      instance.facetType]!;
-  val['environment'] = instance.environment;
-  val['system'] = instance.system;
-  val['stage'] =
-      _$GetDeviceFacetsResponseBody200FilesStageEnumMap[instance.stage]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('communication', instance.communication);
-  val['device'] = instance.device;
-  writeNotNull('config', instance.config);
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['status'] =
-      _$GetDeviceFacetsResponseBody200FilesStatusEnumMap[instance.status]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200FilesFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200FilesFacetType.files: 'FILES',
-};
-
-const _$GetDeviceFacetsResponseBody200FilesStageEnumMap = {
-  GetDeviceFacetsResponseBody200FilesStage.current: 'current',
-  GetDeviceFacetsResponseBody200FilesStage.expected: 'expected',
-  GetDeviceFacetsResponseBody200FilesStage.historical: 'historical',
-};
-
-const _$GetDeviceFacetsResponseBody200FilesStatusEnumMap = {
-  GetDeviceFacetsResponseBody200FilesStatus.disabled: 'disabled',
-  GetDeviceFacetsResponseBody200FilesStatus.pending: 'pending',
-  GetDeviceFacetsResponseBody200FilesStatus.unknown: 'unknown',
-  GetDeviceFacetsResponseBody200FilesStatus.error: 'error',
-  GetDeviceFacetsResponseBody200FilesStatus.warning: 'warning',
-  GetDeviceFacetsResponseBody200FilesStatus.healthy: 'healthy',
-};
-
-GetDeviceFacetsResponseBody200Location
-    _$GetDeviceFacetsResponseBody200LocationFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200Location(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          latitude: json['latitude'] as num,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          updater: json['updater'] as String?,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200LocationFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          longitude: json['longitude'] as num,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200LocationToJson(
-    GetDeviceFacetsResponseBody200Location instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['latitude'] = instance.latitude;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  writeNotNull('updater', instance.updater);
-  val['facetType'] = _$GetDeviceFacetsResponseBody200LocationFacetTypeEnumMap[
-      instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['longitude'] = instance.longitude;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200LocationFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200LocationFacetType.location: 'LOCATION',
-};
-
-GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrength
-    _$GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrength(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrength
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthState
-      .disabled: 'disabled',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthState
-      .pending: 'pending',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthState
-      .unknown: 'unknown',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthState.error:
-      'error',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthState
-      .warning: 'warning',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrengthState
-      .healthy: 'healthy',
-};
-
-GetDeviceFacetsResponseBody200StatusConnectivityWifiConnection
-    _$GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityWifiConnection(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityWifiConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionState.error:
-      'error',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionState.healthy:
-      'healthy',
-};
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionValueEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionValue.connected:
-      'connected',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionValue
-      .notConnected: 'notConnected',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionValue.notInUse:
-      'notInUse',
-  GetDeviceFacetsResponseBody200StatusConnectivityWifiConnectionValue.pending:
-      'pending',
-};
-
-GetDeviceFacetsResponseBody200StatusConnectivityWifi
-    _$GetDeviceFacetsResponseBody200StatusConnectivityWifiFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityWifi(
-          signalStrength: json['signalStrength'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusConnectivityWifiSignalStrength
-                  .fromJson(json['signalStrength'] as Map<String, dynamic>),
-          connection:
-              GetDeviceFacetsResponseBody200StatusConnectivityWifiConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          ssid: json['ssid'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityWifiToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityWifi instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('signalStrength', instance.signalStrength);
-  val['connection'] = instance.connection;
-  writeNotNull('ssid', instance.ssid);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrength
-    _$GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrength(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrength
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthState
-      .disabled: 'disabled',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthState
-      .pending: 'pending',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthState
-      .unknown: 'unknown',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthState
-      .error: 'error',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthState
-      .warning: 'warning',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrengthState
-      .healthy: 'healthy',
-};
-
-GetDeviceFacetsResponseBody200StatusConnectivityCellularConnection
-    _$GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityCellularConnection(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityCellularConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionState
-      .disabled: 'disabled',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionState
-      .pending: 'pending',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionState
-      .unknown: 'unknown',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionState.error:
-      'error',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionState
-      .warning: 'warning',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionState
-      .healthy: 'healthy',
-};
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionValueEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionValue
-      .connected: 'connected',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionValue
-      .notConnected: 'notConnected',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionValue
-      .notInUse: 'notInUse',
-  GetDeviceFacetsResponseBody200StatusConnectivityCellularConnectionValue
-      .pending: 'pending',
-};
-
-GetDeviceFacetsResponseBody200StatusConnectivityCellular
-    _$GetDeviceFacetsResponseBody200StatusConnectivityCellularFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityCellular(
-          signalStrength: json['signalStrength'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusConnectivityCellularSignalStrength
-                  .fromJson(json['signalStrength'] as Map<String, dynamic>),
-          connection:
-              GetDeviceFacetsResponseBody200StatusConnectivityCellularConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityCellularToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityCellular instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('signalStrength', instance.signalStrength);
-  val['connection'] = instance.connection;
-  return val;
-}
-
-GetDeviceFacetsResponseBody200StatusConnectivityEthConnection
-    _$GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityEthConnection(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityEthConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionState.error:
-      'error',
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionState.healthy:
-      'healthy',
-};
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionValueEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionValue.connected:
-      'connected',
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionValue
-      .notConnected: 'notConnected',
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionValue.notInUse:
-      'notInUse',
-  GetDeviceFacetsResponseBody200StatusConnectivityEthConnectionValue.pending:
-      'pending',
-};
-
-GetDeviceFacetsResponseBody200StatusConnectivityEth
-    _$GetDeviceFacetsResponseBody200StatusConnectivityEthFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityEth(
-          connection:
-              GetDeviceFacetsResponseBody200StatusConnectivityEthConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          mac: json['mac'] as String?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityEthToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityEth instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('mac', instance.mac);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnection
-    _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnection(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnection
-            instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionState
-      .disabled: 'disabled',
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionState
-      .pending: 'pending',
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionState
-      .unknown: 'unknown',
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionState.error:
-      'error',
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionState
-      .warning: 'warning',
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionState
-      .healthy: 'healthy',
-};
-
-const _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionValueEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionValue
-      .connected: 'connected',
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionValue
-      .notConnected: 'notConnected',
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionValue
-      .notInUse: 'notInUse',
-  GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnectionValue
-      .pending: 'pending',
-};
-
-GetDeviceFacetsResponseBody200StatusConnectivityPlatform
-    _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivityPlatform(
-          connection:
-              GetDeviceFacetsResponseBody200StatusConnectivityPlatformConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-        );
-
-Map<String,
-    dynamic> _$GetDeviceFacetsResponseBody200StatusConnectivityPlatformToJson(
-        GetDeviceFacetsResponseBody200StatusConnectivityPlatform instance) =>
-    <String, dynamic>{
-      'connection': instance.connection,
-    };
-
-GetDeviceFacetsResponseBody200StatusConnectivity
-    _$GetDeviceFacetsResponseBody200StatusConnectivityFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusConnectivity(
-          wifi: json['wifi'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusConnectivityWifi.fromJson(
-                  json['wifi'] as Map<String, dynamic>),
-          cellular: json['cellular'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusConnectivityCellular
-                  .fromJson(json['cellular'] as Map<String, dynamic>),
-          eth: json['eth'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusConnectivityEth.fromJson(
-                  json['eth'] as Map<String, dynamic>),
-          platform: json['platform'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusConnectivityPlatform
-                  .fromJson(json['platform'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusConnectivityToJson(
-    GetDeviceFacetsResponseBody200StatusConnectivity instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('wifi', instance.wifi);
-  writeNotNull('cellular', instance.cellular);
-  writeNotNull('eth', instance.eth);
-  writeNotNull('platform', instance.platform);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200StatusEngine
-    _$GetDeviceFacetsResponseBody200StatusEngineFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusEngine(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusEngineStateEnumMap,
-              json['state']),
-          updated: json['updated'] as String,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusEngineToJson(
-        GetDeviceFacetsResponseBody200StatusEngine instance) =>
-    <String, dynamic>{
-      'state': _$GetDeviceFacetsResponseBody200StatusEngineStateEnumMap[
-          instance.state]!,
-      'updated': instance.updated,
-    };
-
-const _$GetDeviceFacetsResponseBody200StatusEngineStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusEngineState.running: 'running',
-  GetDeviceFacetsResponseBody200StatusEngineState.stopped: 'stopped',
-  GetDeviceFacetsResponseBody200StatusEngineState.error: 'error',
-  GetDeviceFacetsResponseBody200StatusEngineState.unknown: 'unknown',
-};
-
-GetDeviceFacetsResponseBody200StatusTemperature
-    _$GetDeviceFacetsResponseBody200StatusTemperatureFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusTemperature(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusTemperatureStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusTemperatureToJson(
-    GetDeviceFacetsResponseBody200StatusTemperature instance) {
-  final val = <String, dynamic>{
-    'state': _$GetDeviceFacetsResponseBody200StatusTemperatureStateEnumMap[
-        instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusTemperatureStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusTemperatureState.disabled: 'disabled',
-  GetDeviceFacetsResponseBody200StatusTemperatureState.pending: 'pending',
-  GetDeviceFacetsResponseBody200StatusTemperatureState.unknown: 'unknown',
-  GetDeviceFacetsResponseBody200StatusTemperatureState.error: 'error',
-  GetDeviceFacetsResponseBody200StatusTemperatureState.warning: 'warning',
-  GetDeviceFacetsResponseBody200StatusTemperatureState.healthy: 'healthy',
-};
-
-GetDeviceFacetsResponseBody200StatusAvailability
-    _$GetDeviceFacetsResponseBody200StatusAvailabilityFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusAvailability(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusAvailabilityStateEnumMap,
-              json['state']),
-          updated: json['updated'] as String,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusAvailabilityToJson(
-        GetDeviceFacetsResponseBody200StatusAvailability instance) =>
-    <String, dynamic>{
-      'state': _$GetDeviceFacetsResponseBody200StatusAvailabilityStateEnumMap[
-          instance.state]!,
-      'updated': instance.updated,
-    };
-
-const _$GetDeviceFacetsResponseBody200StatusAvailabilityStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusAvailabilityState.online: 'online',
-  GetDeviceFacetsResponseBody200StatusAvailabilityState.offline: 'offline',
-  GetDeviceFacetsResponseBody200StatusAvailabilityState.unknown: 'unknown',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnection
-    _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnection(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionToJson(
-        GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnection instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionState.error:
-      'error',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionState.healthy:
-      'healthy',
-};
-
-const _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionValueEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionValue.connected:
-      'connected',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionValue
-      .notConnected: 'notConnected',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionValue.notInUse:
-      'notInUse',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnectionValue.pending:
-      'pending',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltage
-    _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltage(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageToJson(
-        GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltage instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageState.error: 'error',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltageState.healthy:
-      'healthy',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerAuxiliary
-    _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerAuxiliary(
-          connection:
-              GetDeviceFacetsResponseBody200StatusPowerAuxiliaryConnection
-                  .fromJson(json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusPowerAuxiliaryVoltage
-                  .fromJson(json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusPowerAuxiliaryToJson(
-    GetDeviceFacetsResponseBody200StatusPowerAuxiliary instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200StatusPowerUsbConnection
-    _$GetDeviceFacetsResponseBody200StatusPowerUsbConnectionFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerUsbConnection(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerUsbConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerUsbConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerUsbConnectionToJson(
-        GetDeviceFacetsResponseBody200StatusPowerUsbConnection instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusPowerUsbConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$GetDeviceFacetsResponseBody200StatusPowerUsbConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerUsbConnectionStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionState.error: 'error',
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionState.healthy:
-      'healthy',
-};
-
-const _$GetDeviceFacetsResponseBody200StatusPowerUsbConnectionValueEnumMap = {
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionValue.connected:
-      'connected',
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionValue.notConnected:
-      'notConnected',
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionValue.notInUse:
-      'notInUse',
-  GetDeviceFacetsResponseBody200StatusPowerUsbConnectionValue.pending:
-      'pending',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerUsbVoltage
-    _$GetDeviceFacetsResponseBody200StatusPowerUsbVoltageFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerUsbVoltage(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerUsbVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerUsbVoltageToJson(
-        GetDeviceFacetsResponseBody200StatusPowerUsbVoltage instance) {
-  final val = <String, dynamic>{
-    'state': _$GetDeviceFacetsResponseBody200StatusPowerUsbVoltageStateEnumMap[
-        instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerUsbVoltageStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusPowerUsbVoltageState.disabled: 'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerUsbVoltageState.pending: 'pending',
-  GetDeviceFacetsResponseBody200StatusPowerUsbVoltageState.unknown: 'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerUsbVoltageState.error: 'error',
-  GetDeviceFacetsResponseBody200StatusPowerUsbVoltageState.warning: 'warning',
-  GetDeviceFacetsResponseBody200StatusPowerUsbVoltageState.healthy: 'healthy',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerUsb
-    _$GetDeviceFacetsResponseBody200StatusPowerUsbFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerUsb(
-          connection:
-              GetDeviceFacetsResponseBody200StatusPowerUsbConnection.fromJson(
-                  json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusPowerUsbVoltage.fromJson(
-                  json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusPowerUsbToJson(
-    GetDeviceFacetsResponseBody200StatusPowerUsb instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200StatusPowerSolarConnection
-    _$GetDeviceFacetsResponseBody200StatusPowerSolarConnectionFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerSolarConnection(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerSolarConnectionStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerSolarConnectionValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerSolarConnectionToJson(
-        GetDeviceFacetsResponseBody200StatusPowerSolarConnection instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusPowerSolarConnectionStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$GetDeviceFacetsResponseBody200StatusPowerSolarConnectionValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerSolarConnectionStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionState.error: 'error',
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionState.healthy:
-      'healthy',
-};
-
-const _$GetDeviceFacetsResponseBody200StatusPowerSolarConnectionValueEnumMap = {
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionValue.connected:
-      'connected',
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionValue.notConnected:
-      'notConnected',
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionValue.notInUse:
-      'notInUse',
-  GetDeviceFacetsResponseBody200StatusPowerSolarConnectionValue.pending:
-      'pending',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerSolarVoltage
-    _$GetDeviceFacetsResponseBody200StatusPowerSolarVoltageFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerSolarVoltage(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerSolarVoltageStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num?,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerSolarVoltageToJson(
-        GetDeviceFacetsResponseBody200StatusPowerSolarVoltage instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusPowerSolarVoltageStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  writeNotNull('value', instance.value);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerSolarVoltageStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusPowerSolarVoltageState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerSolarVoltageState.pending: 'pending',
-  GetDeviceFacetsResponseBody200StatusPowerSolarVoltageState.unknown: 'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerSolarVoltageState.error: 'error',
-  GetDeviceFacetsResponseBody200StatusPowerSolarVoltageState.warning: 'warning',
-  GetDeviceFacetsResponseBody200StatusPowerSolarVoltageState.healthy: 'healthy',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerSolar
-    _$GetDeviceFacetsResponseBody200StatusPowerSolarFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerSolar(
-          connection:
-              GetDeviceFacetsResponseBody200StatusPowerSolarConnection.fromJson(
-                  json['connection'] as Map<String, dynamic>),
-          voltage: json['voltage'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusPowerSolarVoltage.fromJson(
-                  json['voltage'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusPowerSolarToJson(
-    GetDeviceFacetsResponseBody200StatusPowerSolar instance) {
-  final val = <String, dynamic>{
-    'connection': instance.connection,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('voltage', instance.voltage);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSource
-    _$GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSource(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValueEnumMap,
-              json['value']),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceToJson(
-        GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSource instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] =
-      _$GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValueEnumMap[
-          instance.value]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceState.error:
-      'error',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceState.healthy:
-      'healthy',
-};
-
-const _$GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValueEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValue.battery:
-      'battery',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValue.usb: 'usb',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValue.solar:
-      'solar',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValue.auxiliary:
-      'auxiliary',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValue.noSource:
-      'noSource',
-  GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSourceValue
-      .unknownSource: 'unknownSource',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerSource
-    _$GetDeviceFacetsResponseBody200StatusPowerSourceFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerSource(
-          currentSource:
-              GetDeviceFacetsResponseBody200StatusPowerSourceCurrentSource
-                  .fromJson(json['currentSource'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusPowerSourceToJson(
-        GetDeviceFacetsResponseBody200StatusPowerSource instance) =>
-    <String, dynamic>{
-      'currentSource': instance.currentSource,
-    };
-
-GetDeviceFacetsResponseBody200StatusPowerBatteryCharge
-    _$GetDeviceFacetsResponseBody200StatusPowerBatteryChargeFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerBatteryCharge(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerBatteryChargeStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerBatteryChargeToJson(
-        GetDeviceFacetsResponseBody200StatusPowerBatteryCharge instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusPowerBatteryChargeStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerBatteryChargeStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargeState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargeState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargeState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargeState.error: 'error',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargeState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargeState.healthy:
-      'healthy',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerBatteryTemperature
-    _$GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerBatteryTemperature(
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureStateEnumMap,
-              json['state']),
-          message: json['message'] as String?,
-          updated: json['updated'] as String,
-          value: json['value'] as num,
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureToJson(
-        GetDeviceFacetsResponseBody200StatusPowerBatteryTemperature instance) {
-  final val = <String, dynamic>{
-    'state':
-        _$GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureStateEnumMap[
-            instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  val['updated'] = instance.updated;
-  val['value'] = instance.value;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureStateEnumMap =
-    {
-  GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureState.disabled:
-      'disabled',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureState.pending:
-      'pending',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureState.unknown:
-      'unknown',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureState.error:
-      'error',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureState.warning:
-      'warning',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryTemperatureState.healthy:
-      'healthy',
-};
-
-GetDeviceFacetsResponseBody200StatusPowerBattery
-    _$GetDeviceFacetsResponseBody200StatusPowerBatteryFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPowerBattery(
-          charge:
-              GetDeviceFacetsResponseBody200StatusPowerBatteryCharge.fromJson(
-                  json['charge'] as Map<String, dynamic>),
-          temperature: json['temperature'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusPowerBatteryTemperature
-                  .fromJson(json['temperature'] as Map<String, dynamic>),
-          chargingState: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusPowerBatteryChargingStateEnumMap,
-              json['chargingState']),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusPowerBatteryToJson(
-    GetDeviceFacetsResponseBody200StatusPowerBattery instance) {
-  final val = <String, dynamic>{
-    'charge': instance.charge,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('temperature', instance.temperature);
-  val['chargingState'] =
-      _$GetDeviceFacetsResponseBody200StatusPowerBatteryChargingStateEnumMap[
-          instance.chargingState]!;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusPowerBatteryChargingStateEnumMap = {
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargingState.charging:
-      'charging',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargingState.notCharging:
-      'notCharging',
-  GetDeviceFacetsResponseBody200StatusPowerBatteryChargingState.unknown:
-      'unknown',
-};
-
-GetDeviceFacetsResponseBody200StatusPower
-    _$GetDeviceFacetsResponseBody200StatusPowerFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200StatusPower(
-          auxiliary: json['auxiliary'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusPowerAuxiliary.fromJson(
-                  json['auxiliary'] as Map<String, dynamic>),
-          usb: json['usb'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusPowerUsb.fromJson(
-                  json['usb'] as Map<String, dynamic>),
-          solar: json['solar'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusPowerSolar.fromJson(
-                  json['solar'] as Map<String, dynamic>),
-          source: GetDeviceFacetsResponseBody200StatusPowerSource.fromJson(
-              json['source'] as Map<String, dynamic>),
-          battery: json['battery'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusPowerBattery.fromJson(
-                  json['battery'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusPowerToJson(
-    GetDeviceFacetsResponseBody200StatusPower instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('auxiliary', instance.auxiliary);
-  writeNotNull('usb', instance.usb);
-  writeNotNull('solar', instance.solar);
-  val['source'] = instance.source;
-  writeNotNull('battery', instance.battery);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200Status
-    _$GetDeviceFacetsResponseBody200StatusFromJson(Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200Status(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200StatusFacetTypeEnumMap,
-              json['facetType']),
-          connectivity:
-              GetDeviceFacetsResponseBody200StatusConnectivity.fromJson(
-                  json['connectivity'] as Map<String, dynamic>),
-          engine: json['engine'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusEngine.fromJson(
-                  json['engine'] as Map<String, dynamic>),
-          facetId: json['facetId'] as String?,
-          temperature: json['temperature'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusTemperature.fromJson(
-                  json['temperature'] as Map<String, dynamic>),
-          availability: json['availability'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200StatusAvailability.fromJson(
-                  json['availability'] as Map<String, dynamic>),
-          power: GetDeviceFacetsResponseBody200StatusPower.fromJson(
-              json['power'] as Map<String, dynamic>),
-          timestamp: json['timestamp'] as String,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200StatusToJson(
-    GetDeviceFacetsResponseBody200Status instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType': _$GetDeviceFacetsResponseBody200StatusFacetTypeEnumMap[
-        instance.facetType]!,
-    'connectivity': instance.connectivity,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('engine', instance.engine);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('temperature', instance.temperature);
-  writeNotNull('availability', instance.availability);
-  val['power'] = instance.power;
-  val['timestamp'] = instance.timestamp;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200StatusFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200StatusFacetType.status: 'STATUS',
-};
-
-GetDeviceFacetsResponseBody200SnapshotSnapshotFw
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotFwFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200SnapshotSnapshotFw(
-          v: json['v'] as num,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200SnapshotSnapshotFwToJson(
-        GetDeviceFacetsResponseBody200SnapshotSnapshotFw instance) =>
-    <String, dynamic>{
-      'v': instance.v,
-    };
-
-GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant1
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant1FromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant1();
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant1ToJson(
-            GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant1
-                instance) =>
-        <String, dynamic>{};
-
-GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant2
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant2FromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant2();
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant2ToJson(
-            GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsVVariant2
-                instance) =>
-        <String, dynamic>{};
-
-GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsN
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsNFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsN();
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsNToJson(
-            GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsN instance) =>
-        <String, dynamic>{};
-
-GetDeviceFacetsResponseBody200SnapshotSnapshotCfgProps
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200SnapshotSnapshotCfgProps(
-          cv: json['cv'] as num,
-          v: json['v'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsV
-                  .fromJson(json['v'] as Map<String, dynamic>),
-          n: json['n'] == null
-              ? null
-              : GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsN
-                  .fromJson(json['n'] as Map<String, dynamic>),
-        );
-
-Map<String, dynamic>
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotCfgPropsToJson(
-        GetDeviceFacetsResponseBody200SnapshotSnapshotCfgProps instance) {
-  final val = <String, dynamic>{
-    'cv': instance.cv,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('v', instance.v);
-  writeNotNull('n', instance.n);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200SnapshotSnapshot
-    _$GetDeviceFacetsResponseBody200SnapshotSnapshotFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200SnapshotSnapshot(
-          fw: GetDeviceFacetsResponseBody200SnapshotSnapshotFw.fromJson(
-              json['fw'] as Map<String, dynamic>),
-          cfg: (json['cfg'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(
-                k,
-                GetDeviceFacetsResponseBody200SnapshotSnapshotCfgProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200SnapshotSnapshotToJson(
-        GetDeviceFacetsResponseBody200SnapshotSnapshot instance) =>
-    <String, dynamic>{
-      'fw': instance.fw,
-      'cfg': instance.cfg,
-    };
-
-GetDeviceFacetsResponseBody200Snapshot
-    _$GetDeviceFacetsResponseBody200SnapshotFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200Snapshot(
-          componentType: json['componentType'] as String,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200SnapshotFacetTypeEnumMap,
-              json['facetType']),
-          creator: json['creator'] as String?,
-          facetId: json['facetId'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          name: json['name'] as String?,
-          index: json['index'] as num,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          snapshot: GetDeviceFacetsResponseBody200SnapshotSnapshot.fromJson(
-              json['snapshot'] as Map<String, dynamic>),
-          updater: json['updater'] as String?,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200SnapshotToJson(
-    GetDeviceFacetsResponseBody200Snapshot instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'facetType': _$GetDeviceFacetsResponseBody200SnapshotFacetTypeEnumMap[
-        instance.facetType]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('name', instance.name);
-  val['index'] = instance.index;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['snapshot'] = instance.snapshot;
-  writeNotNull('updater', instance.updater);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200SnapshotFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200SnapshotFacetType.snapshot: 'SNAPSHOT',
-};
-
-GetDeviceFacetsResponseBody200UpdateApproval
-    _$GetDeviceFacetsResponseBody200UpdateApprovalFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200UpdateApproval(
-          created: DateTime.parse(json['created'] as String),
-          state: $enumDecode(
-              _$GetDeviceFacetsResponseBody200UpdateApprovalStateEnumMap,
-              json['state']),
-          conditions: (json['conditions'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(
-                  _$GetDeviceFacetsResponseBody200UpdateApprovalConditionsEnumMap,
-                  e))
-              .toList(),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          updater: json['updater'] as String?,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200UpdateApprovalToJson(
-    GetDeviceFacetsResponseBody200UpdateApproval instance) {
-  final val = <String, dynamic>{
-    'created': instance.created.toIso8601String(),
-    'state': _$GetDeviceFacetsResponseBody200UpdateApprovalStateEnumMap[
-        instance.state]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull(
-      'conditions',
-      instance.conditions
-          ?.map((e) =>
-              _$GetDeviceFacetsResponseBody200UpdateApprovalConditionsEnumMap[
-                  e]!)
-          .toList());
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  writeNotNull('updater', instance.updater);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200UpdateApprovalStateEnumMap = {
-  GetDeviceFacetsResponseBody200UpdateApprovalState.approved: 'approved',
-  GetDeviceFacetsResponseBody200UpdateApprovalState.denied: 'denied',
-  GetDeviceFacetsResponseBody200UpdateApprovalState.pending: 'pending',
-};
-
-const _$GetDeviceFacetsResponseBody200UpdateApprovalConditionsEnumMap = {
-  GetDeviceFacetsResponseBody200UpdateApprovalConditions.local: 'local',
-  GetDeviceFacetsResponseBody200UpdateApprovalConditions.remote: 'remote',
-};
-
-GetDeviceFacetsResponseBody200UpdateMismatchProps
-    _$GetDeviceFacetsResponseBody200UpdateMismatchPropsFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200UpdateMismatchProps(
-          actual: json['actual'] as String,
-          expected: json['expected'] as String,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200UpdateMismatchPropsToJson(
-        GetDeviceFacetsResponseBody200UpdateMismatchProps instance) =>
-    <String, dynamic>{
-      'actual': instance.actual,
-      'expected': instance.expected,
-    };
-
-GetDeviceFacetsResponseBody200UpdateProgressProps
-    _$GetDeviceFacetsResponseBody200UpdateProgressPropsFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200UpdateProgressProps(
-          totalSize: json['totalSize'] as num?,
-          lastOffset: json['lastOffset'] as num?,
-          updated: json['updated'] as String?,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200UpdateProgressPropsToJson(
-    GetDeviceFacetsResponseBody200UpdateProgressProps instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('totalSize', instance.totalSize);
-  writeNotNull('lastOffset', instance.lastOffset);
-  writeNotNull('updated', instance.updated);
-  return val;
-}
-
-GetDeviceFacetsResponseBody200UpdateTasks
-    _$GetDeviceFacetsResponseBody200UpdateTasksFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200UpdateTasks(
-          a: $enumDecode(
-              _$GetDeviceFacetsResponseBody200UpdateTasksAEnumMap, json['a']),
-          tries: json['tries'] as num?,
-          topics: (json['topics'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, e as String),
-          ),
-          ctx: json['ctx'] as Map<String, dynamic>?,
-          timeout: json['timeout'] as num?,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200UpdateTasksToJson(
-    GetDeviceFacetsResponseBody200UpdateTasks instance) {
-  final val = <String, dynamic>{
-    'a': _$GetDeviceFacetsResponseBody200UpdateTasksAEnumMap[instance.a]!,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('tries', instance.tries);
-  writeNotNull('topics', instance.topics);
-  writeNotNull('ctx', instance.ctx);
-  writeNotNull('timeout', instance.timeout);
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200UpdateTasksAEnumMap = {
-  GetDeviceFacetsResponseBody200UpdateTasksA.d: 'd',
-  GetDeviceFacetsResponseBody200UpdateTasksA.uf: 'uf',
-  GetDeviceFacetsResponseBody200UpdateTasksA.u: 'u',
-  GetDeviceFacetsResponseBody200UpdateTasksA.upd: 'upd',
-  GetDeviceFacetsResponseBody200UpdateTasksA.r: 'r',
-  GetDeviceFacetsResponseBody200UpdateTasksA.cdr: 'cdr',
-  GetDeviceFacetsResponseBody200UpdateTasksA.z: 'z',
-  GetDeviceFacetsResponseBody200UpdateTasksA.a: 'a',
-  GetDeviceFacetsResponseBody200UpdateTasksA.s: 's',
-  GetDeviceFacetsResponseBody200UpdateTasksA.b: 'b',
-  GetDeviceFacetsResponseBody200UpdateTasksA.e: 'e',
-  GetDeviceFacetsResponseBody200UpdateTasksA.k: 'k',
-  GetDeviceFacetsResponseBody200UpdateTasksA.x: 'x',
-  GetDeviceFacetsResponseBody200UpdateTasksA.crash: 'crash',
-  GetDeviceFacetsResponseBody200UpdateTasksA.t: 't',
-};
-
-GetDeviceFacetsResponseBody200Update
-    _$GetDeviceFacetsResponseBody200UpdateFromJson(Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200Update(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          approval: GetDeviceFacetsResponseBody200UpdateApproval.fromJson(
-              json['approval'] as Map<String, dynamic>),
-          type: json['type'] as String?,
-          updater: json['updater'] as String?,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200UpdateFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          mismatch: (json['mismatch'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(
-                k,
-                GetDeviceFacetsResponseBody200UpdateMismatchProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          name: json['name'] as String?,
-          progress: (json['progress'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(
-                k,
-                GetDeviceFacetsResponseBody200UpdateProgressProps.fromJson(
-                    e as Map<String, dynamic>)),
-          ),
-          id: json['id'] as String,
-          state: $enumDecode(_$GetDeviceFacetsResponseBody200UpdateStateEnumMap,
-              json['state']),
-          job: json['job'] as String?,
-          conditions: (json['conditions'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(
-                  _$GetDeviceFacetsResponseBody200UpdateConditionsEnumMap, e))
-              .toList(),
-          updated: json['updated'] == null
-              ? null
-              : DateTime.parse(json['updated'] as String),
-          device: json['device'] as String,
-          tasks: (json['tasks'] as List<dynamic>)
-              .map((e) => GetDeviceFacetsResponseBody200UpdateTasks.fromJson(
-                  e as Map<String, dynamic>))
-              .toList(),
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200UpdateToJson(
-    GetDeviceFacetsResponseBody200Update instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  writeNotNull('created', instance.created?.toIso8601String());
-  val['approval'] = instance.approval;
-  writeNotNull('type', instance.type);
-  writeNotNull('updater', instance.updater);
-  val['facetType'] = _$GetDeviceFacetsResponseBody200UpdateFacetTypeEnumMap[
-      instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('mismatch', instance.mismatch);
-  writeNotNull('name', instance.name);
-  val['progress'] = instance.progress;
-  val['id'] = instance.id;
-  val['state'] =
-      _$GetDeviceFacetsResponseBody200UpdateStateEnumMap[instance.state]!;
-  writeNotNull('job', instance.job);
-  writeNotNull(
-      'conditions',
-      instance.conditions
-          ?.map((e) =>
-              _$GetDeviceFacetsResponseBody200UpdateConditionsEnumMap[e]!)
-          .toList());
-  writeNotNull('updated', instance.updated?.toIso8601String());
-  val['device'] = instance.device;
-  val['tasks'] = instance.tasks;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200UpdateFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200UpdateFacetType.update: 'UPDATE',
-};
-
-const _$GetDeviceFacetsResponseBody200UpdateStateEnumMap = {
-  GetDeviceFacetsResponseBody200UpdateState.waitingForDeviceStatus:
-      'waiting_for_device_status',
-  GetDeviceFacetsResponseBody200UpdateState.readyToSend: 'ready_to_send',
-  GetDeviceFacetsResponseBody200UpdateState.sent: 'sent',
-  GetDeviceFacetsResponseBody200UpdateState.failed: 'failed',
-  GetDeviceFacetsResponseBody200UpdateState.inProgress: 'in_progress',
-  GetDeviceFacetsResponseBody200UpdateState.completed: 'completed',
-};
-
-const _$GetDeviceFacetsResponseBody200UpdateConditionsEnumMap = {
-  GetDeviceFacetsResponseBody200UpdateConditions.local: 'local',
-  GetDeviceFacetsResponseBody200UpdateConditions.remote: 'remote',
-};
-
-GetDeviceFacetsResponseBody200FirmwareInfo
-    _$GetDeviceFacetsResponseBody200FirmwareInfoFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200FirmwareInfo(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String,
-          created: json['created'] as String,
-          firmwareHash: json['firmwareHash'] as String,
-          firmwareSize: json['firmwareSize'] as num,
-          type: json['type'] as String?,
-          version: json['version'] as num,
-          deviceId: json['deviceId'] as String,
-          target: json['target'] as String,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200FirmwareInfoFacetTypeEnumMap,
-              json['facetType']),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          id: json['id'] as String,
-          firmwareVersion: json['firmwareVersion'] as String,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FirmwareInfoToJson(
-    GetDeviceFacetsResponseBody200FirmwareInfo instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-    'creator': instance.creator,
-    'created': instance.created,
-    'firmwareHash': instance.firmwareHash,
-    'firmwareSize': instance.firmwareSize,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('type', instance.type);
-  val['version'] = instance.version;
-  val['deviceId'] = instance.deviceId;
-  val['target'] = instance.target;
-  val['facetType'] =
-      _$GetDeviceFacetsResponseBody200FirmwareInfoFacetTypeEnumMap[
-          instance.facetType]!;
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['id'] = instance.id;
-  val['firmwareVersion'] = instance.firmwareVersion;
-  val['key'] = instance.key;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200FirmwareInfoFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200FirmwareInfoFacetType.firmwareInfo:
-      'FIRMWARE-INFO',
-};
-
-GetDeviceFacetsResponseBody200Firmware
-    _$GetDeviceFacetsResponseBody200FirmwareFromJson(
-            Map<String, dynamic> json) =>
-        GetDeviceFacetsResponseBody200Firmware(
-          componentType: json['componentType'] as String,
-          creator: json['creator'] as String?,
-          facetType: $enumDecode(
-              _$GetDeviceFacetsResponseBody200FirmwareFacetTypeEnumMap,
-              json['facetType']),
-          created: json['created'] == null
-              ? null
-              : DateTime.parse(json['created'] as String),
-          facetId: json['facetId'] as String?,
-          name: json['name'] as String?,
-          objectVersionId: json['objectVersionId'] as String,
-          id: json['id'] as String,
-          type: json['type'] as String?,
-          deviceId: json['deviceId'] as String,
-          version: json['version'] as num,
-          key: json['key'] as String,
-        );
-
-Map<String, dynamic> _$GetDeviceFacetsResponseBody200FirmwareToJson(
-    GetDeviceFacetsResponseBody200Firmware instance) {
-  final val = <String, dynamic>{
-    'componentType': instance.componentType,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('creator', instance.creator);
-  val['facetType'] = _$GetDeviceFacetsResponseBody200FirmwareFacetTypeEnumMap[
-      instance.facetType]!;
-  writeNotNull('created', instance.created?.toIso8601String());
-  writeNotNull('facetId', instance.facetId);
-  writeNotNull('name', instance.name);
-  val['objectVersionId'] = instance.objectVersionId;
-  val['id'] = instance.id;
-  writeNotNull('type', instance.type);
-  val['deviceId'] = instance.deviceId;
-  val['version'] = instance.version;
-  val['key'] = instance.key;
-  return val;
-}
-
-const _$GetDeviceFacetsResponseBody200FirmwareFacetTypeEnumMap = {
-  GetDeviceFacetsResponseBody200FirmwareFacetType.firmware: 'FIRMWARE',
-};
-
-ListFirmwareVersionsResponseBody200CompatibilityBootloader
-    _$ListFirmwareVersionsResponseBody200CompatibilityBootloaderFromJson(
-            Map<String, dynamic> json) =>
-        ListFirmwareVersionsResponseBody200CompatibilityBootloader(
+        XubeListFirmwareVersionsResponseBody200CompatibilityBootloader(
           min: json['min'] as String,
           max: json['max'] as String?,
         );
 
 Map<String, dynamic>
-    _$ListFirmwareVersionsResponseBody200CompatibilityBootloaderToJson(
-        ListFirmwareVersionsResponseBody200CompatibilityBootloader instance) {
-  final val = <String, dynamic>{
-    'min': instance.min,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('max', instance.max);
-  return val;
-}
-
-ListFirmwareVersionsResponseBody200CompatibilityFirmware
-    _$ListFirmwareVersionsResponseBody200CompatibilityFirmwareFromJson(
-            Map<String, dynamic> json) =>
-        ListFirmwareVersionsResponseBody200CompatibilityFirmware(
-          min: json['min'] as String,
-          max: json['max'] as String?,
-        );
-
-Map<String, dynamic>
-    _$ListFirmwareVersionsResponseBody200CompatibilityFirmwareToJson(
-        ListFirmwareVersionsResponseBody200CompatibilityFirmware instance) {
-  final val = <String, dynamic>{
-    'min': instance.min,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('max', instance.max);
-  return val;
-}
-
-ListFirmwareVersionsResponseBody200CompatibilityHardwareGeneration
-    _$ListFirmwareVersionsResponseBody200CompatibilityHardwareGenerationFromJson(
-            Map<String, dynamic> json) =>
-        ListFirmwareVersionsResponseBody200CompatibilityHardwareGeneration(
-          min: json['min'] as String,
-          max: json['max'] as String?,
-        );
-
-Map<String, dynamic>
-    _$ListFirmwareVersionsResponseBody200CompatibilityHardwareGenerationToJson(
-        ListFirmwareVersionsResponseBody200CompatibilityHardwareGeneration
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityBootloaderToJson(
+        XubeListFirmwareVersionsResponseBody200CompatibilityBootloader
             instance) {
   final val = <String, dynamic>{
     'min': instance.min,
@@ -21888,21 +12980,72 @@ Map<String, dynamic>
   return val;
 }
 
-ListFirmwareVersionsResponseBody200CompatibilityHardware
-    _$ListFirmwareVersionsResponseBody200CompatibilityHardwareFromJson(
+XubeListFirmwareVersionsResponseBody200CompatibilityFirmware
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityFirmwareFromJson(
             Map<String, dynamic> json) =>
-        ListFirmwareVersionsResponseBody200CompatibilityHardware(
+        XubeListFirmwareVersionsResponseBody200CompatibilityFirmware(
+          min: json['min'] as String,
+          max: json['max'] as String?,
+        );
+
+Map<String, dynamic>
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityFirmwareToJson(
+        XubeListFirmwareVersionsResponseBody200CompatibilityFirmware instance) {
+  final val = <String, dynamic>{
+    'min': instance.min,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('max', instance.max);
+  return val;
+}
+
+XubeListFirmwareVersionsResponseBody200CompatibilityHardwareGeneration
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityHardwareGenerationFromJson(
+            Map<String, dynamic> json) =>
+        XubeListFirmwareVersionsResponseBody200CompatibilityHardwareGeneration(
+          min: json['min'] as String,
+          max: json['max'] as String?,
+        );
+
+Map<String, dynamic>
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityHardwareGenerationToJson(
+        XubeListFirmwareVersionsResponseBody200CompatibilityHardwareGeneration
+            instance) {
+  final val = <String, dynamic>{
+    'min': instance.min,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('max', instance.max);
+  return val;
+}
+
+XubeListFirmwareVersionsResponseBody200CompatibilityHardware
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityHardwareFromJson(
+            Map<String, dynamic> json) =>
+        XubeListFirmwareVersionsResponseBody200CompatibilityHardware(
           generation: json['generation'] == null
               ? null
-              : ListFirmwareVersionsResponseBody200CompatibilityHardwareGeneration
+              : XubeListFirmwareVersionsResponseBody200CompatibilityHardwareGeneration
                   .fromJson(json['generation'] as Map<String, dynamic>),
           model: json['model'] as String,
           make: json['make'] as String,
         );
 
 Map<String, dynamic>
-    _$ListFirmwareVersionsResponseBody200CompatibilityHardwareToJson(
-        ListFirmwareVersionsResponseBody200CompatibilityHardware instance) {
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityHardwareToJson(
+        XubeListFirmwareVersionsResponseBody200CompatibilityHardware instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -21917,25 +13060,25 @@ Map<String, dynamic>
   return val;
 }
 
-ListFirmwareVersionsResponseBody200Compatibility
-    _$ListFirmwareVersionsResponseBody200CompatibilityFromJson(
+XubeListFirmwareVersionsResponseBody200Compatibility
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityFromJson(
             Map<String, dynamic> json) =>
-        ListFirmwareVersionsResponseBody200Compatibility(
+        XubeListFirmwareVersionsResponseBody200Compatibility(
           bootloader: json['bootloader'] == null
               ? null
-              : ListFirmwareVersionsResponseBody200CompatibilityBootloader
+              : XubeListFirmwareVersionsResponseBody200CompatibilityBootloader
                   .fromJson(json['bootloader'] as Map<String, dynamic>),
           firmware: json['firmware'] == null
               ? null
-              : ListFirmwareVersionsResponseBody200CompatibilityFirmware
+              : XubeListFirmwareVersionsResponseBody200CompatibilityFirmware
                   .fromJson(json['firmware'] as Map<String, dynamic>),
-          hardware:
-              ListFirmwareVersionsResponseBody200CompatibilityHardware.fromJson(
-                  json['hardware'] as Map<String, dynamic>),
+          hardware: XubeListFirmwareVersionsResponseBody200CompatibilityHardware
+              .fromJson(json['hardware'] as Map<String, dynamic>),
         );
 
-Map<String, dynamic> _$ListFirmwareVersionsResponseBody200CompatibilityToJson(
-    ListFirmwareVersionsResponseBody200Compatibility instance) {
+Map<String, dynamic>
+    _$XubeListFirmwareVersionsResponseBody200CompatibilityToJson(
+        XubeListFirmwareVersionsResponseBody200Compatibility instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -21950,9 +13093,10 @@ Map<String, dynamic> _$ListFirmwareVersionsResponseBody200CompatibilityToJson(
   return val;
 }
 
-ListFirmwareVersionsResponseBody200
-    _$ListFirmwareVersionsResponseBody200FromJson(Map<String, dynamic> json) =>
-        ListFirmwareVersionsResponseBody200(
+XubeListFirmwareVersionsResponseBody200
+    _$XubeListFirmwareVersionsResponseBody200FromJson(
+            Map<String, dynamic> json) =>
+        XubeListFirmwareVersionsResponseBody200(
           creator: json['creator'] as String?,
           created: json['created'] == null
               ? null
@@ -21972,14 +13116,14 @@ ListFirmwareVersionsResponseBody200
           id: json['id'] as String,
           compatibility: (json['compatibility'] as List<dynamic>)
               .map((e) =>
-                  ListFirmwareVersionsResponseBody200Compatibility.fromJson(
+                  XubeListFirmwareVersionsResponseBody200Compatibility.fromJson(
                       e as Map<String, dynamic>))
               .toList(),
           key: json['key'] as String,
         );
 
-Map<String, dynamic> _$ListFirmwareVersionsResponseBody200ToJson(
-    ListFirmwareVersionsResponseBody200 instance) {
+Map<String, dynamic> _$XubeListFirmwareVersionsResponseBody200ToJson(
+    XubeListFirmwareVersionsResponseBody200 instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -22004,14 +13148,15 @@ Map<String, dynamic> _$ListFirmwareVersionsResponseBody200ToJson(
   return val;
 }
 
-GetDevicesResponseBody200Certificate
-    _$GetDevicesResponseBody200CertificateFromJson(Map<String, dynamic> json) =>
-        GetDevicesResponseBody200Certificate(
+XubeGetDevicesResponseBody200Certificate
+    _$XubeGetDevicesResponseBody200CertificateFromJson(
+            Map<String, dynamic> json) =>
+        XubeGetDevicesResponseBody200Certificate(
           certificateArn: json['certificateArn'] as String?,
         );
 
-Map<String, dynamic> _$GetDevicesResponseBody200CertificateToJson(
-    GetDevicesResponseBody200Certificate instance) {
+Map<String, dynamic> _$XubeGetDevicesResponseBody200CertificateToJson(
+    XubeGetDevicesResponseBody200Certificate instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -22024,12 +13169,12 @@ Map<String, dynamic> _$GetDevicesResponseBody200CertificateToJson(
   return val;
 }
 
-GetDevicesResponseBody200 _$GetDevicesResponseBody200FromJson(
+XubeGetDevicesResponseBody200 _$XubeGetDevicesResponseBody200FromJson(
         Map<String, dynamic> json) =>
-    GetDevicesResponseBody200(
+    XubeGetDevicesResponseBody200(
       generation: json['generation'] as String,
       componentType: $enumDecode(
-          _$GetDevicesResponseBody200ComponentTypeEnumMap,
+          _$XubeGetDevicesResponseBody200ComponentTypeEnumMap,
           json['componentType']),
       accountId: json['accountId'] as String?,
       creator: json['creator'] as String?,
@@ -22039,7 +13184,7 @@ GetDevicesResponseBody200 _$GetDevicesResponseBody200FromJson(
           : DateTime.parse(json['created'] as String),
       certificate: json['certificate'] == null
           ? null
-          : GetDevicesResponseBody200Certificate.fromJson(
+          : XubeGetDevicesResponseBody200Certificate.fromJson(
               json['certificate'] as Map<String, dynamic>),
       name: json['name'] as String?,
       model: json['model'] as String,
@@ -22048,11 +13193,11 @@ GetDevicesResponseBody200 _$GetDevicesResponseBody200FromJson(
       make: json['make'] as String,
     );
 
-Map<String, dynamic> _$GetDevicesResponseBody200ToJson(
-    GetDevicesResponseBody200 instance) {
+Map<String, dynamic> _$XubeGetDevicesResponseBody200ToJson(
+    XubeGetDevicesResponseBody200 instance) {
   final val = <String, dynamic>{
     'generation': instance.generation,
-    'componentType': _$GetDevicesResponseBody200ComponentTypeEnumMap[
+    'componentType': _$XubeGetDevicesResponseBody200ComponentTypeEnumMap[
         instance.componentType]!,
   };
 
@@ -22075,59 +13220,61 @@ Map<String, dynamic> _$GetDevicesResponseBody200ToJson(
   return val;
 }
 
-const _$GetDevicesResponseBody200ComponentTypeEnumMap = {
-  GetDevicesResponseBody200ComponentType.device: 'DEVICE',
+const _$XubeGetDevicesResponseBody200ComponentTypeEnumMap = {
+  XubeGetDevicesResponseBody200ComponentType.device: 'DEVICE',
 };
 
-GetAccountTransactionsCountResponseBody200Projected
-    _$GetAccountTransactionsCountResponseBody200ProjectedFromJson(
+XubeGetAccountTransactionsCountResponseBody200Projected
+    _$XubeGetAccountTransactionsCountResponseBody200ProjectedFromJson(
             Map<String, dynamic> json) =>
-        GetAccountTransactionsCountResponseBody200Projected(
+        XubeGetAccountTransactionsCountResponseBody200Projected(
           dataTransferCount: json['dataTransferCount'] as num,
           from: json['from'] as String,
           to: json['to'] as String,
         );
 
 Map<String, dynamic>
-    _$GetAccountTransactionsCountResponseBody200ProjectedToJson(
-            GetAccountTransactionsCountResponseBody200Projected instance) =>
+    _$XubeGetAccountTransactionsCountResponseBody200ProjectedToJson(
+            XubeGetAccountTransactionsCountResponseBody200Projected instance) =>
         <String, dynamic>{
           'dataTransferCount': instance.dataTransferCount,
           'from': instance.from,
           'to': instance.to,
         };
 
-GetAccountTransactionsCountResponseBody200Current
-    _$GetAccountTransactionsCountResponseBody200CurrentFromJson(
+XubeGetAccountTransactionsCountResponseBody200Current
+    _$XubeGetAccountTransactionsCountResponseBody200CurrentFromJson(
             Map<String, dynamic> json) =>
-        GetAccountTransactionsCountResponseBody200Current(
+        XubeGetAccountTransactionsCountResponseBody200Current(
           dataTransferCount: json['dataTransferCount'] as num,
           from: json['from'] as String,
           to: json['to'] as String,
         );
 
-Map<String, dynamic> _$GetAccountTransactionsCountResponseBody200CurrentToJson(
-        GetAccountTransactionsCountResponseBody200Current instance) =>
-    <String, dynamic>{
-      'dataTransferCount': instance.dataTransferCount,
-      'from': instance.from,
-      'to': instance.to,
-    };
+Map<String, dynamic>
+    _$XubeGetAccountTransactionsCountResponseBody200CurrentToJson(
+            XubeGetAccountTransactionsCountResponseBody200Current instance) =>
+        <String, dynamic>{
+          'dataTransferCount': instance.dataTransferCount,
+          'from': instance.from,
+          'to': instance.to,
+        };
 
-GetAccountTransactionsCountResponseBody200
-    _$GetAccountTransactionsCountResponseBody200FromJson(
+XubeGetAccountTransactionsCountResponseBody200
+    _$XubeGetAccountTransactionsCountResponseBody200FromJson(
             Map<String, dynamic> json) =>
-        GetAccountTransactionsCountResponseBody200(
+        XubeGetAccountTransactionsCountResponseBody200(
           projected: json['projected'] == null
               ? null
-              : GetAccountTransactionsCountResponseBody200Projected.fromJson(
-                  json['projected'] as Map<String, dynamic>),
-          current: GetAccountTransactionsCountResponseBody200Current.fromJson(
-              json['current'] as Map<String, dynamic>),
+              : XubeGetAccountTransactionsCountResponseBody200Projected
+                  .fromJson(json['projected'] as Map<String, dynamic>),
+          current:
+              XubeGetAccountTransactionsCountResponseBody200Current.fromJson(
+                  json['current'] as Map<String, dynamic>),
         );
 
-Map<String, dynamic> _$GetAccountTransactionsCountResponseBody200ToJson(
-    GetAccountTransactionsCountResponseBody200 instance) {
+Map<String, dynamic> _$XubeGetAccountTransactionsCountResponseBody200ToJson(
+    XubeGetAccountTransactionsCountResponseBody200 instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

@@ -156,10 +156,9 @@ packages:
   open_api_forked:
     dependency: "direct main"
     description:
-      name: open_api_forked
-      sha256: e815a0adbb290b6b460c48808de2b393f95522b1016cdb5d54cc8098cc8d5d2f
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../../open_api_forked"
+      relative: true
+    source: path
     version: "3.0.0+6"
   path:
     dependency: transitive
